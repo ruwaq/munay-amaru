@@ -1,5 +1,6 @@
 {
-  "name": "munay-amaru",
+  "name": "munay-sounds",
+  "main": "src/worker.js",
   "compatibility_date": "2026-08-16",
   "assets": {
     "directory": "./dist",
