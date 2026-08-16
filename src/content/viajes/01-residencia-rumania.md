@@ -1,30 +1,35 @@
 ---
-title: "Cuaderno de Rumania: El origen de Nacer"
+title: "Transilvania: La Madera Resonante y el Origen de Nacer"
 date: 2024-05-18
 journey:
-  name: "Residencia Artística en Transilvania"
-  stage: "Bosques y valles de Rumania"
+  name: "Residencia Mística en los Cárpatos"
+  stage: "Valles de Niebla y Montes Apuseni"
 location:
-  name: "Cluj & Montes Apuseni, Rumania"
+  name: "Montes Apuseni & Cluj-Napoca"
   country: "Rumania"
-  weather: "Niebla matinal, olor a madera de abeto y tierra húmeda"
-distanceCovered: "Exploración sonora de campo"
-clippings:
-  - title: "Billete de tren nocturno Bucarest-Cluj"
-    type: "ticket"
-    note: "El sonido rítmico de los rieles sirvió de compás para la primera maqueta de Nacer."
-  - title: "Hoja de abedul prensada"
-    type: "hoja_seca"
-    note: "Recogida junto al arroyo donde grabamos los primeros armónicos."
+  weather: "Niebla suspendida, vaho de resina fresca y humus profundo"
+  elevation: "1.100 msnm"
+ambientAudio:
+  src: "/audio/ejemplo-voz.mp3"
+  duration: "03:15"
+  narrator: "Crujido de abeto, viento en la arboleda y primeros acordes"
 tags:
   - rumania
   - nacer
-  - residencia
-  - munay
+  - carpatos
+  - silencio-bosque
+  - transmutacion
+  - munay-amaru
 ---
 
-Hay lugares donde la distancia no aísla, sino que despoja de lo innecesario.
+### I. La desposesión de la niebla
 
-Durante la residencia en Rumania, rodeado de montañas y silencio, la melodía de *Nacer* apareció una madrugada sin previo aviso. Fue una necesidad de agradecer el camino y de entender que cada viaje nos reinventa por completo.
+Hay geografías que no te reciben: te despojan. Llegar a los Montes Apuseni en el tren de medianoche fue como atravesar una membrana donde el ruido del siglo se extingue. Aquí la niebla no oculta el paisaje; lo interioriza. Los abetos centenarios no son árboles: son columnas de una catedral viva cuyo techo son las nubes bajas.
 
-La guitarra resonaba en la madera vieja de la casa como si la habitación entera fuera la caja de resonancia de un violonchelo.
+Comprendí que la soledad en la montaña no es aislamiento, sino la única manera de escuchar lo que vibra debajo del pensamiento. El aire huele a madera mojada, a musgo que lleva siglos aprendiendo a callar. 
+
+### II. La madera viva y el primer latido
+
+En la casa de madera vieja donde pasé la residencia, las paredes crujían al compás de los cambios de temperatura, como si la estructura entera respirara. Una madrugada, antes de que despuntara el alba, la melodía de *Nacer* brotó sin premeditación. No fue un ejercicio de composición, sino un acto de agradecimiento involuntario.
+
+Al pulsar las cuerdas, la habitación entera actuó como la caja armónica de un violonchelo ancestral. La guitarra no sonaba hacia afuera: dialogaba con el bosque circundante. Viajar, para el buscador nómada, es esto: morir a las formas viejas para que la vibración de la tierra te otorgue un nombre nuevo.

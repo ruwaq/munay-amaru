@@ -1,24 +1,35 @@
 ---
-title: "Sesiones en Polonia: Raíces de I Am a Tree"
+title: "Małopolska: El Micelio Sagrado y las Raíces de I Am a Tree"
 date: 2024-06-02
 journey:
-  name: "Encuentro Musical Multicultural"
-  stage: "Cracovia y bosques de Małopolska"
+  name: "Encuentro Musical de Raíces Invisibles"
+  stage: "Cracovia mística y bosques de Małopolska"
 location:
-  name: "Cracovia, Polonia"
+  name: "Cracovia & Bosque de Małopolska"
   country: "Polonia"
-  weather: "Cielo abierto de primavera, brisa templada"
-clippings:
-  - title: "Partitura en servilleta con acordes de I Am a Tree"
-    type: "boceto"
-    note: "Anotada en un café antiguo del barrio de Kazimierz tras la improvisación con músicos locales."
+  weather: "Luz tamizada entre robles, brisa templada con polen primaveral"
+ambientAudio:
+  src: "/audio/ejemplo-voz.mp3"
+  duration: "03:10"
+  narrator: "Polifonía vocal en madera y resonancia de copas de árboles"
 tags:
   - polonia
+  - i-am-a-tree
+  - eliana-colzani
   - arboles
-  - colaboracion
-  - munay
+  - raices
+  - fraternidad
+  - munay-amaru
 ---
 
-En Polonia, la música fue el puente donde las palabras ya no hacían falta.
+### I. El idioma anterior a las palabras
 
-Nos reunimos músicos de distintas geografías en un espacio de madera donde las percusiones, las voces y las cuerdas se trenzaron de manera espontánea. De esa comunión de raíces nació *I Am a Tree*: una canción sobre la pertenencia a la tierra y el crecimiento colectivo.
+En las callejuelas empedradas de Kazimierz y en los bosques umbríos que custodian la región de Małopolska, la música dejó de ser una disciplina para convertirse en un puente primordial. Músicos venidos de distintas latitudes y tradiciones nos congregamos bajo techos de vigas desgastadas. Sin una lengua común, bastó sostener una nota fundamental para que los instrumentos encontraran su cauce.
+
+Las percusiones de cuero emulaban los latidos cardíacos; las cuerdas trazaban ramificaciones en el aire; las voces se entrelazaban no para sobresalir, sino para cobijar. 
+
+### II. Ser árbol: la sabiduría de lo hondo
+
+De esa comunión nació *I Am a Tree*, cuya obra plástica fue creada por **Eliana Colzani**. Hacerse árbol no implica inmovilidad ni estatismo: es la sabiduría de extender raíces tan hondas en la oscuridad de la tierra que ninguna tormenta superficial pueda quebrar la copa. 
+
+Bajo la hojarasca polaca comprendí el principio del micelio: todos los seres están comunicados por una red subterránea de afecto, alimento y memoria. El arte nómada no acumula destinos; tiende filamentos invisibles para recordarnos que nadie florece en soledad.

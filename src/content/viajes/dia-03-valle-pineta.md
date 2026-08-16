@@ -1,42 +1,36 @@
 ---
-title: "El estruendo callado del deshielo"
-date: 2026-07-22
+title: "Andes y Pacífico: Liturgia de las Piedras y la Voz de los Apus"
+date: 2024-08-01
 journey:
-  name: "Ruta de los Valles Altos"
-  day: 3
-  stage: "De Bielsa al Circo de Pineta"
+  name: "Alquimia Andino-Costera"
+  stage: "Del Valle Sagrado a las Playas de Cantos Rodados"
 location:
-  name: "Circo de Pineta, Huesca"
-  city: "Bielsa"
-  country: "España"
-  coordinates:
-    lat: 42.6782
-    lng: 0.0894
-  elevation: "1.320 msnm"
-  weather: "Cielo encapotado, viento norte, 9°C"
-distanceCovered: "14.2 km a pie"
+  name: "Pisac, Cusco & Costa Central"
+  country: "Perú"
+  weather: "Cielo cobalto de puna, viento frío de cordillera y niebla costera salobre"
+  elevation: "2.972 msnm"
 ambientAudio:
   src: "/audio/ejemplo-voz.mp3"
-  duration: "02:30"
-  format: "audio/mpeg"
-  narrator: "Ambiente natural directo"
-clippings:
-  - title: "Billete de autobús Ayerbe-Bielsa"
-    type: "ticket"
-    note: "Doblado en cuatro en el bolsillo interior. La tinta se corrió con el sudor."
-  - title: "Edelweiss seca"
-    type: "hoja_seca"
-    note: "Encontrada en el sendero de las cascadas."
+  duration: "03:45"
+  narrator: "Viento en las quebradas, charango a 432 Hz y resaca del Pacífico"
 tags:
-  - pirineos
-  - senderismo
-  - montaña
+  - peru
+  - allinllachu
+  - dioses
+  - liturgia-de-las-piedras
+  - apus
+  - pachamama
+  - munay-amaru
 ---
 
-El valle se abre como una herida de roca caliza entre las nubes.
+### I. La pregunta ritual: Allinllachu
 
-Caminar con el peso de la mochila después de cuatro horas hace que cada respiración coincida exactamente con el golpe de los bastones en la grava. Se convierte en algo casi rítmico, casi meditativo.
+En las faldas de las montañas sagradas del Cusco, el saludo tradicional quechua —*Allinllachu*— no es una cortesía superficial. Es una indagación ontológica: ¿está tu corazón en paz?, ¿está tu respiración en armonía con los ríos, con los cerros, con los muertos y los por nacer?
 
-Las cascadas del circo caen desde una altura que hace que el sonido llegue después de la imagen. Primero ves el agua. Luego, dos segundos después, el rugido. Hay algo en esa disociación que se parece a recordar: la imagen antes que la emoción.
+Caminar en altitud obliga a la reverencia. Cada paso cuesta aire; cada respiración es una ofrenda a los Apus, guardianes minerales que sostienen el peso del cosmos andino. Con el charango afinado en frecuencias naturales a 432 Hz, la música se convierte en *Ayni* (reciprocidad sagrada): no tocamos para ser escuchados por hombres, sino para dialogar con las rocas, el ichu y el viento de las quebradas (*Dioses EP*).
 
-Esta noche dormiré en el refugio con botas todavía húmedas.
+### II. La liturgia del mineral y el océano
+
+Al descender hacia la costa pacífica, el paisaje transmuta de la verticalidad titánica a la horizontalidad insondable. Las piedras que bajan de la cordillera son pulidas por miles de años de torrente hasta llegar al mar, convirtiéndose en cantos rodados que repican con cada rompiente.
+
+Sostener una piedra en la palma es sostener un siglo de silencio comprimido. Cuando la arrojas al oleaje (*Piedras al Mar*), la piedra no cae como castigo: se sumerge a conversar con el lecho oceánico, enseñándole a las corrientes superficiales cómo se preserva la quietud cuando todo arriba es vendaval. El viaje espiritual concluye donde comenzó: reconociendo que el artista no es dueño del sonido, sino el cuenco vacío donde la naturaleza deposita su misterio.
