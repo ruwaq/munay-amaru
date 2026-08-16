@@ -7,7 +7,7 @@ location: "Cracovia & Transilvania"
 audio:
   src: "/audio/ejemplo-voz.mp3"
   duration: "03:10"
-  narrator: "Munay Sounds"
+  narrator: "Munay Amaru"
 tags:
   - arboles
   - nacer

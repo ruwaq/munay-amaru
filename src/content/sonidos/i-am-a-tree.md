@@ -26,6 +26,6 @@ Nacida en Polonia durante sesiones colectivas con músicos de diferentes orígen
 
 **Créditos de arte y música:**
 - **Obra de portada:** **Eliana Colzani**
-- **Composición & Voces:** Munay Sounds · Colaboraciones internacionales
+- **Composición & Voces:** Munay Amaru · Colaboraciones internacionales
 
 Parte del álbum *Nacer*, disponible en [Bandcamp](https://munaysounds.bandcamp.com/album/nacer).

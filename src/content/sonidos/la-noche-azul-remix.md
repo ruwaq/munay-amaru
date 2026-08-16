@@ -1,5 +1,5 @@
 ---
-title: "Omar Franco — La Noche Azul (Munay Sounds Remix)"
+title: "Omar Franco — La Noche Azul (Munay Amaru Remix)"
 date: 2021-03-21
 category: "ambient_music"
 audio:

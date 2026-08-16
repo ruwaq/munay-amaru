@@ -25,6 +25,6 @@ El movimiento del aro no depende de la fuerza, sino del ritmo exacto con el que 
 
 **Créditos de arte:**
 - **Obra de portada:** **Eliana Colzani**
-- **Música & Producción:** Munay Sounds
+- **Música & Producción:** Munay Amaru
 
 Disponible en [Bandcamp](https://munaysounds.bandcamp.com/track/hula-hop).

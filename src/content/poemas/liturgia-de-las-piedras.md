@@ -7,7 +7,7 @@ location: "Costa de Lima & Cordillera Central, Perú"
 audio:
   src: "/audio/ejemplo-voz.mp3"
   duration: "03:45"
-  narrator: "Munay Sounds"
+  narrator: "Munay Amaru"
 tags:
   - piedras
   - mar
