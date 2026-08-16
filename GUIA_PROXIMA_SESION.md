@@ -41,7 +41,7 @@
 ## 🛠️ Comandos de Reactivación Rápida
 ```bash
 # Iniciar servidor local
-cd ~/projects/diario-artista
+cd ~/projects/munay-amaru
 npm run preview
 
 # Compilar y subir cambios

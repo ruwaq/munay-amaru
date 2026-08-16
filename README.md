@@ -37,7 +37,7 @@ Santuario digital de creación interdisciplinaria, arte contemporáneo, poesía 
 
 ```bash
 # 1. Entrar al proyecto
-cd ~/projects/diario-artista
+cd ~/projects/munay-amaru
 
 # 2. Ver la web en local desde tu teléfono (Abre http://localhost:4321)
 npm run preview
