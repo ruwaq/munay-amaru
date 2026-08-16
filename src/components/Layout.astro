@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 
 const siteTitle = SITE_TITLE[locale];
-const siteSubtitle = 'Pabellón de Arte & Santuario Sonoro';
+const siteSubtitle = SITE_SUBTITLE[locale];
 const pageTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} · ${siteSubtitle}`;
 const pageDesc = description || SITE_DESCRIPTION[locale];
 ---
@@ -86,7 +86,7 @@ const pageDesc = description || SITE_DESCRIPTION[locale];
       <a href={SOCIAL_LINKS.linktree} target="_blank" rel="noopener noreferrer">Linktree &rarr;</a>
     </div>
     <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 50ch; margin: 0 auto 12px;">
-      «Munay»: El poder del amor incondicional y la voluntad sagrada del corazón.
+      «Munay Amaru»: El poder del amor incondicional y la sabiduría primordial del agua andina.
     </p>
     <p style="margin-top: 8px;">
       <a href="mailto:munaysounds@gmail.com">Correspondencia con el artista &rarr;</a>
@@ -94,7 +94,7 @@ const pageDesc = description || SITE_DESCRIPTION[locale];
       <a href="/rss.xml">Suscripción RSS</a>
     </p>
     <p style="margin-top: 18px; font-family: var(--font-inscription); font-size: 0.68rem; letter-spacing: 0.18em; opacity: 0.5;">
-      MUSEO &middot; SANTUARIO MUNAY SOUNDS &copy; {new Date().getFullYear()}
+      MUSEO &middot; SANTUARIO MUNAY AMARU &copy; {new Date().getFullYear()}
     </p>
   </footer>
 

@@ -1,5 +1,5 @@
 /**
- * Utilidades de internacionalización y metadatos para Munay Sounds — Pabellón de Arte Zen.
+ * Utilidades de internacionalización y metadatos para Munay Amaru — Pabellón de Arte Zen.
  * Español (es) en raíz (/), Inglés (en) con prefijo (/en).
  */
 
@@ -15,8 +15,8 @@ export const ARTIST_INFO = {
 };
 
 export const SITE_TITLE = {
-  es: 'Munay Sounds',
-  en: 'Munay Sounds',
+  es: 'Munay Amaru',
+  en: 'Munay Amaru',
 };
 
 export const SITE_SUBTITLE = {
@@ -25,8 +25,8 @@ export const SITE_SUBTITLE = {
 };
 
 export const SITE_DESCRIPTION = {
-  es: 'Santuario de creación y fonoteca en 432 Hz de Munay Amaru (Omar Trillo): música orgánica, poesía contemplativa, artes plásticas y geopoética.',
-  en: 'Creation sanctuary and 432 Hz sound vault by Munay Amaru (Omar Trillo): organic music, contemplative poetry, fine arts, and geopoetics.',
+  es: 'Santuario de creación, arte contemporáneo y fonoteca en 432 Hz de Munay Amaru (Omar Trillo).',
+  en: 'Creation sanctuary, contemporary art, and 432 Hz sound vault by Munay Amaru (Omar Trillo).',
 };
 
 export const SOCIAL_LINKS = {
