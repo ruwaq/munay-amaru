@@ -1,0 +1,53 @@
+---
+import { LOCALES } from '../utils/i18n';
+import type { Locale } from '../utils/i18n';
+
+interface Props {
+  currentLocale: Locale;
+  translationUrl?: string | null;
+  hasTranslation?: boolean;
+}
+
+const { currentLocale, translationUrl = null, hasTranslation = false } = Astro.props;
+---
+
+<nav
+  class="lang-switcher"
+  aria-label={currentLocale === 'es' ? 'Selector de idioma' : 'Language selector'}
+>
+  <ul style="list-style: none; display: flex; gap: 6px; align-items: center; margin: 0; padding: 0;">
+    <!-- Español -->
+    <li>
+      {currentLocale === 'es' ? (
+        <span aria-current="page" style="font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">{LOCALES.es.label}</span>
+      ) : (
+        <a href={translationUrl || '/'} hreflang="es">
+          {LOCALES.es.label}
+        </a>
+      )}
+    </li>
+
+    <li aria-hidden="true" style="color: var(--ink-faint); user-select: none;">&middot;</li>
+
+    <!-- English -->
+    <li>
+      {currentLocale === 'en' ? (
+        <span aria-current="page" style="font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">{LOCALES.en.label}</span>
+      ) : hasTranslation && translationUrl ? (
+        <a href={translationUrl} hreflang="en">
+          {LOCALES.en.label}
+        </a>
+      ) : (
+        <span
+          style="opacity: 0.4; cursor: not-allowed;"
+          title={currentLocale === 'es'
+            ? 'Esta entrada solo existe en español'
+            : 'This entry is only available in Spanish'}
+          aria-disabled="true"
+        >
+          {LOCALES.en.label}
+        </span>
+      )}
+    </li>
+  </ul>
+</nav>

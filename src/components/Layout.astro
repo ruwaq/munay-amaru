@@ -1,0 +1,104 @@
+---
+import '../styles/vintage.css';
+import BottomDock from './BottomDock.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION, SOCIAL_LINKS } from '../utils/i18n';
+import type { Locale } from '../utils/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: Locale;
+  activePage?: string;
+  translationUrl?: string | null;
+  hasTranslation?: boolean;
+}
+
+const {
+  title,
+  description,
+  locale = 'es',
+  activePage = 'home',
+  translationUrl = null,
+  hasTranslation = false,
+} = Astro.props;
+
+const siteTitle = SITE_TITLE[locale];
+const siteSubtitle = 'Pabellón de Arte & Santuario Sonoro';
+const pageTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} · ${siteSubtitle}`;
+const pageDesc = description || SITE_DESCRIPTION[locale];
+---
+
+<!doctype html>
+<html lang={locale === 'es' ? 'es' : 'en'}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f4ef" />
+
+  <!-- SEO Primario -->
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc} />
+
+  <!-- RSS Autodescubrimiento -->
+  <link rel="alternate" type="application/rss+xml" title={`Feed RSS — ${siteTitle}`} href="/rss.xml" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Google Fonts: Zen Architecture & Literary Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <!-- Cabecera de Museo Contemplativa -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="museum-brand">
+        <span class="brand-title">{siteTitle}</span>
+        <span class="brand-subtitle">{siteSubtitle}</span>
+      </a>
+      <LanguageSwitcher
+        currentLocale={locale}
+        translationUrl={translationUrl}
+        hasTranslation={hasTranslation}
+      />
+    </div>
+  </header>
+
+  <!-- Contenido de Sala -->
+  <main id="main-content" role="main" class="page-container">
+    <slot />
+  </main>
+
+  <!-- Footer Zen de Museo -->
+  <footer class="museum-footer" role="contentinfo">
+    <div style="margin-bottom: 16px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-family: var(--font-inscription); font-size: 0.75rem; letter-spacing: 0.12em;">
+      <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer">Bandcamp &rarr;</a>
+      <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer">SoundCloud &rarr;</a>
+      <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">YouTube &rarr;</a>
+      <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer">Audius &rarr;</a>
+      <a href={SOCIAL_LINKS.linktree} target="_blank" rel="noopener noreferrer">Linktree &rarr;</a>
+    </div>
+    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 50ch; margin: 0 auto 12px;">
+      «Munay»: El poder del amor incondicional y la voluntad sagrada del corazón.
+    </p>
+    <p style="margin-top: 8px;">
+      <a href="mailto:munaysounds@gmail.com">Correspondencia con el artista &rarr;</a>
+      &nbsp;&middot;&nbsp;
+      <a href="/rss.xml">Suscripción RSS</a>
+    </p>
+    <p style="margin-top: 18px; font-family: var(--font-inscription); font-size: 0.68rem; letter-spacing: 0.18em; opacity: 0.5;">
+      MUSEO &middot; SANTUARIO MUNAY SOUNDS &copy; {new Date().getFullYear()}
+    </p>
+  </footer>
+
+  <!-- Navegación Dock Zócalo Zen -->
+  <BottomDock activePage={activePage} locale={locale} />
+</body>
+</html>

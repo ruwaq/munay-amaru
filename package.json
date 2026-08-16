@@ -1,0 +1,16 @@
+{
+  "name": "diario-artista",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node ./node_modules/astro/astro.js dev --host",
+    "start": "node ./node_modules/astro/astro.js dev --host",
+    "build": "node ./node_modules/astro/astro.js build",
+    "preview": "node ./node_modules/astro/astro.js preview --host",
+    "check": "node ./node_modules/astro/astro.js check"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.11",
+    "astro": "^5.4.2"
+  }
+}

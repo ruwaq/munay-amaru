@@ -1,0 +1,94 @@
+---
+import Layout from '../../components/Layout.astro';
+import { SOCIAL_LINKS } from '../../utils/i18n';
+---
+
+<Layout activePage="about" title="Manifiesto · Munay Sounds" locale="es">
+  <div style="margin-bottom: 40px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 20px;">
+    <span class="inv-code" style="margin-bottom: 6px;">MANIFIESTO DEL ARTISTA &middot; CÍRCULO DE CREADORES</span>
+    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink-primary); line-height: 1.15; margin-top: 4px;">
+      Munay Sounds
+    </h1>
+    <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px;">
+      «Munay»: el principio quechua del amor incondicional, la voluntad afectiva y la intención pura que nace del corazón.
+    </p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr; gap: 36px; margin-bottom: 50px;">
+    <!-- Declaración del Artista Nómada -->
+    <article class="zen-card prose-zen">
+      <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 14px; color: var(--ink-primary);">
+        I. La Arquitectura del Silencio
+      </h2>
+      <p>
+        <strong>Munay Sounds</strong> no opera como una factoría comercial ni como un catálogo de consumo veloz. Es un santuario de creación interdisciplinaria donde la música orgánica en 432 Hz, las artes visuales contemporáneas, la poesía de la lentitud y las grabaciones de campo convergen como ofrendas a la tierra.
+      </p>
+      <p>
+        Creemos en la nobleza de los materiales naturales, en la pureza del espacio vacío (*Ma*), en la calidez de la cinta magnética y en la quietud de las cosas creadas con devoción. Grabamos y escribimos para recordar la armonía que habita debajo del ruido del siglo.
+      </p>
+    </article>
+
+    <!-- Círculo de Creadores & Artistas Residentes -->
+    <section class="zen-card" style="border-left: 2px solid var(--accent-gold);">
+      <span class="inv-code" style="margin-bottom: 12px;">CÍRCULO DE ARTISTAS COLABORADORES</span>
+      <h2 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 16px; color: var(--ink-primary);">
+        Artistas en Resonancia
+      </h2>
+      <p style="font-size: 0.95rem; color: var(--ink-muted); line-height: 1.65; margin-bottom: 20px;">
+        El universo plástico y conceptual de Munay Sounds es fruto del diálogo constante con creadores visuales e ingenieros sonoros internacionales:
+      </p>
+
+      <div style="display: grid; gap: 16px;">
+        <div style="padding: 16px; background: var(--bg-card-warm); border-radius: 4px; border: 1px solid var(--border-hairline);">
+          <strong style="font-family: var(--font-inscription); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent-gold); display: block; margin-bottom: 4px;">
+            ELIANA COLZANI (Italia)
+          </strong>
+          <span style="font-size: 0.9rem; color: var(--ink-body); line-height: 1.5; display: block;">
+            Obras plásticas de portada para <em>I Am a Tree</em> y <em>Hula Hop</em>. Sensibilidad pictórica en diálogo con el micelio vegetal, las raíces botánicas y la circularidad del movimiento.
+          </span>
+        </div>
+
+        <div style="padding: 16px; background: var(--bg-card-warm); border-radius: 4px; border: 1px solid var(--border-hairline);">
+          <strong style="font-family: var(--font-inscription); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--accent-moss); display: block; margin-bottom: 4px;">
+            JIMENA VÍLCHEZ (Perú)
+          </strong>
+          <span style="font-size: 0.9rem; color: var(--ink-body); line-height: 1.5; display: block;">
+            Dirección plástica, grabado calcográfico y texturas textiles en <em>Proyecto Tu Silencio!</em>. Exploración del soporte como territorio de vacío fértil.
+          </span>
+        </div>
+
+        <div style="padding: 16px; background: var(--bg-card-warm); border-radius: 4px; border: 1px solid var(--border-hairline);">
+          <strong style="font-family: var(--font-inscription); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--ink-primary); display: block; margin-bottom: 4px;">
+            GASTÓN PURAY [@gastipuray] (Perú)
+          </strong>
+          <span style="font-size: 0.9rem; color: var(--ink-body); line-height: 1.5; display: block;">
+            Obra visual ritual en tinta china sumi-e y gráfica andina surrealista en <em>Dioses EP</em>, invocando la presencia de los Apus tutelares.
+          </span>
+        </div>
+
+        <div style="padding: 16px; background: var(--bg-card-warm); border-radius: 4px; border: 1px solid var(--border-hairline);">
+          <strong style="font-family: var(--font-inscription); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--ink-muted); display: block; margin-bottom: 4px;">
+            OMAR FRANCO (Perú / Europa)
+          </strong>
+          <span style="font-size: 0.9rem; color: var(--ink-body); line-height: 1.5; display: block;">
+            Ingeniería acústica, grabación de campo, mezcla espacial y masterización analógica en <em>Dioses EP</em>, <em>Proyecto Tu Silencio!</em> y la coproducción de <em>La Noche Azul Remix</em>.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Correspondencia con el Artista -->
+    <section class="zen-card" style="text-align: center; padding: 40px 24px; background: var(--bg-card-warm);">
+      <span class="inv-code" style="margin-bottom: 12px;">CORRESPONDENCIA DIRECTA</span>
+      <h2 style="font-family: var(--font-display); font-size: 1.65rem; color: var(--ink-primary); margin-bottom: 8px;">
+        Cartas &amp; Intercambios Creativos
+      </h2>
+      <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 48ch; margin: 0 auto 18px;">
+        Leemos y respondemos cada carta con la misma lentitud y afecto con que nacen nuestras grabaciones.
+      </p>
+      <a href="mailto:munaysounds@gmail.com" style="font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline;">
+        munaysounds@gmail.com
+      </a>
+    </section>
+  </div>
+</Layout>

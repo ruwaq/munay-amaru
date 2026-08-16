@@ -1,0 +1,116 @@
+---
+import Layout from '../../components/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const collections = ['poemas', 'cuentos', 'pensamientos', 'miradas', 'viajes', 'sonidos'] as const;
+  const paths = [];
+
+  for (const colName of collections) {
+    const entries = await getCollection(colName as any, ({ data }: any) => !data.draft);
+    for (const entry of entries) {
+      const cleanSlug = entry.id.replace(/\.md$/, '');
+      paths.push({
+        params: { slug: `${colName}-${cleanSlug}` },
+        props: { entry, collectionName: colName },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { entry, collectionName } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data as any;
+
+const categoryLabels: Record<string, string> = {
+  poemas: 'Poema · Verbo',
+  cuentos: 'Relato · Narrativa',
+  pensamientos: 'Aforismo · Fragmento',
+  miradas: 'Registro Visual · Fotografía',
+  viajes: 'Geopoética · Expedición',
+  sonidos: 'Pabellón Acústico · 432 Hz',
+};
+
+const backUrls: Record<string, string> = {
+  poemas: '/palabras/',
+  cuentos: '/palabras/',
+  pensamientos: '/palabras/',
+  miradas: '/miradas/',
+  viajes: '/miradas/',
+  sonidos: '/sonidos/',
+};
+---
+
+<Layout
+  title={data.title || 'Obra Contemplativa'}
+  activePage={collectionName === 'sonidos' ? 'sounds' : collectionName === 'poemas' || collectionName === 'cuentos' ? 'words' : collectionName === 'viajes' || collectionName === 'miradas' ? 'gazes' : 'home'}
+  locale={data.lang || 'es'}
+>
+  <article class="reading-wrap" style="padding-top: 10px; margin-bottom: 60px;">
+    <!-- Navegación de retorno a sala -->
+    <div style="margin-bottom: 24px;">
+      <a href={backUrls[collectionName] || '/'} style="font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); text-decoration: none;">
+        &larr; Volver a la sala
+      </a>
+    </div>
+
+    <!-- Encabezado de Cédula Curatorial -->
+    <header style="margin-bottom: 32px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 20px;">
+      <span class="inv-code" style="margin-bottom: 8px;">
+        {categoryLabels[collectionName] || 'OBRA'} &middot; {data.date ? new Date(data.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}
+      </span>
+
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; color: var(--ink-primary); line-height: 1.15; margin: 8px 0 12px;">
+        {data.title || 'Sin Título'}
+      </h1>
+
+      {data.dedication && (
+        <p style="font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--ink-muted); margin-bottom: 12px;">
+          «{data.dedication}»
+        </p>
+      )}
+
+      {data.location && (
+        <div style="font-size: 0.85rem; color: var(--ink-muted);">
+          📍 {typeof data.location === 'object' ? `${data.location.name} (${data.location.country || ''})` : data.location}
+          {data.location.elevation && ` · ${data.location.elevation}`}
+        </div>
+      )}
+    </header>
+
+    <!-- Reproductor de Audio si existe -->
+    {(data.audio || data.ambientAudio) && (
+      <div class="sanctuary-player" style="margin-bottom: 36px;">
+        <div class="player-header">
+          <span class="inv-code">REGISTRO SONORO</span>
+          <span class="freq-badge">432 Hz &middot; {(data.audio || data.ambientAudio).duration || '03:30'}</span>
+        </div>
+        <audio controls src={(data.audio || data.ambientAudio).src} style="width: 100%; height: 38px; filter: sepia(10%);"></audio>
+      </div>
+    )}
+
+    <!-- Enmarcado si es Mirada / Foto -->
+    {data.photo && (
+      <div class="float-mount-frame" style="margin-bottom: 36px;">
+        <img src={data.photo.src} alt={data.photo.alt || data.title} class="float-artwork" />
+      </div>
+    )}
+
+    <!-- Cuerpo del Texto Zen -->
+    <div class="prose-zen">
+      <Content />
+    </div>
+
+    <!-- Cédula de Registro / Metadatos de Sala -->
+    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <span class="inv-code" style="margin-bottom: 0;">
+        ARCHIVO &middot; MUNAY SOUNDS
+      </span>
+      <a href={backUrls[collectionName] || '/'} style="font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline;">
+        Explorar más obras de esta colección &rarr;
+      </a>
+    </footer>
+  </article>
+</Layout>

@@ -1,0 +1,104 @@
+---
+import Layout from '../components/Layout.astro';
+import MuseumExhibit from '../components/MuseumExhibit.astro';
+
+// Obra viva destacada del día
+const featuredExhibit = {
+  invNumber: 'MS-COL-2024-001 · COLECCIÓN PERMANENTE',
+  artist: 'ELIANA COLZANI & MUNAY SOUNDS',
+  title: 'I Am a Tree',
+  year: '2024',
+  medium: 'Óleo botánico sobre lino natural & paisaje sonoro en 432 Hz',
+  dimensions: '60 × 60 cm (Lienzo) · 03:10 min (Audio en bucle)',
+  provenance: 'Sesiones y residencia artística en Małopolska, Cracovia (Polonia)',
+  concept: '«I Am a Tree» explora la interconectividad subterránea del micelio y la memoria vegetal como arquetipo de arraigo espiritual en el nomadismo. La obra pictórica de Eliana Colzani articula una morfología arbórea donde los tonos ocres y verdes profundos dialogan con la composición acústica de Munay Sounds. Una invitación a disolver el cuerpo individual en la red viva del bosque.',
+  credits: 'Obra visual: Eliana Colzani · Composición y guitarras: Munay Sounds · Masterización analógica',
+  imageSrc: 'https://f4.bcbits.com/img/a3993646546_2.jpg',
+  imageAlt: 'Obra de arte I Am a Tree de Eliana Colzani',
+  linkUrl: 'https://munaysounds.bandcamp.com/album/nacer',
+  audioSrc: '/audio/ejemplo-voz.mp3'
+};
+---
+
+<Layout activePage="home" locale="es">
+  <!-- Umbral de Bienvenida & Espacio 'Ma' -->
+  <section style="text-align: center; margin-bottom: 48px; padding-top: 10px;">
+    <span class="inv-code" style="margin-bottom: 8px;">PABELLÓN DIGITAL &middot; RESIDENCIA CONTINUA</span>
+    <h1 style="font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; color: var(--ink-primary); line-height: 1.15; margin-bottom: 14px;">
+      El Silencio y la Forma
+    </h1>
+    <p style="font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--ink-muted); max-width: 52ch; margin: 0 auto;">
+      Un santuario contemporáneo donde la música orgánica en 432 Hz, la plástica y la poesía nómada habitan en contemplación.
+    </p>
+  </section>
+
+  <!-- Obra Viva del Día (Featured Living Artwork) -->
+  <section style="margin-bottom: 48px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 8px;">
+      <span style="font-family: var(--font-inscription); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted);">
+        Obra en Resonancia
+      </span>
+      <span class="freq-badge">SALA I &middot; BOTÁNICA</span>
+    </div>
+
+    <MuseumExhibit {...featuredExhibit} />
+  </section>
+
+  <!-- Aforismo Zen / Reflexión de la Pausa -->
+  <section class="zen-card" style="text-align: center; padding: clamp(28px, 5vw, 44px); margin-bottom: 48px; border-left: 2px solid var(--accent-gold);">
+    <span class="inv-code" style="margin-bottom: 10px;">PRINCIPIO DEL AYNI &middot; RECIPROCIDAD</span>
+    <blockquote style="font-family: var(--font-display); font-size: clamp(1.2rem, 3vw, 1.5rem); font-style: italic; color: var(--ink-primary); line-height: 1.6; max-width: 44ch; margin: 0 auto 16px;">
+      «El silencio nunca está vacío: es un espacio lleno de presencias que solo se hacen audibles cuando dejamos de empujar el tiempo.»
+    </blockquote>
+    <cite style="font-family: var(--font-inscription); font-size: 0.72rem; letter-spacing: 0.16em; color: var(--ink-muted); text-transform: uppercase;">
+      — Proyecto Tu Silencio! &middot; Munay Sounds
+    </cite>
+  </section>
+
+  <!-- Recorrido por los Pabellones del Museo -->
+  <section style="margin-bottom: 40px;">
+    <div style="margin-bottom: 24px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 8px;">
+      <span style="font-family: var(--font-inscription); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted);">
+        Salas de Exhibición
+      </span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      <!-- Sala Galería -->
+      <a href="/tienda/" class="zen-card" style="text-decoration: none; display: block;">
+        <span class="zen-overline">SALA DE ARTES PLÁSTICAS</span>
+        <h2 class="zen-title">Galería de Obras</h2>
+        <p style="font-size: 0.95rem; color: var(--ink-muted); line-height: 1.6;">
+          Exposiciones de <strong>Eliana Colzani</strong>, <strong>Jimena Vílchez</strong> y <strong>@gastipuray</strong> en diálogo con los álbumes.
+        </p>
+      </a>
+
+      <!-- Sala Pabellón Sonoro -->
+      <a href="/sonidos/" class="zen-card" style="text-decoration: none; display: block;">
+        <span class="zen-overline">CÁMARA ACÚSTICA 432 Hz</span>
+        <h2 class="zen-title">Pabellón Sonoro</h2>
+        <p style="font-size: 0.95rem; color: var(--ink-muted); line-height: 1.6;">
+          Sound journeys y piezas de meditación: <em>Piedras al Mar</em>, <em>Nacer</em>, <em>Allinllachu</em> y <em>Luce di Alba</em>.
+        </p>
+      </a>
+
+      <!-- Sala Geopoética -->
+      <a href="/miradas/" class="zen-card" style="text-decoration: none; display: block;">
+        <span class="zen-overline">EXPEDICIONES Y BITÁCORAS</span>
+        <h2 class="zen-title">Geopoética Nómada</h2>
+        <p style="font-size: 0.95rem; color: var(--ink-muted); line-height: 1.6;">
+          Cuadernos de viaje espiritual: la niebla de Rumania, los bosques de Polonia, la luz de Grecia y los Andes.
+        </p>
+      </a>
+
+      <!-- Sala Poética -->
+      <a href="/palabras/" class="zen-card" style="text-decoration: none; display: block;">
+        <span class="zen-overline">ALCOBA LITERARIA</span>
+        <h2 class="zen-title">Poética &amp; Filosofía</h2>
+        <p style="font-size: 0.95rem; color: var(--ink-muted); line-height: 1.6;">
+          Versos mayores y ensayos sobre la lentitud, el Ayni andino y la estética Zen del vacío.
+        </p>
+      </a>
+    </div>
+  </section>
+</Layout>
