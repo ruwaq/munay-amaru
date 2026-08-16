@@ -8,6 +8,7 @@ import type { Locale } from '../utils/i18n';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
   locale?: Locale;
   activePage?: string;
   translationUrl?: string | null;
@@ -17,6 +18,7 @@ interface Props {
 const {
   title,
   description,
+  image,
   locale = 'es',
   activePage = 'home',
   translationUrl = null,
@@ -27,6 +29,8 @@ const siteTitle = SITE_TITLE[locale];
 const siteSubtitle = SITE_SUBTITLE[locale];
 const pageTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} · ${siteSubtitle}`;
 const pageDesc = description || SITE_DESCRIPTION[locale];
+const pageImage = image || 'https://f4.bcbits.com/img/a3993646546_2.jpg';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://diario-artista.pages.dev');
 ---
 
 <!doctype html>
@@ -36,9 +40,26 @@ const pageDesc = description || SITE_DESCRIPTION[locale];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f4ef" />
 
-  <!-- SEO Primario -->
+  <!-- SEO Primario & Canonical -->
   <title>{pageTitle}</title>
   <meta name="description" content={pageDesc} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="author" content="Munay Amaru (Omar Trillo)" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
+  <meta property="og:image" content={pageImage} />
+  <meta property="og:site_name" content={siteTitle} />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalUrl} />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDesc} />
+  <meta name="twitter:image" content={pageImage} />
 
   <!-- RSS Autodescubrimiento -->
   <link rel="alternate" type="application/rss+xml" title={`Feed RSS — ${siteTitle}`} href="/rss.xml" />
@@ -50,7 +71,7 @@ const pageDesc = description || SITE_DESCRIPTION[locale];
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
 </head>

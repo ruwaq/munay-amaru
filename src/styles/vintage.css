@@ -457,3 +457,101 @@ body {
     letter-spacing: 0.12em;
   }
 }
+
+/* --- ANIMACIÓN CÍRCULO SAMAY (RESPIRACIÓN CONSCIENTE 4-4-6-2) --- */
+@keyframes samay-breath {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 16px hsla(42, 48%, 52%, 0.2);
+    border-color: var(--accent-gold);
+  }
+  25% {
+    /* Inhalar (4s) */
+    transform: scale(1.28);
+    box-shadow: 0 0 32px hsla(42, 48%, 52%, 0.45), inset 0 0 14px hsla(42, 48%, 52%, 0.15);
+    border-color: var(--solar-200);
+  }
+  50% {
+    /* Retener (4s) */
+    transform: scale(1.28);
+    box-shadow: 0 0 36px hsla(42, 48%, 52%, 0.5), inset 0 0 18px hsla(42, 48%, 52%, 0.25);
+    border-color: var(--solar-200);
+  }
+  87.5% {
+    /* Exhalar (6s) */
+    transform: scale(1);
+    box-shadow: 0 0 16px hsla(42, 48%, 52%, 0.2);
+    border-color: var(--accent-gold);
+  }
+  100% {
+    /* Vacío fértil (2s) */
+    transform: scale(1);
+    box-shadow: 0 0 14px hsla(42, 48%, 52%, 0.15);
+    border-color: var(--accent-gold);
+  }
+}
+
+.samay-circle {
+  width: 84px;
+  height: 84px;
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 50%;
+  margin: 18px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: samay-breath 16s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+/* --- MODO OSCURO ZEN CONTEMPLATIVO --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-canvas: hsl(215, 14%, 8%);
+    --bg-card: hsl(215, 12%, 11%);
+    --bg-card-warm: hsl(215, 10%, 13%);
+    
+    --ink-primary: hsl(42, 20%, 96%);
+    --ink-body: hsl(42, 12%, 86%);
+    --ink-muted: hsl(42, 8%, 65%);
+    --ink-faint: hsl(215, 8%, 46%);
+    
+    --border-hairline: hsla(42, 15%, 90%, 0.1);
+    --border-hairline-strong: hsla(42, 15%, 90%, 0.2);
+    
+    --shadow-ethereal-sm: 0 2px 10px hsla(0, 0%, 0%, 0.3);
+    --shadow-ethereal-md: 0 8px 24px hsla(0, 0%, 0%, 0.4);
+    --shadow-ethereal-lg: 0 16px 48px hsla(0, 0%, 0%, 0.55);
+  }
+
+  .site-header {
+    background: hsla(215, 14%, 8%, 0.85);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+
+  .bottom-dock {
+    background: hsla(215, 14%, 8%, 0.9);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .float-mount-frame {
+    background: hsl(215, 12%, 12%);
+    border-color: var(--border-hairline);
+  }
+
+  .curatorial-label {
+    background: hsl(215, 12%, 10%);
+    border-color: var(--border-hairline);
+  }
+
+  .sanctuary-player {
+    background: hsl(215, 12%, 10%);
+    border-color: var(--border-hairline);
+  }
+
+  .freq-badge {
+    background: hsla(42, 48%, 52%, 0.15);
+    color: var(--solar-200);
+    border-color: hsla(42, 48%, 52%, 0.3);
+  }
+}

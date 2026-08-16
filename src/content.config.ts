@@ -74,6 +74,7 @@ const miradas = defineCollection({
   schema: z.object({
     title: z.string().optional(),
     date: z.coerce.date(),
+    draft: z.boolean().default(false),
     analogDate: z.string(),
     photo: z.object({
       src: z.string(),
@@ -95,6 +96,7 @@ const viajes = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    draft: z.boolean().default(false),
     journey: z.object({
       name: z.string(),
       day: z.number().optional(),
@@ -118,6 +120,7 @@ const sonidos = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    draft: z.boolean().default(false),
     category: z.string().default('field_recording'),
     audio: audioSchema.extend({
       fileSize: z.string().optional(),

@@ -1,13 +1,14 @@
 ---
 import Layout from '../../components/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const collections = ['poemas', 'cuentos', 'pensamientos', 'miradas', 'viajes', 'sonidos'] as const;
   const paths = [];
 
   for (const colName of collections) {
-    const entries = await getCollection(colName as any, ({ data }: any) => !data.draft);
+    const entries = await getCollection(colName, ({ data }: { data: { draft?: boolean } }) => !data.draft);
     for (const entry of entries) {
       const cleanSlug = entry.id.replace(/\.md$/, '');
       paths.push({
@@ -18,6 +19,13 @@ export async function getStaticPaths() {
   }
 
   return paths;
+}
+
+type ValidCollection = 'poemas' | 'cuentos' | 'pensamientos' | 'miradas' | 'viajes' | 'sonidos';
+
+export interface Props {
+  entry: CollectionEntry<ValidCollection>;
+  collectionName: ValidCollection;
 }
 
 const { entry, collectionName } = Astro.props;
