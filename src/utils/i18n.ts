@@ -1,10 +1,18 @@
 /**
- * Utilidades de internacionalización para Munay Sounds — Diario de Artista.
+ * Utilidades de internacionalización y metadatos para Munay Sounds — Pabellón de Arte Zen.
  * Español (es) en raíz (/), Inglés (en) con prefijo (/en).
- * Soporte para contenido asimétrico.
  */
 
 export type Locale = 'es' | 'en';
+
+export const ARTIST_INFO = {
+  civilName: 'Omar Trillo',
+  spiritualName: 'Munay Amaru',
+  spiritualMeaning: {
+    es: '«Munay» (amor incondicional, voluntad pura desde el corazón) y «Amaru» (serpiente sagrada andina de la sabiduría, transmutación y el flujo eterno del agua).',
+    en: '«Munay» (unconditional love, pure will from the heart) and «Amaru» (the sacred Andean serpent of wisdom, transmutation, and the eternal flow of water).'
+  }
+};
 
 export const SITE_TITLE = {
   es: 'Munay Sounds',
@@ -12,13 +20,13 @@ export const SITE_TITLE = {
 };
 
 export const SITE_SUBTITLE = {
-  es: 'diario sonoro & cuaderno creativo abierto',
-  en: 'sound journal & open creative notebook',
+  es: 'Pabellón de Arte Contemporáneo & Santuario Sonoro',
+  en: 'Contemporary Art Pavilion & Sound Sanctuary',
 };
 
 export const SITE_DESCRIPTION = {
-  es: 'Diario creativo y fonoteca analógica de Munay Sounds: música, poesía, paisajes sonoros, fotografía y relatos.',
-  en: 'Creative journal and analog sound library by Munay Sounds: music, poetry, field recordings, photography and travel tales.',
+  es: 'Santuario de creación y fonoteca en 432 Hz de Munay Amaru (Omar Trillo): música orgánica, poesía contemplativa, artes plásticas y geopoética.',
+  en: 'Creation sanctuary and 432 Hz sound vault by Munay Amaru (Omar Trillo): organic music, contemplative poetry, fine arts, and geopoetics.',
 };
 
 export const SOCIAL_LINKS = {
@@ -27,23 +35,6 @@ export const SOCIAL_LINKS = {
   youtube: 'https://youtube.com/@munay_sounds',
   instagram: 'https://instagram.com/munay_sounds',
   linktree: 'https://linktr.ee/munay_sounds',
-};
-
-export const NAV_LABELS = {
-  es: {
-    home: 'Ahora',
-    words: 'Palabras',
-    gazes: 'Miradas',
-    sounds: 'Sonidos',
-    about: 'Munay',
-  },
-  en: {
-    home: 'Now',
-    words: 'Words',
-    gazes: 'Gazes',
-    sounds: 'Sounds',
-    about: 'Munay',
-  },
 };
 
 export const LOCALES: Record<Locale, {

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../components/Layout.astro';
-import { SOCIAL_LINKS } from '../../utils/i18n';
+import { SOCIAL_LINKS, ARTIST_INFO } from '../../utils/i18n';
 ---
 
 <Layout activePage="about" title="Manifiesto · Munay Sounds" locale="es">
@@ -10,7 +10,7 @@ import { SOCIAL_LINKS } from '../../utils/i18n';
       Munay Sounds
     </h1>
     <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px;">
-      «Munay»: el principio quechua del amor incondicional, la voluntad afectiva y la intención pura que nace del corazón.
+      Un refugio de creación donde convergen la música orgánica en 432 Hz, la plástica contemporánea y la geopoética nómada.
     </p>
   </div>
 
@@ -27,6 +27,24 @@ import { SOCIAL_LINKS } from '../../utils/i18n';
         Creemos en la nobleza de los materiales naturales, en la pureza del espacio vacío (*Ma*), en la calidez de la cinta magnética y en la quietud de las cosas creadas con devoción. Grabamos y escribimos para recordar la armonía que habita debajo del ruido del siglo.
       </p>
     </article>
+
+    <!-- Información noble y discreta sobre el creador -->
+    <section class="zen-card" style="background: var(--bg-card-warm); border-left: 2px solid var(--accent-moss);">
+      <span class="inv-code" style="margin-bottom: 10px;">IDENTIDAD &middot; TRANSMUTACIÓN ANDINA</span>
+      <h2 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--ink-primary); margin-bottom: 10px;">
+        El Artista: Munay Amaru
+      </h2>
+      <p style="font-size: 0.95rem; color: var(--ink-body); line-height: 1.7; margin-bottom: 12px;">
+        Detrás de la dirección y concepción de este santuario se encuentra <strong>Omar Trillo</strong>, quien asume en su camino creativo y espiritual el nombre andino de <strong>Munay Amaru</strong>.
+      </p>
+      <blockquote style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); margin: 12px 0 16px; border-left: 2px solid var(--accent-gold); padding-left: 16px;">
+        «<strong>Munay</strong>»: la voluntad de amar incondicionalmente desde el centro del corazón.<br />
+        «<strong>Amaru</strong>»: la serpiente sagrada de la cosmovisión andina, símbolo del agua vivificante, la sabiduría primordial y la transmutación infinita entre los mundos.
+      </blockquote>
+      <p style="font-size: 0.9rem; color: var(--ink-muted); line-height: 1.6;">
+        Formado entre la rigurosidad instrumental, la exploración audiovisual y el peregrinaje por residencias artísticas en Europa y Sudamérica, su obra es un puente continuo entre la memoria ancestral de los Andes y la vanguardia estética contemporánea.
+      </p>
+    </section>
 
     <!-- Círculo de Creadores & Artistas Residentes -->
     <section class="zen-card" style="border-left: 2px solid var(--accent-gold);">
