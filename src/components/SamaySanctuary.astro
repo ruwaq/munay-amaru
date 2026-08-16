@@ -1,0 +1,159 @@
+---
+// Círculo de Respiración Samay — Interactivo & Háptico
+// Ciclo andino consciente: 4-4-6-2
+---
+
+<section class="zen-card" id="samay-sanctuary" style="background: var(--bg-card-warm); text-align: center; padding: clamp(28px, 5vw, 44px); margin-bottom: 40px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 8px;">
+    <span class="inv-code" style="margin-bottom: 0;">CÍRCULO SAMAY &middot; RESPIRACIÓN CONSCIENTE (4-4-6-2)</span>
+    <span id="haptic-indicator" style="font-family: var(--font-inscription); font-size: 0.62rem; color: var(--accent-moss); letter-spacing: 0.1em; opacity: 0;">GUÍA TÁCTIL</span>
+  </div>
+
+  <!-- Anillo SVG interactivo -->
+  <div
+    id="samay-interactive-trigger"
+    role="button"
+    tabindex="0"
+    aria-label="Iniciar ciclo de respiración guiada Samay"
+    style="width: 170px; height: 170px; margin: 0 auto 20px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;"
+  >
+    <svg viewBox="0 0 160 160" style="position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg);">
+      <circle cx="80" cy="80" r="70" fill="none" stroke="var(--sumi-100)" stroke-width="2.5"></circle>
+      <circle
+        id="samay-progress-ring"
+        cx="80" cy="80" r="70"
+        fill="none"
+        stroke="var(--solar-500)"
+        stroke-width="3.5"
+        stroke-linecap="round"
+      ></circle>
+    </svg>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; text-align: center; pointer-events: none;">
+      <span id="samay-phase-text" style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--ink-primary); line-height: 1.1;">Inhala</span>
+      <span id="samay-timer-text" style="font-family: var(--font-inscription); font-size: 0.82rem; color: var(--solar-500); letter-spacing: 0.1em; margin: 4px 0;">432 Hz</span>
+      <span id="samay-sub-text" style="font-size: 0.68rem; color: var(--ink-faint); max-width: 90px; line-height: 1.3;">Toca para respirar</span>
+    </div>
+  </div>
+
+  <!-- Fases -->
+  <div style="display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-muted); margin: 0 0 10px;">
+    <span>Inhala <em>4s</em></span><span>&middot;</span>
+    <span>Retén <em>4s</em></span><span>&middot;</span>
+    <span>Suelta <em>6s</em></span><span>&middot;</span>
+    <span>Vacío <em>2s</em></span>
+  </div>
+
+  <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 46ch; margin: 0 auto;">
+    Sintoniza el ritmo de tu cuerpo con el pulso de la cordillera y el mar.
+  </p>
+  <span style="display: block; font-size: 0.8rem; color: var(--ink-faint); margin-top: 10px;">Conecta auriculares para la experiencia binaural completa.</span>
+</section>
+
+<script>
+  (function initSamay() {
+    const ring = document.getElementById('samay-progress-ring') as SVGCircleElement | null;
+    const trigger = document.getElementById('samay-interactive-trigger');
+    const phaseText = document.getElementById('samay-phase-text');
+    const timerText = document.getElementById('samay-timer-text');
+    const subText = document.getElementById('samay-sub-text');
+    const hapticBadge = document.getElementById('haptic-indicator');
+
+    const CIRCUMFERENCE = 2 * Math.PI * 70;
+    if (ring) {
+      ring.style.strokeDasharray = `${CIRCUMFERENCE} ${CIRCUMFERENCE}`;
+      ring.style.strokeDashoffset = `${CIRCUMFERENCE}`;
+    }
+
+    const stages = [
+      { name: 'Inhala', sub: 'Samay Yaykuy', seconds: 4, vibrate: [40, 60, 40] },
+      { name: 'Retén', sub: 'Habita la calma', seconds: 4, vibrate: [20, 30] },
+      { name: 'Exhala', sub: 'Suelta el peso', seconds: 6, vibrate: [60] },
+      { name: 'Vacío', sub: 'Vacío fértil', seconds: 2, vibrate: [15] },
+    ];
+
+    let isRunning = false;
+    let currentStageIdx = 0;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    let audioCtx: AudioContext | null = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AC = (window as any).AudioContext || (window as any).webkitAudioContext;
+        if (AC) audioCtx = new AC();
+      }
+    }
+
+    function playChime(freq = 432) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.0);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 2.2);
+      } catch (e) {}
+    }
+
+    function setProgress(p: number) {
+      if (ring) ring.style.strokeDashoffset = `${CIRCUMFERENCE * (1 - p)}`;
+    }
+
+    function runStage() {
+      if (!isRunning) return;
+      const stage = stages[currentStageIdx];
+      if (phaseText) phaseText.textContent = stage.name;
+      if (subText) subText.textContent = stage.sub;
+      if ('vibrate' in navigator) navigator.vibrate(stage.vibrate);
+      playChime(currentStageIdx === 0 ? 432 : 216);
+
+      const startP = [0, 1, 1, 0][currentStageIdx] ?? 0;
+      const endP = [1, 1, 0, 0][currentStageIdx] ?? 0;
+      const totalMs = stage.seconds * 1000;
+      let elapsed = 0;
+
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (!isRunning) { clearInterval(intervalId!); return; }
+        elapsed += 200;
+        const t = Math.min(elapsed / totalMs, 1);
+        setProgress(startP + (endP - startP) * t);
+        const left = Math.max(0, stage.seconds - Math.floor(elapsed / 1000));
+        if (timerText) timerText.textContent = `${left}s`;
+        if (elapsed >= totalMs) {
+          clearInterval(intervalId!);
+          currentStageIdx = (currentStageIdx + 1) % stages.length;
+          runStage();
+        }
+      }, 200);
+    }
+
+    function start() {
+      isRunning = true;
+      currentStageIdx = 0;
+      if (hapticBadge && 'vibrate' in navigator) hapticBadge.style.opacity = '1';
+      runStage();
+    }
+
+    function stop() {
+      isRunning = false;
+      if (intervalId) clearInterval(intervalId);
+      setProgress(0);
+      if (phaseText) phaseText.textContent = 'Inhala';
+      if (timerText) timerText.textContent = '432 Hz';
+      if (subText) subText.textContent = 'Toca para respirar';
+      if (hapticBadge) hapticBadge.style.opacity = '0';
+    }
+
+    trigger?.addEventListener('click', () => { initAudio(); isRunning ? stop() : start(); });
+    trigger?.addEventListener('keydown', (e: Event) => {
+      const ke = e as KeyboardEvent;
+      if (ke.key === 'Enter' || ke.key === ' ') { e.preventDefault(); (trigger as HTMLElement).click(); }
+    });
+  })();
+</script>

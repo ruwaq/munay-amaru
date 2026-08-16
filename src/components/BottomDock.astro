@@ -1,50 +1,34 @@
 ---
 import type { Locale } from '../utils/i18n';
-
-interface Props {
-  activePage?: string;
-  locale?: Locale;
-}
-
+interface Props { activePage?: string; locale?: Locale; }
 const { activePage = 'home', locale = 'es' } = Astro.props;
 const prefix = locale === 'en' ? '/en' : '';
 
 const tabs = [
   {
-    id: 'home',
-    href: prefix + '/',
+    id: 'home', href: prefix + '/',
     label: locale === 'es' ? 'Santuario' : 'Sanctuary',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21V12h6v9"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21V12h6v9"/></svg>`,
   },
   {
-    id: 'shop',
-    href: prefix + '/tienda/',
+    id: 'shop', href: prefix + '/tienda/',
     label: locale === 'es' ? 'Galería' : 'Gallery',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
   },
   {
-    id: 'sounds',
-    href: prefix + '/sonidos/',
+    id: 'sounds', href: prefix + '/sonidos/',
     label: locale === 'es' ? 'Sonoro' : 'Sound',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h2M6 8v8M10 5v14M14 8v8M18 10v4M22 12h-2"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 12h2M6 8v8M10 5v14M14 8v8M18 10v4M22 12h-2"/></svg>`,
   },
   {
-    id: 'words',
-    href: prefix + '/palabras/',
+    id: 'words', href: prefix + '/palabras/',
     label: locale === 'es' ? 'Poética' : 'Poetics',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg>`,
   },
   {
-    id: 'gazes',
-    href: prefix + '/miradas/',
-    label: locale === 'es' ? 'Geopoética' : 'Journeys',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>`,
-  },
-  {
-    id: 'about',
-    href: prefix + '/sobre/',
-    label: locale === 'es' ? 'Manifiesto' : 'Manifesto',
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>`,
+    id: 'gazes', href: prefix + '/miradas/',
+    label: locale === 'es' ? 'Viajes' : 'Journeys',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>`,
   },
 ];
 ---
@@ -58,7 +42,9 @@ const tabs = [
         aria-current={activePage === tab.id ? 'page' : undefined}
         aria-label={tab.label}
       >
-        <Fragment set:html={tab.icon} />
+        <div class="dock-icon-wrapper">
+          <Fragment set:html={tab.icon} />
+        </div>
         <span>{tab.label}</span>
       </a>
     ))}

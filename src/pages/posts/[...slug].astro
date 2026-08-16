@@ -6,119 +6,183 @@ import type { CollectionEntry } from 'astro:content';
 export async function getStaticPaths() {
   const collections = ['poemas', 'cuentos', 'pensamientos', 'miradas', 'viajes', 'sonidos'] as const;
   const paths = [];
-
   for (const colName of collections) {
-    const entries = await getCollection(colName, ({ data }: { data: { draft?: boolean } }) => !data.draft);
-    for (const entry of entries) {
+    const entries = await getCollection(colName, ({ data }: any) => !data.draft);
+    entries.sort((a: any, b: any) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+      const prev = i > 0 ? entries[i - 1] : null;
+      const next = i < entries.length - 1 ? entries[i + 1] : null;
       const cleanSlug = entry.id.replace(/\.md$/, '');
       paths.push({
         params: { slug: `${colName}-${cleanSlug}` },
-        props: { entry, collectionName: colName },
+        props: { entry, collectionName: colName, prevEntry: prev, nextEntry: next },
       });
     }
   }
-
   return paths;
 }
 
 type ValidCollection = 'poemas' | 'cuentos' | 'pensamientos' | 'miradas' | 'viajes' | 'sonidos';
-
 export interface Props {
   entry: CollectionEntry<ValidCollection>;
   collectionName: ValidCollection;
+  prevEntry: CollectionEntry<ValidCollection> | null;
+  nextEntry: CollectionEntry<ValidCollection> | null;
 }
 
-const { entry, collectionName } = Astro.props;
+const { entry, collectionName, prevEntry, nextEntry } = Astro.props;
 const { Content } = await render(entry);
 const data = entry.data as any;
 
-const categoryLabels: Record<string, string> = {
-  poemas: 'Poema · Verbo',
-  cuentos: 'Relato · Narrativa',
-  pensamientos: 'Aforismo · Fragmento',
-  miradas: 'Registro Visual · Fotografía',
-  viajes: 'Geopoética · Expedición',
-  sonidos: 'Pabellón Acústico · 432 Hz',
+const wordCount = (entry.body || '').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
+
+const categoryMeta: Record<string, { label: string; backUrl: string; folio: string }> = {
+  poemas:       { label: 'Poema · Verbo Sagrado',              backUrl: '/palabras/',  folio: 'FASCÍCULO I — POESÍA'       },
+  cuentos:      { label: 'Relato · Narrativa de la Lentitud',  backUrl: '/palabras/',  folio: 'FASCÍCULO II — CUENTOS'     },
+  pensamientos: { label: 'Aforismo · Fragmento de Diario',     backUrl: '/palabras/',  folio: 'FASCÍCULO III — DIARIO'     },
+  miradas:      { label: 'Registro Visual · Fotografía',       backUrl: '/miradas/',   folio: 'FASCÍCULO IV — MIRADAS'     },
+  viajes:       { label: 'Geopoética · Expedición Nómada',     backUrl: '/miradas/',   folio: 'FASCÍCULO V — GEOGRAFÍAS'   },
+  sonidos:      { label: 'Pabellón Acústico · 432 Hz',         backUrl: '/sonidos/',   folio: 'FASCÍCULO VI — FONOTECA'    },
 };
 
-const backUrls: Record<string, string> = {
-  poemas: '/palabras/',
-  cuentos: '/palabras/',
-  pensamientos: '/palabras/',
-  miradas: '/miradas/',
-  viajes: '/miradas/',
-  sonidos: '/sonidos/',
+const meta = categoryMeta[collectionName] || { label: 'Obra', backUrl: '/', folio: 'MUNAY AMARU' };
+const isPoem = collectionName === 'poemas';
+const activePageMap: Record<string, string> = {
+  sonidos: 'sounds', poemas: 'words', cuentos: 'words', pensamientos: 'words',
+  viajes: 'gazes', miradas: 'gazes',
 };
 ---
 
-<Layout
-  title={data.title || 'Obra Contemplativa'}
-  activePage={collectionName === 'sonidos' ? 'sounds' : collectionName === 'poemas' || collectionName === 'cuentos' ? 'words' : collectionName === 'viajes' || collectionName === 'miradas' ? 'gazes' : 'home'}
-  locale={data.lang || 'es'}
->
-  <article class="reading-wrap" style="padding-top: 10px; margin-bottom: 60px;">
-    <!-- Navegación de retorno a sala -->
-    <div style="margin-bottom: 24px;">
-      <a href={backUrls[collectionName] || '/'} style="font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); text-decoration: none;">
+<Layout title={data.title || 'Obra Contemplativa'} activePage={activePageMap[collectionName] || 'home'} locale={data.lang || 'es'}>
+  <article class="reading-wrap paper-texture" style="padding-top: 16px; margin-bottom: 80px;">
+
+    <!-- Cabecera de folio -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: 12px; margin-bottom: 32px; gap: 12px;">
+      <a href={meta.backUrl} style="font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; gap: 4px;">
         &larr; Volver a la sala
       </a>
+      <span class="inv-code" style="margin-bottom: 0;">{meta.folio}</span>
     </div>
 
-    <!-- Encabezado de Cédula Curatorial -->
-    <header style="margin-bottom: 32px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 20px;">
-      <span class="inv-code" style="margin-bottom: 8px;">
-        {categoryLabels[collectionName] || 'OBRA'} &middot; {data.date ? new Date(data.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}
+    <!-- Cédula curatorial -->
+    <header style="margin-bottom: 36px; text-align: center;">
+      <span class="inv-code" style="margin-bottom: 10px;">
+        {meta.label} &middot; {data.date ? new Date(data.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}
       </span>
-
-      <h1 style="font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; color: var(--ink-primary); line-height: 1.15; margin: 8px 0 12px;">
+      <h1 style="font-family: var(--font-display); font-size: clamp(2.2rem, 5.5vw, 3.4rem); font-weight: 400; color: var(--ink-primary); line-height: 1.12; margin: 12px auto 16px; max-width: 22ch;">
         {data.title || 'Sin Título'}
       </h1>
-
       {data.dedication && (
-        <p style="font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--ink-muted); margin-bottom: 12px;">
-          «{data.dedication}»
+        <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 48ch; margin: 0 auto 16px;">
+          &laquo;{data.dedication}&raquo;
         </p>
       )}
-
-      {data.location && (
-        <div style="font-size: 0.85rem; color: var(--ink-muted);">
-          📍 {typeof data.location === 'object' ? `${data.location.name} (${data.location.country || ''})` : data.location}
-          {data.location.elevation && ` · ${data.location.elevation}`}
-        </div>
-      )}
+      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 0.8rem; color: var(--ink-muted); margin-top: 16px;">
+        {!isPoem && <span>&#9203; Lectura lenta: {readingMinutes} min</span>}
+        {data.location && (
+          <span>&#128205; {typeof data.location === 'object' ? `${data.location.name}${data.location.country ? ', ' + data.location.country : ''}` : data.location}</span>
+        )}
+        {data.location?.elevation && <span>&#9968;&#65039; {data.location.elevation}</span>}
+      </div>
+      <div class="wabi-divider">&#10086;</div>
     </header>
 
-    <!-- Reproductor de Audio si existe -->
-    {(data.audio || data.ambientAudio) && (
-      <div class="sanctuary-player" style="margin-bottom: 36px;">
-        <div class="player-header">
-          <span class="inv-code">REGISTRO SONORO</span>
-          <span class="freq-badge">432 Hz &middot; {(data.audio || data.ambientAudio).duration || '03:30'}</span>
-        </div>
-        <audio controls src={(data.audio || data.ambientAudio).src} style="width: 100%; height: 38px; filter: sepia(10%);"></audio>
-      </div>
-    )}
-
-    <!-- Enmarcado si es Mirada / Foto -->
+    <!-- Imagen en paspartú -->
     {data.photo && (
-      <div class="float-mount-frame" style="margin-bottom: 36px;">
-        <img src={data.photo.src} alt={data.photo.alt || data.title} class="float-artwork" />
+      <div class="float-mount-frame" style="margin-bottom: 40px;">
+        <figure style="margin: 0; text-align: center; width: 100%;">
+          <img src={data.photo.src} alt={data.photo.alt || data.title} class="float-artwork" loading="lazy" decoding="async" />
+          {data.footnote && (
+            <figcaption style="font-family: var(--font-display); font-size: 0.95rem; font-style: italic; color: var(--ink-muted); margin-top: 14px; max-width: 52ch; margin-inline: auto;">
+              {data.footnote}
+            </figcaption>
+          )}
+        </figure>
       </div>
     )}
 
-    <!-- Cuerpo del Texto Zen -->
-    <div class="prose-zen">
+    <!-- Audio -->
+    {(data.audio || data.ambientAudio) && (
+      <div class="sanctuary-player" style="margin-bottom: 40px;">
+        <div class="player-header">
+          <span class="inv-code">PAISAJE ACÚSTICO / LECTURA ORAL</span>
+          <span class="freq-badge">432 Hz &middot; {(data.audio || data.ambientAudio)?.duration || '03:15'}</span>
+        </div>
+        <audio controls src={(data.audio || data.ambientAudio)?.src} style="width: 100%; height: 38px; filter: sepia(10%);"></audio>
+      </div>
+    )}
+
+    <!-- Cuerpo del texto -->
+    <div class={isPoem ? 'prose-poem' : 'prose-editorial has-dropcap'}>
       <Content />
     </div>
 
-    <!-- Cédula de Registro / Metadatos de Sala -->
-    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-      <span class="inv-code" style="margin-bottom: 0;">
-        ARCHIVO &middot; MUNAY AMARU
-      </span>
-      <a href={backUrls[collectionName] || '/'} style="font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline;">
+    <div class="wabi-divider">&#10022;</div>
+
+    <!-- Colofón de coleccionista -->
+    <aside class="editorial-colophon">
+      <span class="inv-code">REGISTRO DE ARCHIVO · COLOFÓN</span>
+      <div class="colophon-grid">
+        <div class="colophon-item">
+          <strong>AUTOR / CANCILLER</strong>
+          Munay Amaru (Omar Trillo)
+        </div>
+        <div class="colophon-item">
+          <strong>TIPOGRAFÍAS</strong>
+          Cinzel · Cormorant Garamond · Plus Jakarta Sans
+        </div>
+        {data.camera && (
+          <div class="colophon-item">
+            <strong>CÁMARA & PELÍCULA</strong>
+            {data.camera.model || 'Analógica'} · {data.camera.film || '35mm'}
+          </div>
+        )}
+        {data.location?.coordinates && (
+          <div class="colophon-item">
+            <strong>COORDENADAS GPS</strong>
+            {data.location.coordinates.lat}° N / {data.location.coordinates.lng}° E
+          </div>
+        )}
+        <div class="colophon-item">
+          <strong>SOPORTE DIGITAL</strong>
+          Papel Limestone 42° · Resonancia 432 Hz
+        </div>
+        <div class="colophon-item">
+          <strong>ARCHIVO</strong>
+          {data.date ? new Date(data.date).getFullYear() : '—'} · Munay Amaru
+        </div>
+      </div>
+    </aside>
+
+    <!-- Navegación prev/next -->
+    <nav aria-label="Navegación entre obras" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-hairline);">
+      <div>
+        {prevEntry && (
+          <a href={`/posts/${collectionName}-${prevEntry.id.replace(/\.md$/, '')}/`} style="text-decoration: none; display: block; padding: 8px 0; min-height: 44px;">
+            <span style="font-family: var(--font-inscription); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; display: block;">&larr; Obra Previa</span>
+            <div style="font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-primary); margin-top: 2px; line-height: 1.3;">{prevEntry.data.title || 'Anterior'}</div>
+          </a>
+        )}
+      </div>
+      <div style="text-align: right;">
+        {nextEntry && (
+          <a href={`/posts/${collectionName}-${nextEntry.id.replace(/\.md$/, '')}/`} style="text-decoration: none; display: block; padding: 8px 0; min-height: 44px;">
+            <span style="font-family: var(--font-inscription); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; display: block;">Siguiente Obra &rarr;</span>
+            <div style="font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-primary); margin-top: 2px; line-height: 1.3;">{nextEntry.data.title || 'Siguiente'}</div>
+          </a>
+        )}
+      </div>
+    </nav>
+
+    <!-- Pie de sala -->
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <span class="inv-code" style="margin-bottom: 0;">ARCHIVO · MUNAY AMARU</span>
+      <a href={meta.backUrl} style="font-size: 0.82rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center;">
         Explorar más obras de esta colección &rarr;
       </a>
     </footer>
+
   </article>
 </Layout>
