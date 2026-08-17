@@ -530,18 +530,164 @@ body {
 .lang-divider { color: var(--ink-faint); user-select: none; padding: 0 2px; }
 
 /* Responsive móvil */
+/* =============================================
+   DISEÑO MÓVIL — Mobile-First para teléfonos
+   Optimizado para iPhone 13-16, Samsung Galaxy,
+   Pixel. La mayoría del tráfico viene de aquí.
+   ============================================= */
+
 @media (max-width: 640px) {
-  .page-container { padding: 20px 16px; }
-  .zen-card { padding: 20px 16px; margin-bottom: 18px; }
-  .museum-vitrine { padding: 16px 14px; margin-bottom: 24px; }
-  .float-mount-frame { padding: 14px 10px; margin-bottom: 16px; }
-  .sanctuary-player { padding: 18px 14px; }
-  .brand-title { font-size: 0.98rem; letter-spacing: 0.12em; }
-  .editorial-colophon { padding: 16px; }
-  .colophon-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* === BASE === */
+  html { font-size: 15px; }
+
+  body { padding-bottom: var(--dock-height); }
+
+  .page-container {
+    padding: 18px 16px 24px;
+  }
+
+  /* === CABECERA COMPACTA === */
+  .site-header {
+    padding-top: max(10px, env(safe-area-inset-top, 10px));
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .brand-title {
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+  }
+  .brand-subtitle { display: none; } /* Más limpio en móvil pequeño */
+
+  /* === VITRINA DE MUSEO EN MÓVIL ===
+     La obra toma todo el ancho — como una sala inmersiva */
+  .museum-vitrine {
+    padding: 0;
+    margin-bottom: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .float-mount-frame {
+    /* Imagen panorámica cine en móvil */
+    padding: 10px;
+    margin-bottom: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+  .float-artwork {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: auto;
+    border-radius: 2px;
+  }
+  .curatorial-label {
+    padding: 16px 16px 18px;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .artwork-artist { font-size: 1.25rem; }
+  .artwork-title-year { font-size: 1rem; }
+  .tech-specs { font-size: 0.8rem; }
+  .curatorial-essay { font-size: 1rem; line-height: 1.65; }
+
+  /* === TARJETAS ZEN EN MÓVIL === */
+  .zen-card {
+    padding: 18px 16px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+  }
+  .zen-title { font-size: 1.5rem; }
+  .zen-overline { font-size: 0.65rem; }
+
+  /* === REPRODUCTOR EN MÓVIL === */
+  .sanctuary-player {
+    padding: 16px 14px;
+    margin-bottom: 16px;
+  }
+  .player-header { gap: 6px; }
+
+  /* === TIPOGRAFÍA DE LECTURA EN MÓVIL ===
+     Legibilidad máxima en 360-430px de ancho */
+  .prose-editorial {
+    font-size: 1.12rem;
+    line-height: 1.9;
+  }
+  .prose-editorial p { margin-bottom: 1.4em; }
+  .prose-editorial blockquote {
+    padding-left: 14px;
+    margin: 1.6em 0;
+    font-size: 1.05rem;
+  }
+  /* Drop cap más pequeño en móvil */
+  .prose-editorial.has-dropcap > p:first-of-type::first-letter {
+    font-size: 3.2em;
+    padding-right: 8px;
+  }
+
+  .prose-poem {
+    font-size: 1.15rem;
+    line-height: 2;
+    padding: 10px 0;
+    max-width: 100%;
+  }
+
+  /* === COLOFÓN COMPACTO === */
+  .editorial-colophon { padding: 14px 14px 16px; margin-top: 32px; }
+  .colophon-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 0.75rem;
+  }
+  .colophon-item strong { font-size: 0.58rem; }
+
+  /* === WABI DIVIDER EN MÓVIL === */
+  .wabi-divider { margin: 28px auto; }
+  .wabi-divider::before,
+  .wabi-divider::after { width: 40px; }
+
+  /* === FOOTER COMPACTO === */
+  .museum-footer {
+    padding: 28px 16px;
+    font-size: 0.82rem;
+  }
+  .museum-footer > div {
+    gap: 12px !important;
+  }
 }
-@media (max-width: 380px) {
-  .dock-tab { min-width: 44px; font-size: 0.58rem; padding: 4px; }
+
+/* === TELÉFONOS MUY PEQUEÑOS (< 380px: Moto G, Galaxy A) === */
+@media (max-width: 390px) {
+  .dock-tab {
+    min-width: 44px;
+    font-size: 0.56rem;
+    letter-spacing: 0.01em;
+    padding: 4px 3px;
+  }
+  .zen-title { font-size: 1.35rem; }
+  .artwork-artist { font-size: 1.15rem; }
+  .colophon-grid { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* === LANDSCAPE MÓVIL (teléfono en horizontal) === */
+@media (max-width: 768px) and (orientation: landscape) {
+  .bottom-dock {
+    padding: 4px 16px;
+    padding-bottom: max(4px, env(safe-area-inset-bottom, 4px));
+  }
+  --dock-height: calc(50px + env(safe-area-inset-bottom, 0px));
+  .dock-tab { min-height: 40px; }
+  .float-mount-frame { aspect-ratio: 16 / 7; }
+}
+
+/* === PANTALLAS RETINA (imágenes nítidas) === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .float-artwork {
+    image-rendering: -webkit-optimize-contrast;
+  }
 }
 
 /* Animación Samay */
@@ -593,4 +739,111 @@ body {
     border-color: hsla(42, 48%, 52%, 0.3);
   }
   .editorial-colophon { background: hsl(215, 12%, 10%); }
+}
+
+/* =====================================================
+   MEJORAS ESPECÍFICAS DE LECTURA MÓVIL
+   Para el blog artístico visto en teléfono
+   ===================================================== */
+
+/* Cabecera de artículo (reading-wrap) en móvil */
+@media (max-width: 640px) {
+
+  /* Título de obra grande pero manejable */
+  .reading-wrap header h1 {
+    font-size: clamp(1.85rem, 8vw, 2.6rem) !important;
+    margin-inline: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Dedicatoria más compacta */
+  .reading-wrap header p {
+    font-size: 1.05rem !important;
+    max-width: 100% !important;
+  }
+
+  /* Metadatos de lectura en columna */
+  .reading-wrap header > div[style*="flex"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  /* Navegación prev/next: solo 1 columna en muy pequeño */
+  .reading-wrap nav[aria-label="Navegación entre obras"] {
+    gap: 12px !important;
+  }
+
+  /* Colofón en 1 columna en muy pequeño */
+  .editorial-colophon .inv-code {
+    font-size: 0.6rem;
+  }
+
+  /* Audio nativo más alto y táctil */
+  audio {
+    height: 44px !important;
+    border-radius: 4px;
+  }
+
+  /* Reproductor de sala más grande en pantalla táctil */
+  .reading-wrap .sanctuary-player audio {
+    height: 48px !important;
+  }
+
+  /* Imagen de obra en página de lectura — full bleed */
+  .reading-wrap .float-mount-frame {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  /* Tarjetas de sala en home — más táctiles */
+  a.zen-card {
+    -webkit-tap-highlight-color: hsla(40, 44%, 36%, 0.08);
+  }
+
+  /* Grid de salas: 1 columna en móvil */
+  div[style*="auto-fit, minmax(240px"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="auto-fit, minmax(280px"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="auto-fit, minmax(270px"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="auto-fit, minmax(260px"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Fotografías de miradas: cuadrícula 2-col en móvil */
+  div[style*="auto-fit, minmax(270px"] article {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+}
+
+/* Links de navegación: siempre bien táctiles */
+a[href] {
+  min-height: 0; /* override when needed */
+}
+
+/* Botones de acción táctil mínimo */
+a[style*="underline"], button {
+  cursor: pointer;
+}
+
+/* Grid de salas: siempre 1 columna en móvil */
+@media (max-width: 640px) {
+  .rooms-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  /* Tarjetas de sala en home — quitar margen bottom extra */
+  .rooms-grid .zen-card {
+    margin-bottom: 0;
+  }
 }
