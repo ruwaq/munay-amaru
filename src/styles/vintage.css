@@ -1,32 +1,33 @@
 /* ==========================================================================
    MUNAY AMARU — MUSEO DE ARTE CONTEMPORÁNEO
-   Filosofía: MoMA · Noguchi Museum · Fondazione Prada · Tadao Ando
-   Principio: Solo espacio, tipografía y silencio. Sin ruido visual.
+   Estética: Pergamino antiguo · Manuscrito de artista · Washi japonés
+   Referencia: Kinfolk · Noguchi Museum · Fondazione Prada · Tadao Ando
+   Sin sombras. Sin efectos. Solo papel, tinta y silencio.
    ========================================================================== */
 
 :root {
   --dock-height: calc(60px + env(safe-area-inset-bottom, 0px));
 
-  /* Paleta de papel y tinta — muy suave */
-  --bg-canvas:   hsl(40, 14%, 95%);
-  --bg-card:     hsl(40, 10%, 98%);
-  --bg-warm:     hsl(38, 16%, 93%);
+  /* — PAPEL ANTIGUO — */
+  --bg:          hsl(38, 28%, 88%);   /* pergamino cálido */
+  --bg-card:     hsl(40, 22%, 91%);   /* papel un poco más claro */
+  --bg-mat:      hsl(36, 24%, 84%);   /* mat oscuro para paspartú */
 
-  --ink-primary: hsl(215, 12%, 12%);
-  --ink-body:    hsl(215, 8%, 22%);
-  --ink-muted:   hsl(215, 5%, 48%);
-  --ink-faint:   hsl(215, 4%, 68%);
+  /* — TINTA — */
+  --ink:         hsl(28, 20%, 14%);   /* tinta sepia oscura */
+  --ink-body:    hsl(28, 14%, 22%);
+  --ink-muted:   hsl(28, 10%, 44%);
+  --ink-faint:   hsl(28, 8%, 62%);
 
-  --gold:        hsl(40, 44%, 36%);  /* Dorado oscuro — contraste WCAG AA */
-  --gold-light:  hsl(42, 48%, 52%);  /* Solo para decoración grande */
-  --moss:        hsl(98, 22%, 24%);
-  --moss-bg:     hsl(94, 25%, 93%);
+  /* — DORADO ANTIGUO — */
+  --gold:        hsl(38, 55%, 32%);   /* contraste WCAG AA sobre pergamino */
+  --gold-warm:   hsl(40, 52%, 44%);   /* solo decoración grande */
 
-  /* Un solo borde hairline */
-  --line:        hsl(40, 12%, 82%);
-  --line-strong: hsl(40, 10%, 68%);
+  /* — BORDES DE PAPEL — */
+  --rule:        hsl(36, 18%, 72%);   /* línea de papel */
+  --rule-warm:   hsl(36, 20%, 56%);   /* línea más visible */
 
-  /* Tipografías */
+  /* — TIPOGRAFÍAS — */
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-label:   'Cinzel', Georgia, serif;
   --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
@@ -35,20 +36,19 @@
   color-scheme: light;
 }
 
-/* --- RESET LIMPIO --- */
+/* --- RESET --- */
 *, *::before, *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
 html {
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.72;
   color: var(--ink-body);
-  background: var(--bg-canvas);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
@@ -64,260 +64,184 @@ body {
 
 /* Accesibilidad */
 .skip-link {
-  position: absolute;
-  top: -100%;
-  left: 16px;
-  z-index: 999;
-  background: var(--ink-primary);
-  color: var(--bg-card);
-  padding: 10px 18px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: top 0.2s;
+  position: absolute; top: -100%; left: 16px; z-index: 999;
+  background: var(--ink); color: var(--bg-card);
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; transition: top 0.2s;
 }
 .skip-link:focus { top: 0; }
-
-:focus-visible {
-  outline: 1.5px solid var(--gold);
-  outline-offset: 3px;
-}
+:focus-visible { outline: 1.5px solid var(--gold); outline-offset: 3px; }
 
 /* ============================================
-   CABECERA — simple, quieta, sin blur
+   CABECERA — Frente de manuscrito
    ============================================ */
 .site-header {
-  border-bottom: 1px solid var(--line);
-  background: var(--bg-canvas);
-  position: sticky;
-  top: 0;
-  z-index: 90;
-  padding: max(14px, env(safe-area-inset-top, 14px)) max(20px, env(safe-area-inset-left, 20px)) 14px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  position: sticky; top: 0; z-index: 90;
+  padding: max(14px, env(safe-area-inset-top,14px)) max(20px, env(safe-area-inset-left,20px)) 14px;
 }
 .header-inner {
-  max-width: 1040px;
-  margin-inline: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 1040px; margin-inline: auto;
+  display: flex; justify-content: space-between; align-items: center;
 }
-.museum-brand {
-  text-decoration: none;
-  color: var(--ink-primary);
-}
+.museum-brand { text-decoration: none; color: var(--ink); }
 .brand-title {
   font-family: var(--font-label);
-  font-size: 1.1rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  display: block;
+  font-size: 1.05rem; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 600; display: block;
 }
 .brand-subtitle {
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-muted);
-  text-transform: uppercase;
-  display: block;
-  margin-top: 2px;
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  color: var(--ink-muted); text-transform: uppercase;
+  display: block; margin-top: 2px;
 }
 
 /* ============================================
-   CONTENEDORES
+   CONTENEDOR
    ============================================ */
 .page-container {
-  width: 100%;
-  max-width: 900px;
+  width: 100%; max-width: 860px;
   margin-inline: auto;
-  padding: 44px 24px 60px;
+  padding: 48px 28px 64px;
   flex: 1;
 }
-.reading-wrap {
-  max-width: 62ch;
-  margin-inline: auto;
-}
+.reading-wrap { max-width: 60ch; margin-inline: auto; }
 
 /* ============================================
-   ETIQUETA DE SALA (inv-code)
+   ETIQUETA DE SALA
    ============================================ */
 .inv-code {
   font-family: var(--font-label);
-  font-size: 0.62rem;
-  letter-spacing: 0.25em;
-  color: var(--gold);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 8px;
+  font-size: 0.6rem; letter-spacing: 0.28em;
+  color: var(--gold); text-transform: uppercase;
+  display: block; margin-bottom: 8px;
 }
 
 /* ============================================
-   VITRINA DE MUSEO
-   Sin sombra, sin movimiento. Solo borde y espacio.
+   VITRINA DE MUSEO — Paspartú plano
    ============================================ */
 .museum-vitrine {
-  border: 1px solid var(--line);
-  margin-bottom: 48px;
+  border: 1px solid var(--rule);
+  margin-bottom: 52px;
+  background: var(--bg-card);
 }
-
 .float-mount-frame {
-  background: var(--bg-warm);
-  border-bottom: 1px solid var(--line);
-  padding: clamp(20px, 5vw, 48px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: var(--bg-mat);
+  border-bottom: 1px solid var(--rule);
+  padding: clamp(18px, 5vw, 44px);
+  display: flex; justify-content: center; align-items: center;
 }
 .float-artwork {
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
+  max-width: 100%; height: auto;
+  aspect-ratio: 1/1; object-fit: cover; display: block;
 }
-
-/* Cartela curatorial */
 .curatorial-label {
-  padding: 20px 24px 24px;
+  padding: 20px 24px 22px;
   border-left: 2px solid var(--gold);
 }
 .artwork-artist {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--ink-primary);
-  line-height: 1.2;
-  margin-bottom: 2px;
+  font-size: 1.45rem; font-weight: 500;
+  color: var(--ink); line-height: 1.2;
 }
 .artwork-title-year {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-style: italic;
-  color: var(--ink-muted);
-  margin-bottom: 14px;
+  font-size: 1.05rem; font-style: italic;
+  color: var(--ink-muted); margin-bottom: 12px;
 }
 .tech-specs {
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: 0.8rem; line-height: 1.6;
   color: var(--ink-muted);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 10px 0;
-  margin-bottom: 14px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 9px 0; margin-bottom: 12px;
 }
 .curatorial-essay {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  line-height: 1.75;
-  color: var(--ink-body);
-  margin-bottom: 16px;
+  font-size: 1.08rem; line-height: 1.75;
+  color: var(--ink-body); margin-bottom: 14px;
 }
 
 /* ============================================
-   TARJETA ZEN — solo borde, sin sombra ni movimiento
+   TARJETA ZEN — solo borde hairline, sin hover
    ============================================ */
 .zen-card {
   background: var(--bg-card);
-  border: 1px solid var(--line);
-  padding: 24px;
-  margin-bottom: 20px;
+  border: 1px solid var(--rule);
+  padding: 22px 20px; margin-bottom: 18px;
 }
-/* Solo un sutil cambio de borde al tocar — nada más */
-@media (hover: none) {
-  .zen-card:active { background: var(--bg-warm); }
-  a.zen-card:active { background: var(--bg-warm); }
-}
+a.zen-card { text-decoration: none; display: block; color: inherit; }
 @media (hover: hover) {
-  .zen-card:hover { border-color: var(--line-strong); }
-  a.zen-card:hover { border-color: var(--line-strong); text-decoration: none; }
+  .zen-card:hover  { border-color: var(--rule-warm); }
+  a.zen-card:hover { border-color: var(--rule-warm); }
+}
+@media (hover: none) {
+  .zen-card:active  { background: var(--bg-mat); }
+  a.zen-card:active { background: var(--bg-mat); }
 }
 
 .zen-overline {
   font-family: var(--font-label);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  color: var(--gold);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 10px;
+  font-size: 0.6rem; letter-spacing: 0.24em;
+  color: var(--gold); text-transform: uppercase;
+  display: block; margin-bottom: 10px;
 }
 .zen-title {
   font-family: var(--font-display);
-  font-size: 1.65rem;
-  font-weight: 400;
-  color: var(--ink-primary);
-  line-height: 1.2;
-  margin-bottom: 10px;
+  font-size: 1.65rem; font-weight: 400;
+  color: var(--ink); line-height: 1.2; margin-bottom: 10px;
 }
 .zen-title a { color: inherit; text-decoration: none; }
 
 /* ============================================
-   REPRODUCTOR — plano, funcional
+   REPRODUCTOR ACÚSTICO
    ============================================ */
 .sanctuary-player {
-  border: 1px solid var(--line);
+  border: 1px solid var(--rule);
   background: var(--bg-card);
-  padding: 20px 22px;
-  margin-bottom: 20px;
+  padding: 18px 20px; margin-bottom: 18px;
 }
-.sanctuary-player.is-playing {
-  border-left: 2px solid var(--gold);
-}
+.sanctuary-player.is-playing { border-left: 2px solid var(--gold); }
 .player-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
-  flex-wrap: wrap;
-  gap: 8px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 12px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
 }
 .freq-badge {
   font-family: var(--font-label);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  color: var(--moss);
-  background: var(--moss-bg);
-  padding: 3px 8px;
-  border: 1px solid hsl(94, 20%, 78%);
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-size: 0.6rem; letter-spacing: 0.14em;
+  color: var(--gold); background: var(--bg-mat);
+  border: 1px solid var(--rule); padding: 3px 8px;
+  white-space: nowrap; flex-shrink: 0;
 }
 
 /* ============================================
-   TIPOGRAFÍA EDITORIAL
+   TIPOGRAFÍA EDITORIAL — libro de arte
    ============================================ */
 .prose-editorial {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2.2vw, 1.25rem);
-  line-height: 1.85;
-  color: var(--ink-body);
-  font-feature-settings: "liga" 1, "kern" 1;
+  font-size: clamp(1.12rem, 2.3vw, 1.28rem);
+  line-height: 1.88; color: var(--ink-body);
+  font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
 }
 .prose-editorial p { margin-bottom: 1.6em; hyphens: auto; }
 .prose-editorial h2, .prose-editorial h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  color: var(--ink-primary);
-  margin: 1.8em 0 0.6em;
+  font-family: var(--font-display); font-weight: 400;
+  color: var(--ink); margin: 1.8em 0 0.6em;
 }
 .prose-editorial blockquote {
   border-left: 1px solid var(--gold);
-  padding-left: 18px;
-  margin: 2em 0;
-  font-style: italic;
-  color: var(--ink-muted);
+  padding-left: 16px; margin: 2em 0;
+  font-style: italic; color: var(--ink-muted);
 }
-/* Drop cap — Kinfolk style */
+/* Capitular — estilo catálogo de arte */
 .prose-editorial.has-dropcap > p:first-of-type::first-letter {
-  font-family: var(--font-label);
-  font-weight: 600;
-  color: var(--gold);
-  float: left;
-  font-size: 3.5em;
-  line-height: 0.82;
-  padding-top: 4px;
-  padding-right: 9px;
+  font-family: var(--font-label); font-weight: 600;
+  color: var(--gold); float: left;
+  font-size: 3.4em; line-height: 0.82;
+  padding-top: 4px; padding-right: 8px;
   text-transform: uppercase;
 }
 
@@ -325,139 +249,90 @@ body {
 .prose-poem {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-  line-height: 2.1;
-  color: var(--ink-primary);
+  line-height: 2.1; color: var(--ink);
   font-style: italic;
-  max-width: 42ch;
-  margin-inline: auto;
-  padding: 16px 0;
+  max-width: 40ch; margin-inline: auto; padding: 16px 0;
 }
 .prose-poem p { margin-bottom: 2em; white-space: pre-line; }
 
 /* ============================================
-   SEPARADOR WABI — muy discreto
+   SEPARADOR WABI — lineal, sin peso
    ============================================ */
 .wabi-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin: 40px auto;
-  color: var(--line-strong);
-  font-size: 0.8rem;
+  display: flex; align-items: center;
+  justify-content: center; gap: 12px;
+  margin: 40px auto; color: var(--rule-warm); font-size: 0.75rem;
 }
 .wabi-divider::before, .wabi-divider::after {
-  content: "";
-  height: 1px;
-  width: 48px;
-  background: var(--line);
+  content: ""; height: 1px; width: 44px; background: var(--rule);
 }
 
 /* ============================================
-   COLOFÓN EDITORIAL
+   COLOFÓN
    ============================================ */
 .editorial-colophon {
-  border: 1px solid var(--line);
-  border-left: 2px solid var(--line-strong);
-  padding: 20px 22px;
-  margin-top: 44px;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--rule-warm);
+  background: var(--bg-mat);
+  padding: 18px 20px; margin-top: 44px;
 }
 .colophon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
-  margin-top: 14px;
-  font-size: 0.78rem;
-  color: var(--ink-muted);
-  line-height: 1.5;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 12px; margin-top: 12px;
+  font-size: 0.77rem; color: var(--ink-muted); line-height: 1.5;
 }
 .colophon-item strong {
-  display: block;
-  font-family: var(--font-label);
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-primary);
-  margin-bottom: 3px;
+  display: block; font-family: var(--font-label);
+  font-size: 0.57rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--ink); margin-bottom: 3px;
 }
 
 /* ============================================
-   DOCK — fijo, limpio, sin blur
+   DOCK — plano, pergamino, sin blur
    ============================================ */
 .bottom-dock {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: var(--bg-canvas);
-  border-top: 1px solid var(--line);
-  padding: 6px 12px;
-  padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: var(--bg); border-top: 1px solid var(--rule);
+  padding: 5px 12px;
+  padding-bottom: max(7px, env(safe-area-inset-bottom, 7px));
 }
 .dock-inner {
-  max-width: 560px;
-  margin-inline: auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  max-width: 540px; margin-inline: auto;
+  display: flex; justify-content: space-around; align-items: center;
 }
 .dock-tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--ink-faint);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-decoration: none; color: var(--ink-faint);
   font-family: var(--font-body);
-  font-size: 0.6rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 4px 6px;
-  min-width: 52px;
-  min-height: 48px;
-  touch-action: manipulation;
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 3px 6px;
+  min-width: 50px; min-height: 48px; touch-action: manipulation;
 }
 .dock-tab .dock-icon-wrapper {
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 3px;
+  height: 22px; display: flex;
+  align-items: center; justify-content: center; margin-bottom: 2px;
 }
-.dock-tab.active {
-  color: var(--ink-primary);
-}
-.dock-tab.active .dock-icon-wrapper svg {
-  stroke: var(--gold);
-}
-@media (hover: none) {
-  .dock-tab:active { color: var(--gold); }
-}
+.dock-tab.active { color: var(--ink); }
+.dock-tab.active .dock-icon-wrapper svg { stroke: var(--gold); }
+@media (hover: none) { .dock-tab:active { color: var(--gold); } }
 
 /* ============================================
    SELECTOR DE IDIOMA
    ============================================ */
 .lang-switcher { display: flex; }
-.lang-list { list-style: none; display: flex; gap: 2px; align-items: center; }
+.lang-list { list-style: none; display: flex; gap: 0; align-items: center; }
 .lang-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 4px 8px;
-  font-size: 0.78rem;
-  color: var(--ink-muted);
-  text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 44px; padding: 4px 8px;
+  font-size: 0.78rem; color: var(--ink-muted); text-decoration: none;
   touch-action: manipulation;
 }
 .lang-btn.active {
-  font-weight: 600;
-  color: var(--ink-primary);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  font-weight: 600; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 4px;
   text-decoration-color: var(--gold);
 }
 .lang-btn.disabled { opacity: 0.35; cursor: not-allowed; }
@@ -467,35 +342,29 @@ body {
    FOOTER
    ============================================ */
 .museum-footer {
-  margin-top: 60px;
-  padding: 36px 24px;
-  border-top: 1px solid var(--line);
-  text-align: center;
-  font-size: 0.82rem;
-  color: var(--ink-muted);
+  margin-top: 60px; padding: 36px 24px;
+  border-top: 1px solid var(--rule);
+  text-align: center; font-size: 0.82rem; color: var(--ink-muted);
 }
 .museum-footer a {
-  color: var(--ink-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--ink); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-color: var(--rule-warm);
 }
 
-/* Círculo Samay — solo animación, sin efectos extra */
+/* ============================================
+   SAMAY
+   ============================================ */
 @keyframes samay-breath {
-  0%, 100% { transform: scale(1);    opacity: 0.6; }
-  25%       { transform: scale(1.25); opacity: 1;   }
-  50%       { transform: scale(1.25); opacity: 1;   }
-  87.5%     { transform: scale(1);    opacity: 0.6; }
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  25%       { transform: scale(1.22); opacity: 1;   }
+  50%       { transform: scale(1.22); opacity: 1;   }
+  87.5%     { transform: scale(1);    opacity: 0.55; }
 }
 .samay-circle {
-  width: 80px;
-  height: 80px;
-  border: 1px solid var(--gold-light);
-  border-radius: 50%;
-  margin: 16px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 78px; height: 78px;
+  border: 1px solid var(--gold-warm);
+  border-radius: 50%; margin: 16px auto;
+  display: flex; align-items: center; justify-content: center;
   animation: samay-breath 16s ease-in-out infinite;
   will-change: transform, opacity;
 }
@@ -504,106 +373,82 @@ body {
 .rooms-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 /* ============================================
-   MÓVIL — Teléfonos 360-430px
+   MÓVIL — Pergamino en pantalla pequeña
    ============================================ */
 @media (max-width: 640px) {
   html { font-size: 15px; }
+  .page-container { padding: 22px 16px 48px; }
 
-  .page-container { padding: 24px 16px 48px; }
-
-  /* Cabecera compacta */
   .site-header { padding: max(10px, env(safe-area-inset-top,10px)) 16px 10px; }
-  .brand-title { font-size: 0.88rem; letter-spacing: 0.14em; }
+  .brand-title { font-size: 0.86rem; letter-spacing: 0.16em; }
   .brand-subtitle { display: none; }
 
-  /* Vitrina: imagen ancha, no cuadrada */
-  .museum-vitrine { margin-bottom: 32px; }
-  .float-mount-frame {
-    padding: 12px;
-    aspect-ratio: 4 / 3;
-  }
-  .float-artwork {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: auto;
-  }
-  .curatorial-label { padding: 16px 14px 18px; }
-  .artwork-artist { font-size: 1.25rem; }
+  /* Vitrina — imagen 4:3 en móvil */
+  .museum-vitrine { margin-bottom: 28px; }
+  .float-mount-frame { padding: 10px; aspect-ratio: 4/3; }
+  .float-artwork { width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; }
+  .curatorial-label { padding: 14px 14px 16px; }
+  .artwork-artist { font-size: 1.2rem; }
   .curatorial-essay { font-size: 1rem; }
 
-  /* Tarjetas */
-  .zen-card { padding: 18px 14px; margin-bottom: 14px; }
+  .zen-card { padding: 16px 14px; margin-bottom: 12px; }
   .zen-title { font-size: 1.4rem; }
 
-  /* Lectura */
-  .prose-editorial { font-size: 1.1rem; line-height: 1.88; }
+  .prose-editorial { font-size: 1.1rem; line-height: 1.9; }
   .prose-editorial.has-dropcap > p:first-of-type::first-letter { font-size: 3em; }
   .prose-poem { font-size: 1.12rem; max-width: 100%; }
 
-  /* Reproductor */
-  .sanctuary-player { padding: 16px 14px; }
+  .sanctuary-player { padding: 14px; }
   audio { height: 44px !important; }
 
-  /* Imagen en lectura — full bleed */
+  /* Full bleed en lectura */
   .reading-wrap .float-mount-frame {
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: -16px; margin-right: -16px;
   }
 
-  /* Colofón */
-  .editorial-colophon { padding: 14px; margin-top: 32px; }
-  .colophon-grid { grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.74rem; }
+  .editorial-colophon { padding: 14px; margin-top: 28px; }
+  .colophon-grid { grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.73rem; }
 
-  /* Wabi divider */
-  .wabi-divider { margin: 28px auto; }
+  .wabi-divider { margin: 26px auto; }
 
-  /* Grid de salas: 1 columna */
-  .rooms-grid { grid-template-columns: 1fr; gap: 12px; }
+  .rooms-grid { grid-template-columns: 1fr; gap: 10px; }
   .rooms-grid .zen-card { margin-bottom: 0; }
 
-  /* Footer */
-  .museum-footer { padding: 28px 16px; }
-  .museum-footer > div { flex-direction: column !important; gap: 10px !important; }
+  .museum-footer { padding: 24px 16px; }
 }
 
-/* Teléfonos muy pequeños */
 @media (max-width: 390px) {
-  .dock-tab { min-width: 44px; font-size: 0.55rem; padding: 4px 2px; }
+  .dock-tab { min-width: 44px; font-size: 0.54rem; padding: 3px 2px; }
   .zen-title { font-size: 1.3rem; }
   .colophon-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================
-   MODO OSCURO
+   MODO OSCURO — Noche de manuscrito
    ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-canvas:   hsl(215, 12%, 9%);
-    --bg-card:     hsl(215, 10%, 11%);
-    --bg-warm:     hsl(215, 10%, 13%);
+    --bg:          hsl(28, 16%, 10%);
+    --bg-card:     hsl(28, 12%, 13%);
+    --bg-mat:      hsl(28, 10%, 8%);
 
-    --ink-primary: hsl(40, 15%, 94%);
-    --ink-body:    hsl(40, 10%, 80%);
-    --ink-muted:   hsl(40, 8%, 58%);
-    --ink-faint:   hsl(215, 6%, 44%);
+    --ink:         hsl(38, 20%, 90%);
+    --ink-body:    hsl(36, 14%, 78%);
+    --ink-muted:   hsl(34, 10%, 54%);
+    --ink-faint:   hsl(30, 8%, 38%);
 
-    --gold:        hsl(43, 50%, 70%);
-    --gold-light:  hsl(42, 48%, 58%);
-    --moss:        hsl(94, 20%, 72%);
-    --moss-bg:     hsla(94, 25%, 20%, 0.6);
+    --gold:        hsl(42, 52%, 66%);
+    --gold-warm:   hsl(40, 48%, 54%);
 
-    --line:        hsl(215, 8%, 20%);
-    --line-strong: hsl(215, 6%, 32%);
+    --rule:        hsl(30, 12%, 20%);
+    --rule-warm:   hsl(30, 14%, 30%);
 
     color-scheme: dark;
   }
-
-  .site-header { background: var(--bg-canvas); }
-  .bottom-dock { background: var(--bg-canvas); }
-  .freq-badge { background: var(--moss-bg); border-color: hsl(94, 15%, 30%); }
+  .site-header { background: var(--bg); }
+  .bottom-dock { background: var(--bg); }
 }
