@@ -39,12 +39,12 @@ const wordCount = (entry.body || '').split(/\s+/).filter(Boolean).length;
 const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
 
 const categoryMeta: Record<string, { label: string; backUrl: string; folio: string }> = {
-  poemas:       { label: 'Poema · Verbo Sagrado',              backUrl: '/palabras/',  folio: 'FASCÍCULO I — POESÍA'       },
-  cuentos:      { label: 'Relato · Narrativa de la Lentitud',  backUrl: '/palabras/',  folio: 'FASCÍCULO II — CUENTOS'     },
-  pensamientos: { label: 'Aforismo · Fragmento de Diario',     backUrl: '/palabras/',  folio: 'FASCÍCULO III — DIARIO'     },
-  miradas:      { label: 'Registro Visual · Fotografía',       backUrl: '/miradas/',   folio: 'FASCÍCULO IV — MIRADAS'     },
-  viajes:       { label: 'Geopoética · Expedición Nómada',     backUrl: '/miradas/',   folio: 'FASCÍCULO V — GEOGRAFÍAS'   },
-  sonidos:      { label: 'Pabellón Acústico · 432 Hz',         backUrl: '/sonidos/',   folio: 'FASCÍCULO VI — FONOTECA'    },
+  poemas:       { label: 'Poema · Verso',                     backUrl: '/palabras/',  folio: 'PLIEGO I — POESÍA'       },
+  cuentos:      { label: 'Relato',                            backUrl: '/palabras/',  folio: 'PLIEGO II — RELATOS'     },
+  pensamientos: { label: 'Nota de Campo · Terminal',          backUrl: '/palabras/',  folio: 'PLIEGO III — DIARIO'     },
+  miradas:      { label: 'Registro Visual · Polaroid',        backUrl: '/miradas/',   folio: 'PLIEGO IV — MIRADAS'     },
+  viajes:       { label: 'Cuaderno de Ruta',                  backUrl: '/miradas/',   folio: 'PLIEGO V — RUTAS'        },
+  sonidos:      { label: 'Cinta Sonora · 432 Hz',             backUrl: '/sonidos/',   folio: 'PLIEGO VI — SONIDOS'     },
 };
 
 const meta = categoryMeta[collectionName] || { label: 'Obra', backUrl: '/', folio: 'MUNAY AMARU' };
@@ -61,7 +61,7 @@ const activePageMap: Record<string, string> = {
     <!-- Cabecera de folio -->
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: 12px; margin-bottom: 32px; gap: 12px;">
       <a href={meta.backUrl} style="font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; gap: 4px;">
-        &larr; Volver a la sala
+        &larr; Volver
       </a>
       <span class="inv-code" style="margin-bottom: 0;">{meta.folio}</span>
     </div>
@@ -121,12 +121,12 @@ const activePageMap: Record<string, string> = {
 
     <div class="wabi-divider">&#10022;</div>
 
-    <!-- Colofón de coleccionista -->
+    <!-- Colofón de registro -->
     <aside class="editorial-colophon">
-      <span class="inv-code">REGISTRO DE ARCHIVO · COLOFÓN</span>
+      <span class="inv-code">REGISTRO DE CAMPO · COLOFÓN</span>
       <div class="colophon-grid">
         <div class="colophon-item">
-          <strong>AUTOR / CANCILLER</strong>
+          <strong>REGISTRO VITAL</strong>
           Munay Amaru (Omar Trillo)
         </div>
         <div class="colophon-item">
@@ -146,22 +146,22 @@ const activePageMap: Record<string, string> = {
           </div>
         )}
         <div class="colophon-item">
-          <strong>SOPORTE DIGITAL</strong>
-          Papel Limestone 42° · Resonancia 432 Hz
+          <strong>RESONANCIA</strong>
+          432 Hz · Cinta Analógica
         </div>
         <div class="colophon-item">
-          <strong>ARCHIVO</strong>
+          <strong>FECHA</strong>
           {data.date ? new Date(data.date).getFullYear() : '—'} · Munay Amaru
         </div>
       </div>
     </aside>
 
     <!-- Navegación prev/next -->
-    <nav aria-label="Navegación entre obras" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-hairline);">
+    <nav aria-label="Navegación entre registros" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-hairline);">
       <div>
         {prevEntry && (
           <a href={`/posts/${collectionName}-${prevEntry.id.replace(/\.md$/, '')}/`} style="text-decoration: none; display: block; padding: 8px 0; min-height: 44px;">
-            <span style="font-family: var(--font-inscription); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; display: block;">&larr; Obra Previa</span>
+            <span style="font-family: var(--font-label); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; display: block;">&larr; Anterior</span>
             <div style="font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-primary); margin-top: 2px; line-height: 1.3;">{prevEntry.data.title || 'Anterior'}</div>
           </a>
         )}
@@ -169,18 +169,18 @@ const activePageMap: Record<string, string> = {
       <div style="text-align: right;">
         {nextEntry && (
           <a href={`/posts/${collectionName}-${nextEntry.id.replace(/\.md$/, '')}/`} style="text-decoration: none; display: block; padding: 8px 0; min-height: 44px;">
-            <span style="font-family: var(--font-inscription); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; display: block;">Siguiente Obra &rarr;</span>
+            <span style="font-family: var(--font-label); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; display: block;">Siguiente &rarr;</span>
             <div style="font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-primary); margin-top: 2px; line-height: 1.3;">{nextEntry.data.title || 'Siguiente'}</div>
           </a>
         )}
       </div>
     </nav>
 
-    <!-- Pie de sala -->
+    <!-- Pie de pliego -->
     <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-      <span class="inv-code" style="margin-bottom: 0;">ARCHIVO · MUNAY AMARU</span>
-      <a href={meta.backUrl} style="font-size: 0.82rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center;">
-        Explorar más obras de esta colección &rarr;
+      <span class="inv-code" style="margin-bottom: 0;">MUNAY AMARU · DIARIO</span>
+      <a href={meta.backUrl} style="font-size: 0.82rem; font-weight: 500; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center;">
+        Ver más registros &rarr;
       </a>
     </footer>
 

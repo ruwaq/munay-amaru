@@ -92,43 +92,33 @@ const exhibits = [
 ];
 ---
 
-<Layout activePage="shop" title="Galería de Obras" locale="es">
-  <div style="margin-bottom: 40px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 20px;">
-    <span class="inv-code" style="margin-bottom: 6px;">COLECCIÓN PERMANENTE &middot; ARTES PLÁSTICAS Y SONIDO</span>
-    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink-primary); line-height: 1.15; margin-top: 4px;">
-      Galería de Obras &amp; Álbumes
+<Layout activePage="shop" title="Trazos & Láminas" locale="es">
+  <div style="margin-bottom: 36px; border-bottom: 1px solid var(--rule); padding-bottom: 18px;">
+    <span class="inv-code" style="margin-bottom: 6px;">CUADERNO DE LÁMINAS &middot; ÓLEOS, TINTAS &amp; GRABADOS</span>
+    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-top: 4px;">
+      Trazos &amp; Láminas
     </h1>
-    <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px;">
-      Vitrinas de arte contemporáneo con las colaboraciones plásticas de <strong>Eliana Colzani</strong>, <strong>Jimena Vílchez</strong>, <strong>@gastipuray</strong> y <strong>Omar Franco</strong>.
+    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px;">
+      Obras sobre lino, papel de algodón, sumi-e y calcografía en diálogo con <strong>Eliana Colzani</strong>, <strong>Jimena Vílchez</strong>, <strong>@gastipuray</strong> y <strong>Omar Franco</strong>.
     </p>
   </div>
 
-  <!-- Lista de vitrinas de museo -->
-  <div style="display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 60px;">
+  <!-- Lista de láminas y registros -->
+  <div style="display: grid; grid-template-columns: 1fr; gap: 36px; margin-bottom: 50px;">
     {exhibits.map((exhibit) => (
       <MuseumExhibit {...exhibit} />
     ))}
   </div>
 
-  <!-- Manifiesto de difusión libre -->
-  <section class="zen-card" style="text-align: center; padding: 40px 24px; border-top: 2px solid var(--accent-gold);">
-    <span class="inv-code" style="margin-bottom: 10px;">DIFUSIÓN LIBRE &middot; AYNI CREATIVO</span>
-    <h3 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--ink-primary); margin-bottom: 10px;">
-      Todos los derechos no reservados
-    </h3>
-    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 50ch; margin: 0 auto 20px;">
-      Nuestras obras y música buscan circular como ofrendas libres. Puedes escucharlas en alta resolución o adquirirlas en las plataformas de los artistas.
+  <!-- Nota de circulación libre / Ayni -->
+  <section class="marginal-note" style="margin: 40px auto 20px; max-width: 60ch; text-align: center; border-left: none; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 24px 16px;">
+    <p style="margin-bottom: 12px;">
+      «Las cosas hechas con las manos y el tiempo buscan circular libremente. Quien las mira o escucha completa la intención.»
     </p>
-    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-      <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline;">
-        Bandcamp Oficial &rarr;
-      </a>
-      <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline;">
-        SoundCloud &rarr;
-      </a>
-      <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline;">
-        Audius &rarr;
-      </a>
+    <div style="display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; font-size: 0.82rem; font-style: normal;">
+      <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline;">Bandcamp &rarr;</a>
+      <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline;">SoundCloud &rarr;</a>
+      <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline;">Audius &rarr;</a>
     </div>
   </section>
 </Layout>

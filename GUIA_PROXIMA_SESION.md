@@ -1,51 +1,42 @@
 # 📌 Guía y Memoria de Contexto para la Próxima Sesión
-### *Proyecto: Munay Amaru — Pabellón de Arte Contemporáneo & Santuario Sonoro*
+### *Proyecto: Munay Amaru — Diario de Vida · Pliego de Gaceta Antigua*
 
 ---
 
-## 🧭 Estado Actual del Proyecto (Cierre de Sesión)
+## 🧭 Estado Actual del Proyecto
 
-1. **Nombre Oficial:** **Munay Amaru** (Nombre espiritual andino de **Omar Trillo**).
-2. **Estética & UX:**
-   - Inspirada en **Tadao Ando**, **Isamu Noguchi**, concepto japonés del ***Ma*** (espacio vacío fértil) y el ***Wabi-Sabi***.
-   - Eliminados por completo los elementos tipo scrapbook / fanzine informal.
-   - Vitrinas de museo contemporáneo en paspartú flotante (*Float Mount Frame*) con placas curatoriales de sala (*Museum Labels*).
-3. **Catálogo de Obras Integradas:**
-   - **Eliana Colzani:** Portadas de *I Am a Tree* (Óleo botánico sobre lino) y *Hula Hop* (Tintas orgánicas sobre papel de algodón).
-   - **Jimena Vílchez:** Obra visual y grabado calcográfico en *Proyecto Tu Silencio!*.
-   - **@gastipuray (Gastón Puray):** Obra visual en tinta china *sumi-e* en *Dioses EP*.
-   - **Omar Franco:** Grabación analógica, ingeniería acústica y masterización.
-   - **Munay Amaru:** *Piedras al Mar*, *Nacer*, *Partes Del Universo*, *Allinllachu*, *Luce di Alba*, *Una y otra vez*, *SEIS*, *La Noche Azul Remix*.
-4. **Pabellón Sonoro & 432 Hz:**
-   - Círculo de respiración *Samay (4-4-6-2)*.
-   - Insignias de frecuencia 432 Hz y fichas técnicas de microfonía de campo.
-5. **Geopoética Nómada:**
-   - 4 crónicas de viaje espiritual: Rumania (*Cárpatos*), Polonia (*Małopolska*), Grecia (*Kalamata*) y Perú (*Andes y Costa Pacífica*).
-6. **Infraestructura Técnica & Despliegue:**
-   - **Framework:** Astro 5 (Static Output).
-   - **Build:** 28 páginas estáticas compiladas en 2.2 segundos.
-   - **Git & GitHub:** Repositorio en `https://github.com/ruwaq/munay-sounds` con branch `main` y GitHub Actions CI configurado.
-   - **Credenciales:** Aisladas y protegidas en `~/.secrets.env` (`chmod 600`).
-
----
-
-## 🎯 Ideas y Tareas Abiertas para la Siguiente Sesión
-
-- [ ] **Despliegue en Cloudflare Pages:** Conectar el repositorio de GitHub `ruwaq/munay-sounds` en el dashboard de Cloudflare para tener dominio `.pages.dev` o vincular un dominio personalizado propio.
-- [ ] **Incorporación de Audios MP3 Reales:** Reemplazar los archivos de prueba en `public/audio/` con los audios master en alta fidelidad cuando estén listos.
-- [ ] **Nuevas Salas o Exposiciones:** Añadir nuevas series pictóricas o escultóricas con sus correspondientes fichas de museo.
-- [ ] **Modo Inmersivo de Pantalla Completa:** Implementar un botón opcional de "Entrar en Penumbra / Modo Meditación Profunda" en el Pabellón Sonoro con visualizador cimático suave.
+1. **Concepto Rector:** **Diario de Vida** (sin etiquetas de museo, sin definirse como artista; solo registros reales de lo que se pudo hacer: pensamientos, arte, música, código y caminos).
+2. **Estética & Layout:**
+   - **Pliego de periódico antiguo / gaceta asimétrica de 3 columnas** con CSS Grid.
+   - Tipografías: *Cormorant Garamond* (cuerpo y plomo), *Cinzel* (titulares y labels), *Courier Prime* (terminal y notas de campo), *Plus Jakarta Sans* (lectura limpia).
+   - Sin tarjetas flotantes, sin sombras ni bordes redondeados modernos.
+   - Filetes de imprenta, fotograbados con filtro de litografía y texto justificado con separación silábica.
+3. **Páginas y Rutas Actualizadas (28 páginas estáticas):**
+   - `/`: Portada en 3 columnas (Nota de Terminal real de Termux, Obra *I Am a Tree* con capitular, reproductor 432 Hz y despachos de viaje).
+   - `/tienda/`: Cuaderno de Trazos & Láminas (Eliana Colzani, Jimena Vílchez, @gastipuray, Omar Franco).
+   - `/sonidos/`: Cintas Sonoras en 432 Hz y registros de campo.
+   - `/palabras/`: Papeles sueltos, poemas, relatos y notas de libreta.
+   - `/miradas/`: Cuadernos de ruta y polaroids analógicas.
+   - `/sobre/`: Colofón vital de Munay Amaru (Omar Trillo).
+   - `/posts/[...slug]`: Detalle individual limpio de cada pieza.
+4. **Infraestructura:**
+   - **Astro 5.4.2** (Static output, 28 páginas compiladas en ~2.4s).
+   - Repositorio GitHub: `https://github.com/ruwaq/munay-sounds` (`main`).
+   - Despliegue listo para Cloudflare Pages vía `wrangler.json`.
 
 ---
 
 ## 🛠️ Comandos de Reactivación Rápida
 ```bash
-# Iniciar servidor local
+# Iniciar servidor de desarrollo en Termux
 cd ~/projects/munay-amaru
-npm run preview
+npm run dev
 
-# Compilar y subir cambios
+# Compilar para producción
+npm run build
+
+# Subir a GitHub
 git add .
-git commit -m "feat: actualizar"
+git commit -m "feat: transformar a diario de vida estilo periodico antiguo"
 git push origin main
 ```

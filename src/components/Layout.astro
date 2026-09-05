@@ -69,7 +69,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://munay-am
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
     rel="stylesheet"
   />
 </head>
@@ -79,41 +79,38 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://munay-am
     {locale === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
   </a>
 
-  <header class="site-header" role="banner">
-    <div class="header-inner">
-      <a href={locale === 'en' ? '/en/' : '/'} class="museum-brand" aria-label={siteTitle}>
-        <span class="brand-title">{siteTitle}</span>
-        <span class="brand-subtitle">{siteSubtitle}</span>
-      </a>
-      <LanguageSwitcher
-        currentLocale={locale}
-        translationUrl={translationUrl}
-        hasTranslation={hasTranslation}
-      />
+  <header class="gazette-header" role="banner">
+    <div class="gazette-masthead-inner">
+      <div class="masthead-meta-bar">
+        <span>{locale === 'es' ? 'REGISTRO CONTINUO' : 'CONTINUOUS LOG'}</span>
+        <span>LIMA &middot; MAŁOPOLSKA &middot; NÓMADA</span>
+        <span>TERMUX &middot; 432 Hz</span>
+      </div>
+      <div class="masthead-title">
+        <a href={locale === 'en' ? '/en/' : '/'}>{siteTitle}</a>
+      </div>
+      <p class="masthead-tagline">{siteSubtitle}</p>
     </div>
   </header>
 
-  <main id="main-content" role="main" class="page-container">
+  <main id="main-content" role="main" class={activePage === 'home' ? 'gazette-broadsheet' : 'page-container'}>
     <slot />
   </main>
 
   <footer class="museum-footer" role="contentinfo">
-    <div style="margin-bottom: 16px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-family: var(--font-inscription); font-size: 0.72rem; letter-spacing: 0.12em;">
+    <div style="margin-bottom: 16px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;">
       <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer">Bandcamp &rarr;</a>
       <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer">SoundCloud &rarr;</a>
       <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">YouTube &rarr;</a>
       <a href={SOCIAL_LINKS.linktree} target="_blank" rel="noopener noreferrer">Linktree &rarr;</a>
     </div>
-    <p style="font-family: var(--font-display); font-size: 1.1rem; font-style: italic; color: var(--ink-muted); max-width: 50ch; margin: 0 auto 12px;">
-      «Munay Amaru»: El poder del amor incondicional y la sabiduría primordial del agua andina.
-    </p>
     <p style="margin-top: 8px;">
-      <a href="mailto:munaysounds@gmail.com">Correspondencia con el artista &rarr;</a>
+      <a href="mailto:munaysounds@gmail.com">{locale === 'es' ? 'Escribir' : 'Contact'} &rarr;</a>
       &nbsp;&middot;&nbsp;
-      <a href="/rss.xml">Suscripción RSS</a>
+      <a href="/rss.xml">RSS</a>
     </p>
-    <p style="margin-top: 18px; font-family: var(--font-inscription); font-size: 0.66rem; letter-spacing: 0.18em; opacity: 0.5;">
-      MUSEO · SANTUARIO MUNAY AMARU &copy; {new Date().getFullYear()}
+    <p style="margin-top: 18px; font-family: var(--font-label); font-size: 0.62rem; letter-spacing: 0.2em; opacity: 0.6; text-transform: uppercase;">
+      MUNAY AMARU &copy; {new Date().getFullYear()} &middot; {locale === 'es' ? 'DIARIO DE VIDA' : 'LIFE JOURNAL'}
     </p>
   </footer>
 

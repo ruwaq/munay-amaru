@@ -20,13 +20,13 @@ export const SITE_TITLE = {
 };
 
 export const SITE_SUBTITLE = {
-  es: 'Pabellón de Arte Contemporáneo & Santuario Sonoro',
-  en: 'Contemporary Art Pavilion & Sound Sanctuary',
+  es: 'Diario de vida · Pensamientos, sonidos, trazos & rutas',
+  en: 'Life journal · Notes, sounds, marks & routes',
 };
 
 export const SITE_DESCRIPTION = {
-  es: 'Santuario de creación, arte contemporáneo y fonoteca en 432 Hz de Munay Amaru (Omar Trillo).',
-  en: 'Creation sanctuary, contemporary art, and 432 Hz sound vault by Munay Amaru (Omar Trillo).',
+  es: 'Diario de vida y cuaderno abierto de Munay Amaru (Omar Trillo). Registros de lo hecho: música, notas, gráfica y caminos.',
+  en: 'Open life journal by Munay Amaru (Omar Trillo). Records of existence: music, notes, art and roads.',
 };
 
 export const SOCIAL_LINKS = {

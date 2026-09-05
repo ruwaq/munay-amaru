@@ -9,25 +9,25 @@ const allMiradas = await getCollection('miradas', ({ data }) => !data.draft);
 allMiradas.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout activePage="gazes" title="Geopoética & Expediciones Nómadas" locale="es">
+<Layout activePage="gazes" title="Rutas & Cuadernos de Campo" locale="es">
 
-  <!-- Cabecera de sala expedicionaria -->
-  <div style="margin-bottom: 44px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 22px;">
-    <span class="inv-code" style="margin-bottom: 8px;">SALA DE EXPEDICIONES &middot; EL ARTISTA NÓMADA</span>
-    <h1 style="font-family: var(--font-display); font-size: clamp(2.1rem, 5.5vw, 3rem); font-weight: 400; color: var(--ink-primary); line-height: 1.12; margin-top: 4px; max-width: 22ch;">
-      Geopoética &amp; Diarios de Viaje
+  <!-- Cabecera de Cuadernos de Campo -->
+  <div style="margin-bottom: 36px; border-bottom: 1px solid var(--rule); padding-bottom: 18px;">
+    <span class="inv-code" style="margin-bottom: 6px;">BITÁCORAS DE RUTA &middot; DESPACHOS Y POLAROIDS</span>
+    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-top: 4px; max-width: 22ch;">
+      Rutas &amp; Cuadernos
     </h1>
-    <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 10px; line-height: 1.7;">
-      Bitácoras de escucha, despojo y afinación del ser con los elementos: la niebla de Rumania, las raíces de Polonia, la luz de Grecia y los Apus de los Andes.
+    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px; line-height: 1.65;">
+      Bitácoras de camino, coordenadas y registros analógicos: la niebla de Rumania, los bosques de Polonia, la costa de Grecia y los Andes.
     </p>
   </div>
 
-  <!-- Diarios de viaje geopoéticos -->
+  <!-- Diarios de viaje y rutas -->
   {allViajes.length > 0 && (
-    <section style="margin-bottom: 60px;">
-      <div style="margin-bottom: 22px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">CUADERNOS DE CAMPO &middot; GEOPOÉTICA</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint);">{allViajes.length} expediciones</span>
+    <section style="margin-bottom: 50px;">
+      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+        <span class="inv-code">CUADERNOS DE RUTA</span>
+        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allViajes.length} rutas</span>
       </div>
       <div style="display: grid; grid-template-columns: 1fr; gap: 28px;">
         {allViajes.map((viaje) => (
@@ -84,9 +84,9 @@ allMiradas.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
   <!-- Galería fotográfica contemplativa -->
   {allMiradas.length > 0 && (
     <section>
-      <div style="margin-bottom: 22px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">REGISTRO VISUAL &middot; FOTOGRAFÍA ANALÓGICA</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint);">{allMiradas.length} registros</span>
+      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+        <span class="inv-code">REGISTROS ANALÓGICOS &middot; POLAROIDS</span>
+        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allMiradas.length} fotos</span>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px;">
         {allMiradas.map((mirada) => (

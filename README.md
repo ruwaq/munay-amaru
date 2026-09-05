@@ -1,35 +1,36 @@
-# 🏛️ Munay Amaru — Pabellón de Arte Contemporáneo & Santuario Sonoro
+# 📰 Munay Amaru — Diario de Vida · Pliego de Gaceta Antigua
 
-Santuario digital de creación interdisciplinaria, arte contemporáneo, poesía contemplativa y fonoteca en 432 Hz de **Munay Amaru** (**Omar Trillo**).
+Diario de vida, notas de campo, sonidos en 432 Hz, trazos sobre papel y lino, rutas nómadas y líneas de código de **Munay Amaru** (**Omar Trillo**). Sin poses ni etiquetas institucionales: registros de lo que se pudo hacer y dejar en este tiempo.
 
 - 📦 **Repositorio GitHub:** [https://github.com/ruwaq/munay-sounds](https://github.com/ruwaq/munay-sounds)
-- 🌐 **Plataformas Oficiales:** [Bandcamp](https://munaysounds.bandcamp.com/) · [SoundCloud](https://soundcloud.com/munay_sounds) · [YouTube](https://youtube.com/@munay_sounds) · [Audius](https://audius.co/munaysounds)
+- 🌐 **Plataformas:** [Bandcamp](https://munaysounds.bandcamp.com/) · [SoundCloud](https://soundcloud.com/munay_sounds) · [YouTube](https://youtube.com/@munay_sounds) · [Audius](https://audius.co/munaysounds)
+- 🚀 **Despliegue:** [https://munay-amaru.pages.dev](https://munay-amaru.pages.dev) (Cloudflare Pages)
 
 ---
 
-## 🌿 Identidad & Círculo de Creadores
+## 🌿 Raíz & Colaboraciones
 
-- **El Artista:** **Munay Amaru** (**Omar Trillo**).
-  - *Munay*: Amor incondicional y voluntad afectiva desde el centro del corazón.
-  - *Amaru*: Serpiente sagrada andina de la sabiduría, transmutación y flujo eterno del agua.
-- **Colaboradores de Artes Plásticas & Ingeniería:**
-  - **Eliana Colzani (Italia):** Obras de portada para *I Am a Tree* (Óleo botánico sobre lino) y *Hula Hop* (Tintas orgánicas sobre papel de algodón).
-  - **Jimena Vílchez (Perú):** Obra visual, grabado calcográfico y texturas textiles en *Proyecto Tu Silencio!*.
-  - **@gastipuray / Gastón Puray (Perú):** Obra visual en tinta china ritual *sumi-e* y gráfica andina surrealista en *Dioses EP*.
+- **Registro Vital:** **Munay Amaru** (**Omar Trillo**).
+  - *Munay*: Amor incondicional y voluntad desde el corazón.
+  - *Amaru*: Serpiente andina de la sabiduría, transmutación y flujo del agua.
+- **Manos & Diálogos:**
+  - **Eliana Colzani (Italia):** Óleo botánico sobre lino (*I Am a Tree*) y tintas orgánicas (*Hula Hop*).
+  - **Jimena Vílchez (Perú):** Grabado calcográfico y texturas textiles (*Proyecto Tu Silencio!*).
+  - **@gastipuray / Gastón Puray (Perú):** Tinta china sumi-e y gráfica andina (*Dioses EP*).
   - **Omar Franco (Perú / Europa):** Grabación analógica, ingeniería acústica, mezcla y masterización.
 
 ---
 
-## 🏛️ Estructura del Museo & Pabellones
+## 📰 Estructura del Diario (Pliegos & Secciones)
 
-| # | Pabellón | Ruta Local | Propósito & Contenido |
+| # | Sección | Ruta | Estética & Contenido |
 | :---: | :--- | :--- | :--- |
-| **1** | **⛩️ Santuario** | `/` | Atrio de entrada contemplativo, Obra en Resonancia del día (*I Am a Tree*) y aforismo de la pausa. |
-| **2** | **🏛️ Galería** | `/tienda/` | Gran sala de exhibición permanente: vitrinas de museo en paspartú flotante (*Float Mount*) y placas curatoriales. |
-| **3** | **📻 Pabellón Sonoro** | `/sonidos/` | Cámara acústica en 432 Hz con guía de respiración *Samay (4-4-6-2)*, *Piedras al Mar*, *Nacer*, *Allinllachu*, *Luce di Alba*. |
-| **4** | **📜 Poética** | `/palabras/` | Alcoba literaria: poemas mayores (*Liturgia de las piedras*, *Anatomía de la raíz*, *El peso de la luz*) y filosofía *Ayni*. |
-| **5** | **🌐 Geopoética** | `/miradas/` | Cuadernos de expedición espiritual del artista nómada: Rumania (Apuseni), Polonia (Małopolska), Grecia (Kalamata) y Perú (Andes/Pacífico). |
-| **6** | **🕯️ Manifiesto** | `/sobre/` | Manifiesto ético del silencio, identidad de Munay Amaru y círculo de creadores. |
+| **1** | **📰 Diario** | `/` | **Portada de Gaceta en 3 columnas asimétricas**: nota real de Termux bajo la lluvia (`23:18`), fotograbado de *I Am a Tree* con capitular clásica, reproductor sonoro directo a 432 Hz, pausa Samay y banda inferior de despachos y versos. |
+| **2** | **🎨 Trazos** | `/tienda/` | **Cuaderno de Láminas**: obras sobre lino, papel de algodón, sumi-e y calcografía presentadas como láminas de taller de imprenta. |
+| **3** | **📻 Sonidos** | `/sonidos/` | **Cintas Sonoras en 432 Hz**: grabaciones de campo, guitarras orgánicas, ficha técnica de microfonía analógica y respiración Samay. |
+| **4** | **📜 Palabras** | `/palabras/` | **Papeles Sueltos**: poemas mayores, relatos de la lentitud y notas breves escritas en la terminal. |
+| **5** | **🗺️ Rutas** | `/miradas/` | **Cuadernos de Camino**: despachos de viaje por Cárpatos (Rumania), Małopolska (Polonia), Kalamata (Grecia) y los Andes, con polaroids analógicas. |
+| **6** | **✒️ Colofón** | `/sobre/` | **Colofón Vital**: testimonio honesto del diario, raíz del nombre andino y notas de correspondencia epistolar. |
 
 ---
 
@@ -39,36 +40,38 @@ Santuario digital de creación interdisciplinaria, arte contemporáneo, poesía 
 # 1. Entrar al proyecto
 cd ~/projects/munay-amaru
 
-# 2. Ver la web en local desde tu teléfono (Abre http://localhost:4321)
-npm run preview
+# 2. Modo desarrollo en vivo (Hot reload en tu teléfono)
+npm run dev
 
-# 3. Compilar el sitio estático para producción (28 páginas en ~2.2 segundos)
+# 3. Compilar el sitio estático para producción (28 páginas en ~2.4 segundos)
 npm run build
 
-# 4. Modo desarrollo en vivo (Hot reload)
-npm run dev
+# 4. Probar la versión compilada en local
+npm run preview
 
 # 5. Guardar cambios y subir a GitHub
 git add .
-git commit -m "feat: actualizar contenido"
+git commit -m "feat: transformar a diario de vida estilo periodico antiguo"
 git push origin main
 ```
 
 ---
 
-## ✍️ Cómo Publicar Nuevas Obras con `nano`
+## ✍️ Publicar Nuevas Entradas desde Termux con `nano`
 
-Todas las piezas se editan como archivos Markdown limpios en `src/content/`:
+Todas las entradas son archivos Markdown limpios en `src/content/`:
 
+- **Notas de terminal / Pensamientos:** `src/content/pensamientos/` (soporta campos: `weather`, `device`, `mood`)
 - **Poemas:** `src/content/poemas/`
-- **Sonidos / Tracks:** `src/content/sonidos/`
-- **Expediciones de Viaje:** `src/content/viajes/`
-- **Registros Visuales:** `src/content/miradas/`
-- **Pensamientos & Aforismos:** `src/content/pensamientos/`
+- **Cintas Sonoras:** `src/content/sonidos/`
+- **Cuadernos de Viaje:** `src/content/viajes/`
+- **Polaroids Analógicas:** `src/content/miradas/`
+- **Relatos:** `src/content/cuentos/`
 
 ---
 
-## 🔒 Credenciales & Despliegue
+## 🔒 Despliegue & Seguridad
 
-- Las credenciales privadas de GitHub y Cloudflare se encuentran aisladas de forma segura en `~/.secrets.env` con permisos `chmod 600`.
-- El flujo de integración continua está configurado en `.github/workflows/deploy.yml`.
+- Build estático con **Astro 5** compilado a `./dist/`.
+- Conectado a **Cloudflare Pages** vía `wrangler.json`.
+- Secretos aislados en `~/.secrets.env` (`chmod 600`).

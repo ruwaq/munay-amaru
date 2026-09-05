@@ -7,28 +7,28 @@ const allSonidos = await getCollection('sonidos', ({ data }) => !data.draft);
 allSonidos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout activePage="sounds" title="Pabellón Sonoro & Meditación 432Hz" locale="es">
+<Layout activePage="sounds" title="Cintas & Sonidos en 432 Hz" locale="es">
 
-  <!-- Cabecera del Pabellón Acústico -->
-  <div style="margin-bottom: 44px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 22px;">
-    <span class="inv-code" style="margin-bottom: 8px;">SALA ACÚSTICA &middot; FRECUENCIAS SAGRADAS</span>
-    <h1 style="font-family: var(--font-display); font-size: clamp(2.1rem, 5.5vw, 3rem); font-weight: 400; color: var(--ink-primary); line-height: 1.12; margin-top: 4px; max-width: 24ch;">
-      Pabellón Sonoro &amp; Meditación
+  <!-- Cabecera de Registros Sonoros -->
+  <div style="margin-bottom: 36px; border-bottom: 1px solid var(--rule); padding-bottom: 18px;">
+    <span class="inv-code" style="margin-bottom: 6px;">CINTAS SONORAS &middot; REGISTROS EN 432 Hz</span>
+    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-top: 4px;">
+      Cintas &amp; Sonidos
     </h1>
-    <p style="font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: var(--ink-muted); max-width: 56ch; margin-top: 10px; line-height: 1.7;">
-      Paisajes acústicos, afinaciones naturales a 432 Hz y grabaciones de campo concebidas como espacios de desaceleración y escucha profunda.
+    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px; line-height: 1.65;">
+      Afinaciones orgánicas a 432 Hz, paisajes acústicos y grabaciones de campo concebidas como espacios de pausa y escucha atenta.
     </p>
   </div>
 
   <!-- Círculo Samay interactivo -->
   <SamaySanctuary />
 
-  <!-- Fichas Sonoras de Sala — Plinto Acústico -->
+  <!-- Cintas y Registros de Campo -->
   {allSonidos.length > 0 && (
     <section>
-      <div style="margin-bottom: 22px; border-bottom: 1px solid var(--border-hairline); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">FONOTECA &middot; ARCHIVO SONORO</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint);">{allSonidos.length} registros</span>
+      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+        <span class="inv-code">CINTAS &middot; REGISTROS DE CAMPO</span>
+        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allSonidos.length} registros</span>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 50px;">
