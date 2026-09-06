@@ -11,17 +11,21 @@
    - Tipografías: *Cormorant Garamond* (cuerpo y plomo), *Cinzel* (titulares y labels), *Courier Prime* (terminal y notas de campo), *Plus Jakarta Sans* (lectura limpia).
    - Sin tarjetas flotantes, sin sombras ni bordes redondeados modernos.
    - Filetes de imprenta, fotograbados con filtro de litografía y texto justificado con separación silábica.
-3. **Páginas y Rutas Actualizadas (28 páginas estáticas):**
+3. **Páginas y Rutas Actualizadas (29 páginas estáticas):**
    - `/`: Portada en 3 columnas (Nota de Terminal real de Termux, Obra *I Am a Tree* con capitular, reproductor 432 Hz y despachos de viaje).
-   - `/tienda/`: Cuaderno de Trazos & Láminas (Eliana Colzani, Jimena Vílchez, @gastipuray, Omar Franco).
-   - `/sonidos/`: Cintas Sonoras en 432 Hz y registros de campo.
+   - `/trazos/`: Cuaderno de Trazos & Láminas (Eliana Colzani, Jimena Vílchez, @gastipuray, Omar Franco) con componente `GazettePlate.astro`.
+   - `/tienda/`: Redirección automática a `/trazos/` para compatibilidad de enlaces.
+   - `/sonidos/`: Cintas Sonoras en 432 Hz y registros de campo con Samay interactivo.
    - `/palabras/`: Papeles sueltos, poemas, relatos y notas de libreta.
    - `/miradas/`: Cuadernos de ruta y polaroids analógicas.
    - `/sobre/`: Colofón vital de Munay Amaru (Omar Trillo).
    - `/posts/[...slug]`: Detalle individual limpio de cada pieza.
-4. **Infraestructura:**
-   - **Astro 5.4.2** (Static output, 28 páginas compiladas en ~2.4s).
-   - Repositorio GitHub: `https://github.com/ruwaq/munay-sounds` (`main`).
+4. **Purificación Terminológica Completa:**
+   - 0 términos institucionales (`museo`, `pabellón`, `curatorial`, `sala`, `exposición permanente`, etc.).
+   - Terminología editorial pura: *pliegos, cédulas de registro, notas de campo, cuadernos de ruta, grabados analógicos, colofón y cintas sonoras*.
+5. **Infraestructura:**
+   - **Astro 5.4.2** (Static output, 29 páginas compiladas en ~2.7s).
+   - Repositorio GitHub: `https://github.com/ruwaq/munay-amaru` (`main`).
    - Despliegue listo para Cloudflare Pages vía `wrangler.json`.
 
 ---

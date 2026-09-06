@@ -81,7 +81,7 @@ allMiradas.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     </section>
   )}
 
-  <!-- Galería fotográfica contemplativa -->
+  <!-- Pliegos fotográficos analógicos -->
   {allMiradas.length > 0 && (
     <section>
       <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
@@ -91,7 +91,7 @@ allMiradas.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px;">
         {allMiradas.map((mirada) => (
           <article class="zen-card" style="padding: 0; overflow: hidden;">
-            <!-- Marco paspartú fotográfico -->
+            <!-- Marco de grabado analógico -->
             <div class="float-mount-frame" style="margin-bottom: 0; border-radius: 0; border: none; border-bottom: 1px solid var(--border-hairline); aspect-ratio: 4/3; padding: 14px;">
               <img
                 src={mirada.data.photo.src}

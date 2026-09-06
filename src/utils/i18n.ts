@@ -1,5 +1,5 @@
 /**
- * Utilidades de internacionalización y metadatos para Munay Amaru — Pabellón de Arte Zen.
+ * Utilidades de internacionalización y metadatos para Munay Amaru — Diario de Vida & Gaceta de Época.
  * Español (es) en raíz (/), Inglés (en) con prefijo (/en).
  */
 

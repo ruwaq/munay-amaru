@@ -1,8 +1,8 @@
 /* ==========================================================================
-   MUNAY AMARU — MUSEO DE ARTE CONTEMPORÁNEO
-   Estética: Pergamino antiguo · Manuscrito de artista · Washi japonés
-   Referencia: Kinfolk · Noguchi Museum · Fondazione Prada · Tadao Ando
-   Sin sombras. Sin efectos. Solo papel, tinta y silencio.
+   MUNAY AMARU — DIARIO DE VIDA & GACETA DE ÉPOCA
+   Estética: Pliego de periódico antiguo · Gaceta asimétrica · Manuscrito
+   Tipografías: Cormorant Garamond · Cinzel · Courier Prime · Jakarta
+   Sin sombras. Sin artificios. Solo papel, tinta, código y música en 432 Hz.
    ========================================================================== */
 
 :root {
@@ -109,7 +109,7 @@ body {
 .reading-wrap { max-width: 60ch; margin-inline: auto; }
 
 /* ============================================
-   ETIQUETA DE SALA
+   FOLIO & CÉDULA DE REGISTRO
    ============================================ */
 .inv-code {
   font-family: var(--font-label);
@@ -119,8 +119,9 @@ body {
 }
 
 /* ============================================
-   VITRINA DE MUSEO — Paspartú plano
+   LÁMINA / GRABADO DE PRENSA — Paspartú plano
    ============================================ */
+.gazette-engraving-frame,
 .museum-vitrine {
   border: 1px solid var(--rule);
   margin-bottom: 52px;
@@ -136,7 +137,7 @@ body {
   max-width: 100%; height: auto;
   aspect-ratio: 1/1; object-fit: cover; display: block;
 }
-.curatorial-label {
+.entry-label {
   padding: 20px 24px 22px;
   border-left: 2px solid var(--gold);
 }
@@ -157,7 +158,7 @@ body {
   border-bottom: 1px solid var(--rule);
   padding: 9px 0; margin-bottom: 12px;
 }
-.curatorial-essay {
+.entry-essay {
   font-family: var(--font-display);
   font-size: 1.08rem; line-height: 1.75;
   color: var(--ink-body); margin-bottom: 14px;
@@ -339,13 +340,15 @@ a.zen-card { text-decoration: none; display: block; color: inherit; }
 .lang-divider { color: var(--ink-faint); padding: 0 2px; user-select: none; }
 
 /* ============================================
-   FOOTER
+   PIE DE IMPRENTA / COLOFÓN
    ============================================ */
+.gazette-footer,
 .museum-footer {
   margin-top: 60px; padding: 36px 24px;
   border-top: 1px solid var(--rule);
   text-align: center; font-size: 0.82rem; color: var(--ink-muted);
 }
+.gazette-footer a,
 .museum-footer a {
   color: var(--ink); text-decoration: underline;
   text-underline-offset: 3px; text-decoration-color: var(--rule-warm);
@@ -387,13 +390,14 @@ a.zen-card { text-decoration: none; display: block; color: inherit; }
   .brand-title { font-size: 0.86rem; letter-spacing: 0.16em; }
   .brand-subtitle { display: none; }
 
-  /* Vitrina — imagen 4:3 en móvil */
+  /* Lámina / Grabado — imagen 4:3 en móvil */
+  .gazette-engraving-frame,
   .museum-vitrine { margin-bottom: 28px; }
   .float-mount-frame { padding: 10px; aspect-ratio: 4/3; }
   .float-artwork { width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; }
-  .curatorial-label { padding: 14px 14px 16px; }
+  .entry-label { padding: 14px 14px 16px; }
   .artwork-artist { font-size: 1.2rem; }
-  .curatorial-essay { font-size: 1rem; }
+  .entry-essay { font-size: 1rem; }
 
   .zen-card { padding: 16px 14px; margin-bottom: 12px; }
   .zen-title { font-size: 1.4rem; }
@@ -418,6 +422,7 @@ a.zen-card { text-decoration: none; display: block; color: inherit; }
   .rooms-grid { grid-template-columns: 1fr; gap: 10px; }
   .rooms-grid .zen-card { margin-bottom: 0; }
 
+  .gazette-footer,
   .museum-footer { padding: 24px 16px; }
 }
 

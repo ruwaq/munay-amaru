@@ -1,6 +1,5 @@
 ---
-// Reproductor Zen Contemplativo — Munay Amaru Pabellón Sonoro
-// Diseño inspirado en Fondazione Prada & Chichu Art Museum (Tadao Ando)
+// Reproductor Acústico & Registros de Campo — Munay Amaru Cintas Sonoras
 interface Props {
   src: string;
   title: string;
@@ -186,7 +185,7 @@ const { src, title, category = 'REGISTRO ACÚSTICO', duration = '03:30', gear, l
               navigator.mediaSession.metadata = new MediaMetadata({
                 title: titleEl?.textContent || 'Munay Amaru',
                 artist: 'Munay Amaru · Omar Franco',
-                album: 'Pabellón Sonoro 432 Hz',
+                album: 'Cintas Sonoras 432 Hz',
                 artwork: [{ src: 'https://f4.bcbits.com/img/a3993646546_2.jpg', sizes: '512x512', type: 'image/jpeg' }]
               });
               navigator.mediaSession.setActionHandler('play', () => audio.play());

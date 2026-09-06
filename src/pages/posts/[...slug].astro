@@ -55,7 +55,7 @@ const activePageMap: Record<string, string> = {
 };
 ---
 
-<Layout title={data.title || 'Obra Contemplativa'} activePage={activePageMap[collectionName] || 'home'} locale={data.lang || 'es'}>
+<Layout title={data.title || 'Registro de Vida'} activePage={activePageMap[collectionName] || 'home'} locale={data.lang || 'es'}>
   <article class="reading-wrap paper-texture" style="padding-top: 16px; margin-bottom: 80px;">
 
     <!-- Cabecera de folio -->
@@ -66,7 +66,7 @@ const activePageMap: Record<string, string> = {
       <span class="inv-code" style="margin-bottom: 0;">{meta.folio}</span>
     </div>
 
-    <!-- Cédula curatorial -->
+    <!-- Encabezado de pliego -->
     <header style="margin-bottom: 36px; text-align: center;">
       <span class="inv-code" style="margin-bottom: 10px;">
         {meta.label} &middot; {data.date ? new Date(data.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}
@@ -89,7 +89,7 @@ const activePageMap: Record<string, string> = {
       <div class="wabi-divider">&#10086;</div>
     </header>
 
-    <!-- Imagen en paspartú -->
+    <!-- Lámina / Grabado analógico -->
     {data.photo && (
       <div class="float-mount-frame" style="margin-bottom: 40px;">
         <figure style="margin: 0; text-align: center; width: 100%;">

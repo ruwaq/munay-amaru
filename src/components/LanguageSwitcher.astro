@@ -21,7 +21,7 @@ const { currentLocale, translationUrl = null, hasTranslation = false } = Astro.p
       ) : hasTranslation && translationUrl ? (
         <a href={translationUrl} class="lang-btn" hreflang="en">{LOCALES.en.label}</a>
       ) : (
-        <span class="lang-btn disabled" aria-disabled="true" title="Esta sala solo existe en español">{LOCALES.en.label}</span>
+        <span class="lang-btn disabled" aria-disabled="true" title="Este pliego solo existe en español">{LOCALES.en.label}</span>
       )}
     </li>
   </ul>
