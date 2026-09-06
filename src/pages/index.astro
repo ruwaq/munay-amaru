@@ -1,6 +1,6 @@
 ---
 import Layout from '../components/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 // 1. Poemas recientes
 const ultimosPoemas = (await getCollection('poemas', ({ data }) => !data.draft))
@@ -22,8 +22,14 @@ const allMiradas = await getCollection('miradas', ({ data }) => !data.draft);
 const latestMirada = allMiradas.length > 0 ? allMiradas[0] : null;
 
 // 5. Pensamientos nocturnos / Terminal
-const allPensamientos = await getCollection('pensamientos', ({ data }) => !data.draft);
+const allPensamientos = (await getCollection('pensamientos', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const latestPensamiento = allPensamientos.length > 0 ? allPensamientos[0] : null;
+const pensamientoRender = latestPensamiento ? await render(latestPensamiento) : null;
+const PensamientoContent = pensamientoRender?.Content;
+const pensamientoDateStr = latestPensamiento?.data.date 
+  ? new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(new Date(latestPensamiento.data.date)).toUpperCase()
+  : 'SEPTIEMBRE 2026';
 ---
 
 <Layout activePage="home" locale="es">
@@ -42,17 +48,16 @@ const latestPensamiento = allPensamientos.length > 0 ? allPensamientos[0] : null
       <div class="terminal-clipping">
         <div class="terminal-header">
           <span class="terminal-meta-tag">TERMINAL</span>
-          <span>{latestPensamiento?.data.weather?.toUpperCase() || '23:18 · LLUVIA'}</span>
+          <span>{latestPensamiento?.data.weather?.toUpperCase() || 'MAÑANA DESPEJADA · 17°C'}</span>
         </div>
-        <p style="margin-bottom: 10px;">
-          Escribir en una pantalla pequeña obliga a pensar con frases más cortas, casi telegráficas. Hay algo monacal en este cursor parpadeando sobre el fondo negro mientras afuera cae la lluvia sobre el patio.
-        </p>
-        <p style="margin-bottom: 8px; font-style: italic; color: var(--ink-muted);">
-          El dispositivo cambia; el gesto, no.
-        </p>
+        <div style="font-size: 0.82rem; line-height: 1.6; margin-bottom: 8px;">
+          {PensamientoContent ? <PensamientoContent /> : (
+            <p>{latestPensamiento?.body}</p>
+          )}
+        </div>
         <div style="font-size: 0.65rem; color: var(--gold); border-top: 1px dashed var(--rule); padding-top: 6px; margin-top: 8px; display: flex; justify-content: space-between;">
           <span>&gt; {latestPensamiento?.data.device || 'TERMUX / MÓVIL'}</span>
-          <span>AGOSTO 2026</span>
+          <span>{pensamientoDateStr}</span>
         </div>
       </div>
 
