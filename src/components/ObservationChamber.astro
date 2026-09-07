@@ -1,0 +1,658 @@
+---
+// ObservationChamber.astro: Cámara de Observación Cenital (Museo Contemplativo)
+---
+
+<dialog id="observation-chamber" class="observation-chamber" aria-labelledby="chamber-title">
+  <div class="chamber-container">
+    
+    <!-- Barra Superior de Navegación & Salida -->
+    <header class="chamber-nav">
+      <div class="chamber-reg">
+        <span class="reg-glyph">&#8853;</span>
+        <span id="chamber-reg-code">SPEC-001 · CÁMARA DE OBSERVACIÓN CENITAL</span>
+      </div>
+      
+      <div class="chamber-controls">
+        <button type="button" id="chamber-prev-btn" class="chamber-btn" aria-label="Espécimen anterior (flecha izquierda)">
+          &larr; Anterior
+        </button>
+        <span id="chamber-counter" class="chamber-counter">01 / 12</span>
+        <button type="button" id="chamber-next-btn" class="chamber-btn" aria-label="Espécimen siguiente (flecha derecha)">
+          Siguiente &rarr;
+        </button>
+        <button type="button" id="chamber-close-btn" class="chamber-btn chamber-btn-close" aria-label="Cerrar cámara (Esc)">
+          &times; Salir
+        </button>
+      </div>
+    </header>
+
+    <!-- Espacio Central de Contemplación -->
+    <main class="chamber-core">
+      
+      <!-- Haz de Luz Cenital Volumétrico -->
+      <div class="spotlight-beam" aria-hidden="true"></div>
+
+      <!-- Cuadro Flotante / Marco de Observación -->
+      <div class="artwork-exhibit">
+        <div class="museum-mat">
+          <div class="specimen-zoom-box" id="chamber-zoom-box">
+            <img 
+              id="chamber-img" 
+              src="" 
+              alt="Muestra de arte" 
+              class="chamber-artwork-image"
+              loading="eager"
+            />
+            <div id="chamber-text-fallback" class="chamber-text-fallback" style="display: none;">
+              <span class="manuscript-calib tl" aria-hidden="true">&#8853;</span>
+              <span class="manuscript-calib tr" aria-hidden="true">&#8853;</span>
+              <span class="manuscript-calib bl" aria-hidden="true">&#8853;</span>
+              <span class="manuscript-calib br" aria-hidden="true">&#8853;</span>
+              <span class="manuscript-glyph" aria-hidden="true">&#10022;</span>
+              <blockquote class="manuscript-lead" id="chamber-manuscript-text"></blockquote>
+              <div class="manuscript-subline" id="chamber-manuscript-subline"></div>
+            </div>
+          </div>
+        </div>
+        <div class="zoom-caption" id="chamber-zoom-caption">
+          <span>&#128269; Clic sobre la obra para ampliar trazo y pigmento al 240%</span>
+        </div>
+      </div>
+
+      <!-- Cédula Curatorial de Latón Envejecido -->
+      <article class="brass-curatorial-plaque">
+        <span class="plaque-rivet tl" aria-hidden="true">&#8853;</span>
+        <span class="plaque-rivet tr" aria-hidden="true">&#8853;</span>
+        <span class="plaque-rivet bl" aria-hidden="true">&#8853;</span>
+        <span class="plaque-rivet br" aria-hidden="true">&#8853;</span>
+
+        <div class="plaque-meta-line">
+          <span id="chamber-inv-code">INV. MS-2026-001</span>
+          <span class="plaque-freq" id="chamber-freq-badge">432 Hz &middot; RESONANCIA NATURAL</span>
+        </div>
+
+        <h2 class="plaque-title" id="chamber-title">Título de la Creación</h2>
+        <div class="plaque-creator" id="chamber-creator">Munay Amaru</div>
+
+        <!-- Ficha Técnica de Laboratorio Botánico / Taller -->
+        <dl class="plaque-specs">
+          <div class="spec-row">
+            <dt>Materia / Técnica:</dt>
+            <dd id="chamber-medium">—</dd>
+          </div>
+          <div class="spec-row" id="chamber-dims-row">
+            <dt>Dimensiones / Soporte:</dt>
+            <dd id="chamber-dims">—</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Procedencia de Origen:</dt>
+            <dd id="chamber-origin">—</dd>
+          </div>
+          <div class="spec-row" id="chamber-synergy-row">
+            <dt>Sinergia &amp; Micelio:</dt>
+            <dd id="chamber-synergy" class="synergy-links">—</dd>
+          </div>
+        </dl>
+
+        <!-- Ensayo Curatorial y Notas de Vida -->
+        <div class="plaque-concept" id="chamber-concept">
+          Descripción y memoria del autor.
+        </div>
+
+        <!-- Consola de Audio Analógico en 432 Hz -->
+        <div class="chamber-audio-station" id="chamber-audio-station" style="display: none;">
+          <div class="audio-station-header">
+            <span>&#9835; REPRODUCCIÓN EN CINTA DIRECTA &middot; 432 Hz</span>
+            <span id="chamber-audio-duration">03:10 min</span>
+          </div>
+          <audio id="chamber-audio-elem" controls preload="none" style="width: 100%; height: 36px;"></audio>
+        </div>
+
+        <!-- Enlace al Pliego Completo -->
+        <div class="plaque-footer">
+          <a id="chamber-post-link" href="#" class="plaque-action-link">
+            Abrir pliego de lectura completa &rarr;
+          </a>
+        </div>
+      </article>
+
+    </main>
+
+  </div>
+</dialog>
+
+<style>
+  .observation-chamber {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    border: none;
+    background: hsl(28, 16%, 6%);
+    color: hsl(38, 20%, 90%);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .observation-chamber::backdrop {
+    background: rgba(10, 8, 7, 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  .chamber-container {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 60px;
+    max-width: 1140px;
+    margin-inline: auto;
+  }
+
+  .chamber-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid hsla(38, 30%, 45%, 0.22);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .chamber-reg {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    color: hsl(40, 50%, 65%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .reg-glyph {
+    color: hsl(42, 60%, 55%);
+  }
+
+  .chamber-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chamber-counter {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: hsl(38, 20%, 60%);
+    padding: 0 6px;
+  }
+
+  .chamber-btn {
+    background: transparent;
+    border: 1px solid hsla(38, 30%, 50%, 0.35);
+    color: hsl(38, 20%, 85%);
+    font-family: var(--font-label);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+  }
+
+  .chamber-btn:hover {
+    border-color: hsl(42, 60%, 55%);
+    background: hsla(40, 40%, 30%, 0.3);
+    color: #fff;
+  }
+
+  .chamber-btn-close {
+    border-color: hsl(40, 45%, 45%);
+    color: hsl(40, 55%, 75%);
+    font-weight: 600;
+  }
+
+  /* Centro de Contemplación */
+  .chamber-core {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  /* Cono de Iluminación Cenital a 2800K */
+  .spotlight-beam {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(850px, 95vw);
+    height: 720px;
+    pointer-events: none;
+    background: radial-gradient(ellipse 65% 55% at 50% 20%, 
+      hsla(42, 50%, 82%, 0.18) 0%, 
+      hsla(38, 30%, 45%, 0.05) 50%, 
+      transparent 80%);
+    z-index: 1;
+  }
+
+  /* Marco y Paspartú de Algodón */
+  .artwork-exhibit {
+    position: relative;
+    z-index: 2;
+    padding: 16px;
+    background: hsl(28, 14%, 12%);
+    border: 2px solid hsl(36, 25%, 22%);
+    box-shadow: 
+      0 16px 40px -8px rgba(0, 0, 0, 0.75),
+      0 36px 80px -12px rgba(0, 0, 0, 0.9),
+      0 0 1px 1px rgba(255, 255, 255, 0.08);
+    max-width: 100%;
+  }
+
+  .museum-mat {
+    background: hsl(38, 18%, 91%);
+    padding: clamp(14px, 3.5vw, 36px);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.45);
+    border: 1px solid hsl(36, 15%, 80%);
+  }
+
+  .specimen-zoom-box {
+    overflow: hidden;
+    cursor: zoom-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 54vh;
+  }
+
+  .chamber-artwork-image {
+    max-width: min(500px, 80vw);
+    max-height: 52vh;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.28s ease-out;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+
+  .chamber-text-fallback {
+    position: relative;
+    padding: clamp(28px, 4.5vw, 42px) clamp(22px, 4.5vw, 36px);
+    background: hsl(38, 28%, 92%);
+    border: 1px solid hsl(36, 20%, 75%);
+    color: hsl(28, 22%, 12%);
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 
+      inset 0 0 14px hsla(38, 20%, 50%, 0.12),
+      0 8px 24px hsla(28, 20%, 5%, 0.28);
+  }
+
+  .manuscript-calib {
+    position: absolute;
+    font-size: 0.65rem;
+    color: hsl(36, 25%, 55%);
+    line-height: 1;
+  }
+  .manuscript-calib.tl { top: 8px; left: 9px; }
+  .manuscript-calib.tr { top: 8px; right: 9px; }
+  .manuscript-calib.bl { bottom: 8px; left: 9px; }
+  .manuscript-calib.br { bottom: 8px; right: 9px; }
+
+  .manuscript-glyph {
+    display: block;
+    font-size: 1.2rem;
+    color: hsl(40, 55%, 45%);
+    margin-bottom: 12px;
+  }
+
+  .manuscript-lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    line-height: 1.65;
+    color: hsl(28, 25%, 12%);
+    margin: 0 0 16px;
+    quotes: "«" "»";
+  }
+
+  .manuscript-subline {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: hsl(36, 25%, 45%);
+    border-top: 1px dashed hsl(36, 20%, 75%);
+    padding-top: 12px;
+  }
+
+  .zoom-caption {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: hsl(38, 20%, 65%);
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  /* Cédula de Latón Envejecido */
+  .brass-curatorial-plaque {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 620px;
+    background: linear-gradient(135deg, hsl(38, 38%, 24%) 0%, hsl(40, 46%, 36%) 50%, hsl(36, 32%, 20%) 100%);
+    border: 1px solid hsl(40, 50%, 48%);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18);
+    padding: 24px 28px;
+    color: hsl(40, 60%, 88%);
+  }
+
+  .plaque-rivet {
+    position: absolute;
+    font-size: 0.75rem;
+    color: hsl(40, 50%, 55%);
+    line-height: 1;
+  }
+  .plaque-rivet.tl { top: 6px; left: 8px; }
+  .plaque-rivet.tr { top: 6px; right: 8px; }
+  .plaque-rivet.bl { bottom: 6px; left: 8px; }
+  .plaque-rivet.br { bottom: 6px; right: 8px; }
+
+  .plaque-meta-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: hsl(40, 55%, 72%);
+    border-bottom: 1px solid hsla(40, 50%, 55%, 0.35);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+
+  .plaque-freq {
+    color: hsl(42, 65%, 68%);
+  }
+
+  .plaque-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 1.85rem);
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 2px;
+    line-height: 1.15;
+  }
+
+  .plaque-creator {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: hsl(38, 40%, 75%);
+    margin-bottom: 14px;
+  }
+
+  .plaque-specs {
+    font-size: 0.78rem;
+    line-height: 1.65;
+    color: hsl(38, 25%, 82%);
+    border-top: 1px dashed hsla(40, 50%, 55%, 0.3);
+    border-bottom: 1px dashed hsla(40, 50%, 55%, 0.3);
+    padding: 10px 0;
+    margin-bottom: 14px;
+  }
+
+  .spec-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .spec-row dt {
+    font-weight: 600;
+    color: hsl(40, 50%, 70%);
+    min-width: 140px;
+  }
+  .spec-row dd {
+    margin: 0;
+  }
+
+  .synergy-links {
+    color: hsl(42, 60%, 75%);
+    font-style: italic;
+  }
+
+  .plaque-concept {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: hsl(38, 20%, 90%);
+    margin-bottom: 18px;
+  }
+
+  .chamber-audio-station {
+    background: rgba(0,0,0,0.32);
+    border: 1px solid hsla(40, 50%, 55%, 0.3);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+  }
+
+  .audio-station-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: hsl(40, 55%, 75%);
+    margin-bottom: 6px;
+  }
+
+  .plaque-footer {
+    border-top: 1px solid hsla(40, 50%, 55%, 0.25);
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .plaque-action-link {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .plaque-action-link:hover {
+    color: hsl(42, 60%, 70%);
+  }
+
+  @media (max-width: 640px) {
+    .chamber-container { padding: 14px 14px 40px; }
+    .brass-curatorial-plaque { padding: 18px 16px; }
+    .spec-row { flex-direction: column; gap: 0; margin-bottom: 6px; }
+    .spec-row dt { min-width: auto; }
+  }
+</style>
+
+<script>
+  // Control interactivo universal para ObservationChamber
+  type Specimen = {
+    id: string;
+    invCode: string;
+    title: string;
+    creator: string;
+    year: string;
+    medium: string;
+    dims?: string;
+    origin: string;
+    concept: string;
+    quote?: string;
+    imageSrc?: string;
+    audioSrc?: string;
+    postUrl: string;
+    synergy: string;
+  };
+
+  let specimensRegistry: Specimen[] = [];
+  let currentIndex = 0;
+  let isZoomed = false;
+
+  const dialog = document.getElementById('observation-chamber') as HTMLDialogElement | null;
+  const zoomBox = document.getElementById('chamber-zoom-box');
+  const imgElem = document.getElementById('chamber-img') as HTMLImageElement | null;
+  const textFallback = document.getElementById('chamber-text-fallback');
+  const manuscriptText = document.getElementById('chamber-manuscript-text');
+  const manuscriptSubline = document.getElementById('chamber-manuscript-subline');
+  const zoomCaption = document.getElementById('chamber-zoom-caption');
+
+  function renderSpecimen(index: number) {
+    if (!specimensRegistry.length || index < 0 || index >= specimensRegistry.length) return;
+    currentIndex = index;
+    const s = specimensRegistry[index];
+
+    // Reset zoom
+    if (imgElem) {
+      imgElem.style.transform = 'scale(1)';
+      isZoomed = false;
+      if (zoomBox) zoomBox.style.cursor = 'zoom-in';
+    }
+
+    // Actualizar metadatos
+    const regCode = document.getElementById('chamber-reg-code');
+    const counter = document.getElementById('chamber-counter');
+    const invCode = document.getElementById('chamber-inv-code');
+    const title = document.getElementById('chamber-title');
+    const creator = document.getElementById('chamber-creator');
+    const medium = document.getElementById('chamber-medium');
+    const dims = document.getElementById('chamber-dims');
+    const dimsRow = document.getElementById('chamber-dims-row');
+    const origin = document.getElementById('chamber-origin');
+    const synergy = document.getElementById('chamber-synergy');
+    const concept = document.getElementById('chamber-concept');
+    const postLink = document.getElementById('chamber-post-link') as HTMLAnchorElement | null;
+    const audioStation = document.getElementById('chamber-audio-station');
+    const audioElem = document.getElementById('chamber-audio-elem') as HTMLAudioElement | null;
+
+    if (regCode) regCode.textContent = `${s.invCode} · CÁMARA DE OBSERVACIÓN CENITAL`;
+    if (counter) counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(specimensRegistry.length).padStart(2, '0')}`;
+    if (invCode) invCode.textContent = s.invCode;
+    if (title) title.textContent = s.title;
+    if (creator) creator.textContent = `${s.creator} (${s.year})`;
+    if (medium) medium.textContent = s.medium;
+    if (dims && dimsRow) {
+      if (s.dims) {
+        dims.textContent = s.dims;
+        dimsRow.style.display = 'flex';
+      } else {
+        dimsRow.style.display = 'none';
+      }
+    }
+    if (origin) origin.textContent = s.origin;
+    if (synergy) synergy.textContent = s.synergy;
+    if (concept) concept.textContent = s.concept;
+    if (postLink) postLink.href = s.postUrl;
+
+    // Imagen o Pliego de Manuscrito Iluminado
+    if (s.imageSrc && imgElem && textFallback) {
+      imgElem.style.display = 'block';
+      imgElem.src = s.imageSrc;
+      imgElem.alt = s.title;
+      textFallback.style.display = 'none';
+      if (zoomCaption) {
+        zoomCaption.innerHTML = '<span>&#128269; Clic sobre la obra para ampliar trazo y pigmento al 240%</span>';
+      }
+    } else if (imgElem && textFallback && manuscriptText) {
+      imgElem.style.display = 'none';
+      textFallback.style.display = 'block';
+      const quoteText = s.quote ? `«${s.quote}»` : (s.concept.length > 180 ? `«${s.concept.slice(0, 180)}...»` : `«${s.concept}»`);
+      manuscriptText.textContent = quoteText;
+      if (manuscriptSubline) {
+        manuscriptSubline.textContent = `${s.creator} · ${s.origin} (${s.year})`;
+      }
+      if (zoomCaption) {
+        zoomCaption.innerHTML = '<span>&#10022; PLIEGO DE PENSAMIENTO VIVO &middot; CALIBRACIÓN CONTEMPLATIVA</span>';
+      }
+    }
+
+    // Audio station
+    if (s.audioSrc && audioStation && audioElem) {
+      audioStation.style.display = 'block';
+      audioElem.src = s.audioSrc;
+    } else if (audioStation && audioElem) {
+      audioStation.style.display = 'none';
+      audioElem.pause();
+    }
+  }
+
+  // Interacción de zoom al 240% hacia las coordenadas del cursor
+  zoomBox?.addEventListener('click', (e) => {
+    if (!imgElem || imgElem.style.display === 'none') return;
+    isZoomed = !isZoomed;
+    if (isZoomed) {
+      const rect = zoomBox.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      imgElem.style.transformOrigin = `${x}% ${y}%`;
+      imgElem.style.transform = 'scale(2.4)';
+      zoomBox.style.cursor = 'zoom-out';
+    } else {
+      imgElem.style.transform = 'scale(1)';
+      zoomBox.style.cursor = 'zoom-in';
+    }
+  });
+
+  // Botones de navegación
+  document.getElementById('chamber-prev-btn')?.addEventListener('click', () => {
+    if (currentIndex > 0) renderSpecimen(currentIndex - 1);
+    else renderSpecimen(specimensRegistry.length - 1);
+  });
+
+  document.getElementById('chamber-next-btn')?.addEventListener('click', () => {
+    if (currentIndex < specimensRegistry.length - 1) renderSpecimen(currentIndex + 1);
+    else renderSpecimen(0);
+  });
+
+  document.getElementById('chamber-close-btn')?.addEventListener('click', () => {
+    const audioElem = document.getElementById('chamber-audio-elem') as HTMLAudioElement | null;
+    audioElem?.pause();
+    dialog?.close();
+  });
+
+  // Cierre al hacer clic en el backdrop
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      const audioElem = document.getElementById('chamber-audio-elem') as HTMLAudioElement | null;
+      audioElem?.pause();
+      dialog.close();
+    }
+  });
+
+  // Atajos de teclado
+  window.addEventListener('keydown', (e) => {
+    if (!dialog?.open) return;
+    if (e.key === 'ArrowLeft') {
+      document.getElementById('chamber-prev-btn')?.click();
+    } else if (e.key === 'ArrowRight') {
+      document.getElementById('chamber-next-btn')?.click();
+    }
+  });
+
+  // Exponer API global
+  (window as any).registerSpecimens = (list: Specimen[]) => {
+    specimensRegistry = list;
+  };
+
+  (window as any).openSpecimenChamber = (specimenId: string) => {
+    const idx = specimensRegistry.findIndex((s) => s.id === specimenId);
+    if (idx !== -1) {
+      renderSpecimen(idx);
+      dialog?.showModal();
+    }
+  };
+</script>

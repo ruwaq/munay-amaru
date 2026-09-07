@@ -79,21 +79,23 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://munay-am
     {locale === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
   </a>
 
-  <header class="gazette-header" role="banner">
-    <div class="gazette-masthead-inner">
-      <div class="masthead-meta-bar">
-        <span>{locale === 'es' ? 'REGISTRO CONTINUO' : 'CONTINUOUS LOG'}</span>
-        <span>LIMA &middot; MAŁOPOLSKA &middot; NÓMADA</span>
-        <span>TERMUX &middot; 432 Hz</span>
+  {activePage !== 'home' && (
+    <header class="gazette-header" role="banner">
+      <div class="gazette-masthead-inner">
+        <div class="masthead-meta-bar">
+          <span>{locale === 'es' ? 'REGISTRO CONTINUO' : 'CONTINUOUS LOG'}</span>
+          <span>LIMA &middot; MAŁOPOLSKA &middot; NÓMADA</span>
+          <span>TERMUX &middot; 432 Hz</span>
+        </div>
+        <div class="masthead-title">
+          <a href={locale === 'en' ? '/en/' : '/'}>{siteTitle}</a>
+        </div>
+        <p class="masthead-tagline">{siteSubtitle}</p>
       </div>
-      <div class="masthead-title">
-        <a href={locale === 'en' ? '/en/' : '/'}>{siteTitle}</a>
-      </div>
-      <p class="masthead-tagline">{siteSubtitle}</p>
-    </div>
-  </header>
+    </header>
+  )}
 
-  <main id="main-content" role="main" class={activePage === 'home' ? 'gazette-broadsheet' : 'page-container'}>
+  <main id="main-content" role="main" class={activePage === 'home' ? 'specimen-home-wrap' : 'page-container'}>
     <slot />
   </main>
 

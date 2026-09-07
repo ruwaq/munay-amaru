@@ -1,224 +1,268 @@
 ---
 import Layout from '../components/Layout.astro';
-import { getCollection, render } from 'astro:content';
+import SpecimenCard from '../components/SpecimenCard.astro';
+import ObservationChamber from '../components/ObservationChamber.astro';
+import MyceliumNetwork from '../components/MyceliumNetwork.astro';
 
-// 1. Poemas recientes
-const ultimosPoemas = (await getCollection('poemas', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 2);
+// Constelación de las 12 Obras en el Suelo del Bosque (Pliegos Botánicos en 1 Clic)
+const specimens = [
+  // — EL FUEGO CENTRAL (Ayni & Tótem Fundacional) —
+  {
+    id: 'spec-001',
+    title: 'Munay (Corazón Radiante)',
+    hemisphere: 'centro' as const,
+    category: 'TÓTEM FUNDACIONAL · AYNI',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Pigmentos minerales sobre papel vegetal texturado',
+    origin: 'Cuaderno de Taller & Viaje',
+    synergy: 'I Am a Tree · Los Guardianes · The Heart\'s Medicine · Pachamamita',
+    quote: 'El amor no es pasividad ni resignación: es fuego creador, presencia incondicional y la voluntad sagrada de estar despiertos.',
+    concept: 'Silueta iluminada con corazón ardiente en el pecho y sol radiante. La voluntad afectiva que no evade el dolor del mundo, sino que lo abraza con discernimiento lúcido.',
+    postUrl: '/trazos/',
+    sizeClass: 'hero' as const,
+  },
 
-// 2. Viajes / Bitácoras
-const ultimosViajes = (await getCollection('viajes', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 2);
+  // — ESTRATO DE RAÍCES & SEMILLAS: PALABRA, PSIQUE, TIERRA & NARRATIVA —
+  {
+    id: 'spec-004',
+    title: 'Illari y el Observatorio del Alma',
+    hemisphere: 'izquierdo' as const,
+    category: 'FICCIÓN FILOSÓFICA · NOVELA',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Psicología profunda, arquetipos & narrativa',
+    origin: 'Metrópoli & Desierto Psíquico',
+    synergy: 'Il Canto Senza Paura · Los Guardianes · Manifiesto',
+    excerpt: 'En la geometría estéril de la prisa urbana olvidamos mirar el cielo. Illari colapsa frente a los ventanales pulcros y desciende al desierto de su psique para rescatar las aguas subterráneas y reconstruir la torre telescópica hacia el interior del ser.',
+    postUrl: '/posts/cuentos-illari-observatorio-del-alma/',
+    sizeClass: 'hero' as const,
+  },
+  {
+    id: 'spec-003',
+    title: 'Los Guardianes',
+    hemisphere: 'izquierdo' as const,
+    category: 'FÁBULA ECOLÓGICA DE MICELIO',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Narrativa de realismo mágico & ecología profunda',
+    origin: 'Bosques de Abeto & Suelo Húmedo',
+    synergy: 'Seeds · The Magic Threads · I Am a Tree',
+    excerpt: 'Aunque corten el tronco más viejo, la tierra no olvida. Bajo cuatrocientos inviernos de nieve y silencio, las hifas invisibles del micelio subterráneo transfieren calor y savia al brote nuevo, custodiado en secreto por un pájaro de alas grises.',
+    postUrl: '/posts/cuentos-los-guardianes/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-007',
+    title: 'Seeds',
+    hemisphere: 'izquierdo' as const,
+    category: 'POEMA EXISTENCIAL · RIGA',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Poema en lengua inglesa & cuaderno de campo',
+    origin: 'Riga, Letonia & Bosques de Małopolska',
+    synergy: 'The Magic Threads · Los Guardianes · I Am a Tree',
+    verses: [
+      'We worship what the eye can calculate.',
+      'Yet the whole miracle begins in blindness.',
+      'A seed is not asleep; it is submitting to the crushing dark.',
+      'The soil is not your tomb; it is your womb. Let the husk break.'
+    ],
+    postUrl: '/posts/poemas-seeds/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-010',
+    title: 'Oda a la Digestión & El Descuido',
+    hemisphere: 'izquierdo' as const,
+    category: 'SÁTIRA & CRÓNICA URBANA',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Poesía cósmico-cómica en dos tiempos',
+    origin: 'Tubo Digestivo & Acera Urbana',
+    synergy: 'Illari · El Amigo de Cuatro Patas · Manifiesto',
+    verses: [
+      'Podrás levitar en tus tratados de metafísica,',
+      'pero si tu estómago no procesa el pan de ayer,',
+      'tu iluminación es solo aire atrapado.',
+      'Dobla las rodillas y agradece el fuego visceral.'
+    ],
+    postUrl: '/posts/poemas-oda-a-la-digestion/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-012',
+    title: 'Manifiesto de los 4 Principios',
+    hemisphere: 'izquierdo' as const,
+    category: 'FUNDAMENTOS ÉTICOS & FILOSOFÍA',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Texto fundacional & bitácora de taller',
+    origin: 'Archivo General de Munay',
+    synergy: 'Munay · Illari · Toda la red de sinapsis',
+    verses: [
+      'I. Rechazo implacable al escapismo espiritual (Bypassing).',
+      'II. Integración y abrazo somático de la propia sombra.',
+      'III. La biología como poética sagrada de hermandad.',
+      'IV. El humor como brújula y ancla indispensable de la verdad.'
+    ],
+    postUrl: '/posts/pensamientos-manifiesto-filosofico/',
+    sizeClass: 'hero' as const,
+  },
 
-// 3. Sonidos recientes
-const ultimosSonidos = (await getCollection('sonidos', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 4);
-
-// 4. Miradas analógicas
-const allMiradas = await getCollection('miradas', ({ data }) => !data.draft);
-const latestMirada = allMiradas.length > 0 ? allMiradas[0] : null;
-
-// 5. Pensamientos nocturnos / Terminal
-const allPensamientos = (await getCollection('pensamientos', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const latestPensamiento = allPensamientos.length > 0 ? allPensamientos[0] : null;
-const pensamientoRender = latestPensamiento ? await render(latestPensamiento) : null;
-const PensamientoContent = pensamientoRender?.Content;
-const pensamientoDateStr = latestPensamiento?.data.date 
-  ? new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(new Date(latestPensamiento.data.date)).toUpperCase()
-  : 'SEPTIEMBRE 2026';
+  // — ESTRATO DE RAMAS & FRUTOS SONOROS: CANTO DE MEDICINA, CHARANGO & 432 Hz —
+  {
+    id: 'spec-002',
+    title: 'I Am a Tree',
+    hemisphere: 'derecho' as const,
+    category: 'ÓLEO BOTÁNICO & 432 Hz',
+    year: '2024',
+    creator: 'Eliana Colzani & Munay Amaru',
+    medium: 'Óleo botánico sobre lino natural & paisaje sonoro',
+    origin: 'Małopolska & Kazimierz, Cracovia (Polonia)',
+    synergy: 'Il Canto Senza Paura · Pipene & Gailene · Munay',
+    quote: 'I am a tree, drinking deep from the silent streams... my roots are old, older than my grief, holding the memory of a thousand rains.',
+    audioSrc: '/audio/ejemplo-voz.mp3',
+    duration: '03:10',
+    postUrl: '/posts/sonidos-i-am-a-tree/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-005',
+    title: 'Il Canto Senza Paura',
+    hemisphere: 'derecho' as const,
+    category: 'CANTO DE MEDICINA · AFINACIÓN DROP D',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Voz ceremonial, afinación Drop D & tambor de pulso',
+    origin: 'Apeninos de Abruzzo, Italia',
+    synergy: 'The Heart\'s Medicine · Pachamamita · Illari',
+    verses: [
+      'Non c\'è buio che possa spegnere il passo.',
+      'La mente si accende quando il cuore smette di tremare,',
+      'e il respiro torna al suo centro ancestrale.'
+    ],
+    audioSrc: '/audio/ejemplo-voz.mp3',
+    duration: '04:15',
+    postUrl: '/posts/sonidos-il-canto-senza-paura/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-006',
+    title: 'The Heart\'s Medicine',
+    hemisphere: 'derecho' as const,
+    category: 'CANTO INTROSPECTIVO · GRATITUD CELULAR',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Guitarras acústicas en afinación abierta & pulso cardíaco',
+    origin: 'Santuario de Calma, Perú',
+    synergy: 'Pachamamita · El Amigo de Cuatro Patas · Munay',
+    quote: 'The heart does not ask for permission to beat; it forgives every wound simply by pumping the next drop of life into your veins.',
+    audioSrc: '/audio/ejemplo-voz.mp3',
+    duration: '03:45',
+    postUrl: '/posts/sonidos-the-hearts-medicine/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-008',
+    title: 'Pachamamita',
+    hemisphere: 'derecho' as const,
+    category: 'DEVOCIONAL ANDINO · CHARANGO & RONROCO',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Charango y Ronroco en Huayno lento (Mi / Si / Sol / Re / La)',
+    origin: 'Valle Sagrado & Cordillera Andina (2.800 m)',
+    synergy: 'The Magic Threads · The Heart\'s Medicine · Munay',
+    verses: [
+      'Agüita clara que bajas cantando del barranco,',
+      'llévate las penas del caminante,',
+      'déjanos la costumbre sagrada de dar las gracias.'
+    ],
+    audioSrc: '/audio/ejemplo-voz.mp3',
+    duration: '04:20',
+    postUrl: '/posts/sonidos-pachamamita/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-009',
+    title: 'The Magic Threads (Pipene & Gailene)',
+    hemisphere: 'derecho' as const,
+    category: 'FÁBULA BOTÁNICA DE MICORRIZAS',
+    year: '2016 / 2026',
+    creator: 'Munay Amaru',
+    medium: 'Manuscrito de campo & acuarelas botánicas',
+    origin: 'Riga & Bosques de Letonia',
+    synergy: 'Seeds · Los Guardianes · I Am a Tree',
+    excerpt: 'Bajo la nieve del Báltico, las raíces de la margarita Pipene y las hifas del hongo Gailene se dan la mano en secreto: lo que a uno le falta, el otro lo entrega en silencio para florecer juntos en primavera.',
+    postUrl: '/trazos/',
+    sizeClass: 'standard' as const,
+  },
+  {
+    id: 'spec-011',
+    title: 'El Amigo de Cuatro Patas',
+    hemisphere: 'derecho' as const,
+    category: 'FOLK ACÚSTICO & PRESENCIA ANIMAL',
+    year: '2026',
+    creator: 'Munay Amaru',
+    medium: 'Guitarra de nylon y armónica en registro cálido',
+    origin: 'El Umbral del Hogar, Perú',
+    synergy: 'Oda a la Digestión · The Heart\'s Medicine',
+    verses: [
+      'No sabe de cuentas, de deudas ni horario,',
+      'su único empleo en este mundo es mirarme llegar,',
+      'y recordarme en silencio que ya estoy a salvo.'
+    ],
+    audioSrc: '/audio/ejemplo-voz.mp3',
+    duration: '02:50',
+    postUrl: '/posts/sonidos-el-amigo-de-cuatro-patas/',
+    sizeClass: 'standard' as const,
+  },
+];
 ---
 
 <Layout activePage="home" locale="es">
-
-  <!-- Pliego Central de Gaceta en 3 Columnas Asimétricas -->
-  <div class="gazette-grid">
-
-    <!-- COLUMNA IZQUIERDA: NOTAS DE CAMPO & TERMINAL -->
-    <aside class="gazette-col">
-      <div class="col-header">
-        <span>NOTAS DE CAMPO</span>
-        <span>01</span>
+  <div class="specimen-archive-field breathe-substrate">
+    
+    <!-- Cabecera de Suelo Vivo & Herbario del Bosque -->
+    <header class="specimen-masthead">
+      <div class="masthead-vital-bar">
+        <span>
+          <span class="vital-pulse-dot" aria-hidden="true"></span>
+          SUELO VIVO &middot; RED MICORRÍZICA &middot; ACÚSTICA EN 432 Hz
+        </span>
+        <span>🌱 RAÍCES & SEMILLAS &middot; 🍃 RAMAS & CANTO DE MEDICINA</span>
+        <span>BOSQUE & PACHAMAMA</span>
       </div>
 
-      <!-- Recorte de Terminal escrito en Termux -->
-      <div class="terminal-clipping">
-        <div class="terminal-header">
-          <span class="terminal-meta-tag">TERMINAL</span>
-          <span>{latestPensamiento?.data.weather?.toUpperCase() || 'MAÑANA DESPEJADA · 17°C'}</span>
-        </div>
-        <div style="font-size: 0.82rem; line-height: 1.6; margin-bottom: 8px;">
-          {PensamientoContent ? <PensamientoContent /> : (
-            <p>{latestPensamiento?.body}</p>
-          )}
-        </div>
-        <div style="font-size: 0.65rem; color: var(--gold); border-top: 1px dashed var(--rule); padding-top: 6px; margin-top: 8px; display: flex; justify-content: space-between;">
-          <span>&gt; {latestPensamiento?.data.device || 'TERMUX / MÓVIL'}</span>
-          <span>{pensamientoDateStr}</span>
-        </div>
-      </div>
+      <h1 class="specimen-main-title">
+        <a href="/">Munay Amaru</a>
+      </h1>
 
-      <!-- Aforismo sin etiqueta de marketing -->
-      <div class="marginal-note">
-        «El silencio nunca está vacío: es un espacio lleno de presencias que solo se hacen audibles cuando dejamos de empujar el tiempo.»
-        <span class="marginal-cite">— Principio del Ayni &middot; Reciprocidad</span>
-      </div>
-
-      <!-- Lámina Analógica / Polaroids -->
-      {latestMirada && (
-        <div style="margin-top: 16px; border-top: 1px solid var(--rule); padding-top: 14px;">
-          <span style="font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: 8px;">
-            LÁMINA ANALÓGICA
-          </span>
-          <img
-            src={latestMirada.data.photo.src}
-            alt={latestMirada.data.photo.alt}
-            style="width: 100%; border: 1px solid var(--rule); padding: 3px; background: var(--bg); filter: grayscale(70%) sepia(20%); display: block; margin-bottom: 6px;"
-          />
-          <p style="font-size: 0.78rem; font-style: italic; color: var(--ink-muted); line-height: 1.4; margin: 0;">
-            {latestMirada.data.footnote}
-            {latestMirada.data.location && (
-              <span style="display: block; font-family: var(--font-mono); font-size: 0.68rem; margin-top: 2px;">
-                &#128205; {latestMirada.data.location}
-              </span>
-            )}
-          </p>
-        </div>
-      )}
-    </aside>
-
-    <!-- COLUMNA CENTRAL: PLIEGO PRINCIPAL / OBRA VISUAL -->
-    <article class="gazette-col">
-      <div class="col-header">
-        <span>PLIEGO PRINCIPAL</span>
-        <span>MAŁOPOLSKA / CRACOVIA</span>
-      </div>
-
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.6vw, 2.5rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-bottom: 6px;">
-        I Am a Tree
-      </h2>
-      <p style="font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--ink-muted); margin-bottom: 14px;">
-        Óleo botánico sobre lino natural & paisaje sonoro en 432 Hz &middot; Eliana Colzani & Munay Amaru
+      <p class="specimen-tagline">
+        Ecosistema vivo de semillas, cantos de medicina en 432 Hz, fábulas del suelo húmedo y cuadernos de campo entrelazados por el micelio de la tierra.
       </p>
 
-      <!-- Grabado Litográfico de Imprenta -->
-      <a href="https://munaysounds.bandcamp.com/album/nacer" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
-        <img
-          src="https://f4.bcbits.com/img/a3993646546_2.jpg"
-          alt="I Am a Tree — Obra botánica sobre lino por Eliana Colzani"
-          class="newspaper-engraving"
-        />
-      </a>
-      <p class="engraving-caption">
-        Fig. 1 — «I Am a Tree» (60 &times; 60 cm). Óleo botánico sobre lino por Eliana Colzani. Resonancia acústica en 432 Hz.
-      </p>
-
-      <!-- Texto de plomo en 2 columnas con capitular -->
-      <div class="newspaper-columns lead-dropcap">
-        <p>
-          La interconectividad subterránea del micelio y la memoria vegetal como arquetipo de arraigo espiritual en el nomadismo. La materia vegetal articula una morfología donde los tonos ocres y verdes dialogan con la cuerda acústica.
-        </p>
-        <p>
-          Una invitación a disolver la prisa individual en la red viva del bosque. No hay pretensión de artificio: solo madera tensada, pigmento vegetal sobre tela de lino y la vibración en 432 Hz grabada en cinta analógica. Quien mira y escucha completa la forma en su propio silencio.
-        </p>
+      <div class="specimen-mycelium-legend">
+        <span>🌿 12 Creaciones Sembradas</span>
+        <span>&middot;</span>
+        <span>Hifas y Savia en la Tierra Viva</span>
+        <span>&middot;</span>
+        <span>Toca cualquier pliego para entrar en 1 clic</span>
       </div>
+    </header>
 
-      <div style="margin-top: 20px; border-top: 1px solid var(--rule); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;">
-        <span style="font-family: var(--font-mono); color: var(--ink-muted); font-size: 0.7rem;">REF: MS-TRA-2024-001</span>
-        <a href="/trazos/" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font-weight: 500;">
-          Abrir cuaderno de trazos &rarr;
-        </a>
-      </div>
-    </article>
+    <!-- Escenario del Sotobosque & Red de Micelio en la Tierra -->
+    <div class="brain-constellation-stage" id="brain-stage">
+      <!-- Red SVG: Hifas Micorrízicas, Raíces y Esporas Microscópicas -->
+      <MyceliumNetwork />
 
-    <!-- COLUMNA DERECHA: REGISTRO SONORO & SKILLS -->
-    <aside class="gazette-col">
-      <div class="col-header">
-        <span>CINTAS SONORAS</span>
-        <span>432 Hz</span>
-      </div>
-
-      <!-- Reproductor compacto de audio -->
-      <div class="gazette-audio-box">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-          <span style="font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase;">
-            CINTA DIRECTA
-          </span>
-          <span class="freq-badge">432 Hz</span>
-        </div>
-        <h3 class="gazette-audio-title">Piedras al Mar</h3>
-        <p class="gazette-audio-subtitle">Guitarras orgánicas y resonancia &middot; 03:10 min</p>
-        <audio controls preload="none" style="width: 100%; height: 38px;">
-          <source src="/audio/ejemplo-voz.mp3" type="audio/mpeg" />
-        </audio>
-      </div>
-
-      <!-- Lista de sonidos recientes -->
-      <div style="margin-bottom: 20px;">
-        <span style="font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: 10px; border-bottom: 1px solid var(--rule); padding-bottom: 4px;">
-          GRABACIONES RECIENTES
-        </span>
-        <ul style="list-style: none; font-size: 0.86rem; line-height: 1.8;">
-          {ultimosSonidos.map(s => (
-            <li style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--rule); padding: 4px 0;">
-              <a href={`/posts/sonidos-${s.id.replace(/\.md$/, '')}/`} style="color: var(--ink); text-decoration: none;">
-                {s.data.title}
-              </a>
-              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted);">
-                {s.data.audio.duration || '432Hz'}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <a href="/sonidos/" style="display: inline-block; font-size: 0.76rem; color: var(--ink-muted); text-decoration: underline; margin-top: 8px;">
-          Escuchar todas las cintas &rarr;
-        </a>
-      </div>
-
-      <!-- Pausa Samay sutil al pie de columna -->
-      <div style="border-top: 1px solid var(--rule); padding-top: 14px; text-align: center; margin-top: auto;">
-        <span style="font-family: var(--font-label); font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 4px;">
-          PAUSA RESPIRATORIA
-        </span>
-        <div class="samay-circle" style="width: 50px; height: 50px; margin: 6px auto;">
-          <span style="font-family: var(--font-label); font-size: 0.48rem; letter-spacing: 0.08em; color: var(--gold);">SAMAY</span>
-        </div>
-        <p style="font-size: 0.72rem; font-style: italic; color: var(--ink-muted); margin: 0;">
-          4s inhala &middot; 4s retén &middot; 6s exhala &middot; 2s pausa
-        </p>
-      </div>
-    </aside>
+      <!-- Pliegos Botánicos con el Arte Directo al Inicio (Acceso en 1 Clic) -->
+      <section class="specimen-constellation" id="specimen-constellation">
+        {specimens.map((item) => (
+          <SpecimenCard {...item} />
+        ))}
+      </section>
+    </div>
 
   </div>
-
-  <!-- BANDA INFERIOR: DESPACHOS DE VIAJE Y PAPELES SUELTOS -->
-  <div class="dispatch-strip">
-    {ultimosViajes.map(viaje => (
-      <a href={`/posts/viajes-${viaje.id.replace(/\.md$/, '')}/`} class="dispatch-card">
-        <span class="dispatch-meta">
-          &#128205; {viaje.data.location.country?.toUpperCase() || 'DESPACHO'} &middot; {viaje.data.date.getFullYear()}
-        </span>
-        <h3 class="dispatch-title">{viaje.data.title}</h3>
-        <p class="dispatch-snippet">
-          {viaje.data.location.name}. Bitácora de ruta, niebla y memoria.
-        </p>
-      </a>
-    ))}
-
-    {ultimosPoemas.map(poema => (
-      <a href={`/posts/poemas-${poema.id.replace(/\.md$/, '')}/`} class="dispatch-card">
-        <span class="dispatch-meta">
-          &#9997; PALABRAS &middot; {poema.data.date.getFullYear()}
-        </span>
-        <h3 class="dispatch-title">{poema.data.title}</h3>
-        <p class="dispatch-snippet" style="font-style: italic;">
-          {poema.data.dedication ? `«${poema.data.dedication}»` : 'Lectura de papel suelto.'}
-        </p>
-      </a>
-    ))}
-  </div>
-
 </Layout>
