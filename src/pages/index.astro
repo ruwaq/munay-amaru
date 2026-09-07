@@ -1,268 +1,152 @@
 ---
 import Layout from '../components/Layout.astro';
-import SpecimenCard from '../components/SpecimenCard.astro';
-import ObservationChamber from '../components/ObservationChamber.astro';
-import MyceliumNetwork from '../components/MyceliumNetwork.astro';
 
-// Constelación de las 12 Obras en el Suelo del Bosque (Pliegos Botánicos en 1 Clic)
-const specimens = [
-  // — EL FUEGO CENTRAL (Ayni & Tótem Fundacional) —
+// Las 12 creaciones de Munay Amaru — datos preservados, diseño nuevo a construir
+const creaciones = [
   {
     id: 'spec-001',
     title: 'Munay (Corazón Radiante)',
-    hemisphere: 'centro' as const,
-    category: 'TÓTEM FUNDACIONAL · AYNI',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Pigmentos minerales sobre papel vegetal texturado',
-    origin: 'Cuaderno de Taller & Viaje',
-    synergy: 'I Am a Tree · Los Guardianes · The Heart\'s Medicine · Pachamamita',
-    quote: 'El amor no es pasividad ni resignación: es fuego creador, presencia incondicional y la voluntad sagrada de estar despiertos.',
-    concept: 'Silueta iluminada con corazón ardiente en el pecho y sol radiante. La voluntad afectiva que no evade el dolor del mundo, sino que lo abraza con discernimiento lúcido.',
-    postUrl: '/trazos/',
-    sizeClass: 'hero' as const,
+    categoria: 'Tótem Fundacional · Ayni',
+    año: '2026',
+    fragmento: 'El amor no es pasividad ni resignación: es fuego creador, presencia incondicional y la voluntad sagrada de estar despiertos.',
+    url: '/trazos/',
+    tipo: 'visual',
   },
-
-  // — ESTRATO DE RAÍCES & SEMILLAS: PALABRA, PSIQUE, TIERRA & NARRATIVA —
   {
     id: 'spec-004',
     title: 'Illari y el Observatorio del Alma',
-    hemisphere: 'izquierdo' as const,
-    category: 'FICCIÓN FILOSÓFICA · NOVELA',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Psicología profunda, arquetipos & narrativa',
-    origin: 'Metrópoli & Desierto Psíquico',
-    synergy: 'Il Canto Senza Paura · Los Guardianes · Manifiesto',
-    excerpt: 'En la geometría estéril de la prisa urbana olvidamos mirar el cielo. Illari colapsa frente a los ventanales pulcros y desciende al desierto de su psique para rescatar las aguas subterráneas y reconstruir la torre telescópica hacia el interior del ser.',
-    postUrl: '/posts/cuentos-illari-observatorio-del-alma/',
-    sizeClass: 'hero' as const,
+    categoria: 'Ficción Filosófica · Novela',
+    año: '2026',
+    fragmento: 'En la geometría estéril de la prisa urbana olvidamos mirar el cielo. Illari colapsa frente a los ventanales pulcros y desciende al desierto de su psique.',
+    url: '/posts/cuentos-illari-observatorio-del-alma/',
+    tipo: 'cuento',
   },
   {
     id: 'spec-003',
     title: 'Los Guardianes',
-    hemisphere: 'izquierdo' as const,
-    category: 'FÁBULA ECOLÓGICA DE MICELIO',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Narrativa de realismo mágico & ecología profunda',
-    origin: 'Bosques de Abeto & Suelo Húmedo',
-    synergy: 'Seeds · The Magic Threads · I Am a Tree',
-    excerpt: 'Aunque corten el tronco más viejo, la tierra no olvida. Bajo cuatrocientos inviernos de nieve y silencio, las hifas invisibles del micelio subterráneo transfieren calor y savia al brote nuevo, custodiado en secreto por un pájaro de alas grises.',
-    postUrl: '/posts/cuentos-los-guardianes/',
-    sizeClass: 'standard' as const,
+    categoria: 'Fábula Ecológica de Micelio',
+    año: '2026',
+    fragmento: 'Aunque corten el tronco más viejo, la tierra no olvida. Bajo cuatrocientos inviernos de nieve y silencio, las hifas invisibles del micelio transfieren calor al brote nuevo.',
+    url: '/posts/cuentos-los-guardianes/',
+    tipo: 'cuento',
   },
   {
     id: 'spec-007',
     title: 'Seeds',
-    hemisphere: 'izquierdo' as const,
-    category: 'POEMA EXISTENCIAL · RIGA',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Poema en lengua inglesa & cuaderno de campo',
-    origin: 'Riga, Letonia & Bosques de Małopolska',
-    synergy: 'The Magic Threads · Los Guardianes · I Am a Tree',
-    verses: [
-      'We worship what the eye can calculate.',
-      'Yet the whole miracle begins in blindness.',
-      'A seed is not asleep; it is submitting to the crushing dark.',
-      'The soil is not your tomb; it is your womb. Let the husk break.'
-    ],
-    postUrl: '/posts/poemas-seeds/',
-    sizeClass: 'standard' as const,
+    categoria: 'Poema Existencial · Riga',
+    año: '2026',
+    fragmento: 'We worship what the eye can calculate. Yet the whole miracle begins in blindness. A seed is not asleep; it is submitting to the crushing dark.',
+    url: '/posts/poemas-seeds/',
+    tipo: 'poema',
   },
   {
     id: 'spec-010',
     title: 'Oda a la Digestión & El Descuido',
-    hemisphere: 'izquierdo' as const,
-    category: 'SÁTIRA & CRÓNICA URBANA',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Poesía cósmico-cómica en dos tiempos',
-    origin: 'Tubo Digestivo & Acera Urbana',
-    synergy: 'Illari · El Amigo de Cuatro Patas · Manifiesto',
-    verses: [
-      'Podrás levitar en tus tratados de metafísica,',
-      'pero si tu estómago no procesa el pan de ayer,',
-      'tu iluminación es solo aire atrapado.',
-      'Dobla las rodillas y agradece el fuego visceral.'
-    ],
-    postUrl: '/posts/poemas-oda-a-la-digestion/',
-    sizeClass: 'standard' as const,
+    categoria: 'Sátira & Crónica Urbana',
+    año: '2026',
+    fragmento: 'Podrás levitar en tus tratados de metafísica, pero si tu estómago no procesa el pan de ayer, tu iluminación es solo aire atrapado.',
+    url: '/posts/poemas-oda-a-la-digestion/',
+    tipo: 'poema',
   },
   {
     id: 'spec-012',
     title: 'Manifiesto de los 4 Principios',
-    hemisphere: 'izquierdo' as const,
-    category: 'FUNDAMENTOS ÉTICOS & FILOSOFÍA',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Texto fundacional & bitácora de taller',
-    origin: 'Archivo General de Munay',
-    synergy: 'Munay · Illari · Toda la red de sinapsis',
-    verses: [
-      'I. Rechazo implacable al escapismo espiritual (Bypassing).',
-      'II. Integración y abrazo somático de la propia sombra.',
-      'III. La biología como poética sagrada de hermandad.',
-      'IV. El humor como brújula y ancla indispensable de la verdad.'
-    ],
-    postUrl: '/posts/pensamientos-manifiesto-filosofico/',
-    sizeClass: 'hero' as const,
+    categoria: 'Fundamentos Éticos & Filosofía',
+    año: '2026',
+    fragmento: 'I. Rechazo al escapismo espiritual. II. Integración de la sombra. III. La biología como poética sagrada. IV. El humor como brújula de la verdad.',
+    url: '/posts/pensamientos-manifiesto-filosofico/',
+    tipo: 'pensamiento',
   },
-
-  // — ESTRATO DE RAMAS & FRUTOS SONOROS: CANTO DE MEDICINA, CHARANGO & 432 Hz —
   {
     id: 'spec-002',
     title: 'I Am a Tree',
-    hemisphere: 'derecho' as const,
-    category: 'ÓLEO BOTÁNICO & 432 Hz',
-    year: '2024',
-    creator: 'Eliana Colzani & Munay Amaru',
-    medium: 'Óleo botánico sobre lino natural & paisaje sonoro',
-    origin: 'Małopolska & Kazimierz, Cracovia (Polonia)',
-    synergy: 'Il Canto Senza Paura · Pipene & Gailene · Munay',
-    quote: 'I am a tree, drinking deep from the silent streams... my roots are old, older than my grief, holding the memory of a thousand rains.',
-    audioSrc: '/audio/ejemplo-voz.mp3',
-    duration: '03:10',
-    postUrl: '/posts/sonidos-i-am-a-tree/',
-    sizeClass: 'standard' as const,
+    categoria: 'Óleo Botánico & 432 Hz',
+    año: '2024',
+    fragmento: 'I am a tree, drinking deep from the silent streams... my roots are old, older than my grief, holding the memory of a thousand rains.',
+    url: '/posts/sonidos-i-am-a-tree/',
+    tipo: 'sonido',
+    audio: '/audio/ejemplo-voz.mp3',
   },
   {
     id: 'spec-005',
     title: 'Il Canto Senza Paura',
-    hemisphere: 'derecho' as const,
-    category: 'CANTO DE MEDICINA · AFINACIÓN DROP D',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Voz ceremonial, afinación Drop D & tambor de pulso',
-    origin: 'Apeninos de Abruzzo, Italia',
-    synergy: 'The Heart\'s Medicine · Pachamamita · Illari',
-    verses: [
-      'Non c\'è buio che possa spegnere il passo.',
-      'La mente si accende quando il cuore smette di tremare,',
-      'e il respiro torna al suo centro ancestrale.'
-    ],
-    audioSrc: '/audio/ejemplo-voz.mp3',
-    duration: '04:15',
-    postUrl: '/posts/sonidos-il-canto-senza-paura/',
-    sizeClass: 'standard' as const,
+    categoria: 'Canto de Medicina · Afinación Drop D',
+    año: '2026',
+    fragmento: 'Non c\'è buio che possa spegnere il passo. La mente si accende quando il cuore smette di tremare.',
+    url: '/posts/sonidos-il-canto-senza-paura/',
+    tipo: 'sonido',
+    audio: '/audio/ejemplo-voz.mp3',
   },
   {
     id: 'spec-006',
     title: 'The Heart\'s Medicine',
-    hemisphere: 'derecho' as const,
-    category: 'CANTO INTROSPECTIVO · GRATITUD CELULAR',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Guitarras acústicas en afinación abierta & pulso cardíaco',
-    origin: 'Santuario de Calma, Perú',
-    synergy: 'Pachamamita · El Amigo de Cuatro Patas · Munay',
-    quote: 'The heart does not ask for permission to beat; it forgives every wound simply by pumping the next drop of life into your veins.',
-    audioSrc: '/audio/ejemplo-voz.mp3',
-    duration: '03:45',
-    postUrl: '/posts/sonidos-the-hearts-medicine/',
-    sizeClass: 'standard' as const,
+    categoria: 'Canto Introspectivo · Gratitud Celular',
+    año: '2026',
+    fragmento: 'The heart does not ask for permission to beat; it forgives every wound simply by pumping the next drop of life into your veins.',
+    url: '/posts/sonidos-the-hearts-medicine/',
+    tipo: 'sonido',
+    audio: '/audio/ejemplo-voz.mp3',
   },
   {
     id: 'spec-008',
     title: 'Pachamamita',
-    hemisphere: 'derecho' as const,
-    category: 'DEVOCIONAL ANDINO · CHARANGO & RONROCO',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Charango y Ronroco en Huayno lento (Mi / Si / Sol / Re / La)',
-    origin: 'Valle Sagrado & Cordillera Andina (2.800 m)',
-    synergy: 'The Magic Threads · The Heart\'s Medicine · Munay',
-    verses: [
-      'Agüita clara que bajas cantando del barranco,',
-      'llévate las penas del caminante,',
-      'déjanos la costumbre sagrada de dar las gracias.'
-    ],
-    audioSrc: '/audio/ejemplo-voz.mp3',
-    duration: '04:20',
-    postUrl: '/posts/sonidos-pachamamita/',
-    sizeClass: 'standard' as const,
+    categoria: 'Devocional Andino · Charango & Ronroco',
+    año: '2026',
+    fragmento: 'Agüita clara que bajas cantando del barranco, llévate las penas del caminante, déjanos la costumbre sagrada de dar las gracias.',
+    url: '/posts/sonidos-pachamamita/',
+    tipo: 'sonido',
+    audio: '/audio/ejemplo-voz.mp3',
   },
   {
     id: 'spec-009',
     title: 'The Magic Threads (Pipene & Gailene)',
-    hemisphere: 'derecho' as const,
-    category: 'FÁBULA BOTÁNICA DE MICORRIZAS',
-    year: '2016 / 2026',
-    creator: 'Munay Amaru',
-    medium: 'Manuscrito de campo & acuarelas botánicas',
-    origin: 'Riga & Bosques de Letonia',
-    synergy: 'Seeds · Los Guardianes · I Am a Tree',
-    excerpt: 'Bajo la nieve del Báltico, las raíces de la margarita Pipene y las hifas del hongo Gailene se dan la mano en secreto: lo que a uno le falta, el otro lo entrega en silencio para florecer juntos en primavera.',
-    postUrl: '/trazos/',
-    sizeClass: 'standard' as const,
+    categoria: 'Fábula Botánica de Micorrizas',
+    año: '2016 / 2026',
+    fragmento: 'Bajo la nieve del Báltico, las raíces de Pipene y las hifas de Gailene se dan la mano en secreto para florecer juntos en primavera.',
+    url: '/trazos/',
+    tipo: 'cuento',
   },
   {
     id: 'spec-011',
     title: 'El Amigo de Cuatro Patas',
-    hemisphere: 'derecho' as const,
-    category: 'FOLK ACÚSTICO & PRESENCIA ANIMAL',
-    year: '2026',
-    creator: 'Munay Amaru',
-    medium: 'Guitarra de nylon y armónica en registro cálido',
-    origin: 'El Umbral del Hogar, Perú',
-    synergy: 'Oda a la Digestión · The Heart\'s Medicine',
-    verses: [
-      'No sabe de cuentas, de deudas ni horario,',
-      'su único empleo en este mundo es mirarme llegar,',
-      'y recordarme en silencio que ya estoy a salvo.'
-    ],
-    audioSrc: '/audio/ejemplo-voz.mp3',
-    duration: '02:50',
-    postUrl: '/posts/sonidos-el-amigo-de-cuatro-patas/',
-    sizeClass: 'standard' as const,
+    categoria: 'Folk Acústico & Presencia Animal',
+    año: '2026',
+    fragmento: 'No sabe de cuentas, de deudas ni horario, su único empleo en este mundo es mirarme llegar, y recordarme en silencio que ya estoy a salvo.',
+    url: '/posts/sonidos-el-amigo-de-cuatro-patas/',
+    tipo: 'sonido',
+    audio: '/audio/ejemplo-voz.mp3',
   },
 ];
 ---
 
 <Layout activePage="home" locale="es">
-  <div class="specimen-archive-field breathe-substrate">
-    
-    <!-- Cabecera de Suelo Vivo & Herbario del Bosque -->
-    <header class="specimen-masthead">
-      <div class="masthead-vital-bar">
-        <span>
-          <span class="vital-pulse-dot" aria-hidden="true"></span>
-          SUELO VIVO &middot; RED MICORRÍZICA &middot; ACÚSTICA EN 432 Hz
-        </span>
-        <span>🌱 RAÍCES & SEMILLAS &middot; 🍃 RAMAS & CANTO DE MEDICINA</span>
-        <span>BOSQUE & PACHAMAMA</span>
-      </div>
-
-      <h1 class="specimen-main-title">
-        <a href="/">Munay Amaru</a>
-      </h1>
-
-      <p class="specimen-tagline">
-        Ecosistema vivo de semillas, cantos de medicina en 432 Hz, fábulas del suelo húmedo y cuadernos de campo entrelazados por el micelio de la tierra.
-      </p>
-
-      <div class="specimen-mycelium-legend">
-        <span>🌿 12 Creaciones Sembradas</span>
-        <span>&middot;</span>
-        <span>Hifas y Savia en la Tierra Viva</span>
-        <span>&middot;</span>
-        <span>Toca cualquier pliego para entrar en 1 clic</span>
-      </div>
-    </header>
-
-    <!-- Escenario del Sotobosque & Red de Micelio en la Tierra -->
-    <div class="brain-constellation-stage" id="brain-stage">
-      <!-- Red SVG: Hifas Micorrízicas, Raíces y Esporas Microscópicas -->
-      <MyceliumNetwork />
-
-      <!-- Pliegos Botánicos con el Arte Directo al Inicio (Acceso en 1 Clic) -->
-      <section class="specimen-constellation" id="specimen-constellation">
-        {specimens.map((item) => (
-          <SpecimenCard {...item} />
-        ))}
-      </section>
-    </div>
-
+  <!-- PÁGINA TEMPORAL: placeholder limpio mientras se construye el diseño nuevo -->
+  <div style="
+    min-height: 100vh;
+    background: #0c1210;
+    color: #dce5df;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  ">
+    <h1 style="font-size: clamp(2rem, 8vw, 5rem); letter-spacing: 0.2em; margin-bottom: 1rem;">
+      Munay Amaru
+    </h1>
+    <p style="opacity: 0.5; font-style: italic; margin-bottom: 3rem;">
+      El bosque está creciendo · Diseño en construcción
+    </p>
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; max-width: 600px; width: 100%;">
+      {creaciones.map((c) => (
+        <li>
+          <a href={c.url} style="color: #c4a35a; text-decoration: none;">
+            {c.title} — <span style="opacity: 0.6; font-size: 0.85em;">{c.categoria}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 </Layout>

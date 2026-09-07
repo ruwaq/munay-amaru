@@ -1,187 +1,100 @@
 ---
 import Layout from '../../components/Layout.astro';
-import SpecimenCard from '../../components/SpecimenCard.astro';
-import ObservationChamber from '../../components/ObservationChamber.astro';
 import { SOCIAL_LINKS } from '../../utils/i18n';
 
-const exhibits = [
+// 8 obras de trazos — datos preservados, diseño nuevo a construir
+const obras = [
   {
-    id: 'spec-trazos-001',
-    invCode: 'MS-TRA-2026-000 · NÚCLEO PLÁSTICO',
     title: 'Munay (Corazón Radiante)',
-    category: 'PASTEL & VOLUNTAD',
-    creator: 'Munay Amaru',
-    year: '2026',
-    medium: 'Pigmentos minerales sobre papel vegetal texturado',
-    dims: 'Pliego fundacional · Concepto original',
-    origin: 'Cuaderno de Taller & Viaje',
-    synergy: 'Conecta con: I Am a Tree · Los Guardianes · The Heart\'s Medicine',
-    quote: 'El amor no es pasividad ni resignación: es fuego creador, presencia incondicional y la voluntad sagrada de estar despiertos.',
-    concept: 'Silueta femenina iluminada en tonos azules y ocres con un corazón ardiente en el pecho, rodeada de flores silvestres amarillas y un gran sol radiante. La palabra MUNAY trazada con vigor mineral en la base sella el principio de la voluntad afectiva.',
-    postUrl: '/trazos/',
+    categoria: 'Pastel & Voluntad · 2026',
+    fragmento: 'Silueta iluminada con corazón ardiente. La voluntad afectiva que no evade el dolor del mundo.',
+    url: '/trazos/',
   },
   {
-    id: 'spec-trazos-002',
-    invCode: 'MS-TRA-2024-001 · PLIEGO BOTÁNICO',
     title: 'I Am a Tree',
-    category: 'ÓLEO BOTÁNICO & 432 Hz',
-    creator: 'Eliana Colzani & Munay Amaru',
-    year: '2024',
-    medium: 'Óleo botánico sobre lino natural & paisaje sonoro en 432 Hz',
-    dims: '60 × 60 cm (Lienzo) · 03:10 min',
-    origin: 'Małopolska y Kazimierz, Cracovia (Polonia)',
-    synergy: 'Conecta con: Los Guardianes · Seeds · Munay',
-    quote: 'I am a tree, drinking deep from the silent streams... my roots are old, holding the memory of a thousand rains.',
-    concept: '«I Am a Tree» explora la interconectividad subterránea del micelio y la memoria vegetal como arquetipo de arraigo espiritual en el nomadismo. La obra pictórica de Eliana Colzani articula una morfología arbórea donde los tonos ocres y verdes dialogan con la composición acústica.',
-    imageSrc: 'https://f4.bcbits.com/img/a3993646546_2.jpg',
-    audioSrc: '/audio/ejemplo-voz.mp3',
-    duration: '03:10',
-    postUrl: '/posts/sonidos-i-am-a-tree/',
+    categoria: 'Óleo Botánico & 432 Hz · 2024',
+    fragmento: 'Eliana Colzani & Munay Amaru. Małopolska y Kazimierz, Cracovia.',
+    url: '/posts/sonidos-i-am-a-tree/',
+    imagen: 'https://f4.bcbits.com/img/a3993646546_2.jpg',
   },
   {
-    id: 'spec-trazos-003',
-    invCode: 'MS-TRA-2016-008 · TINTA BÁLTICA',
     title: 'Retrato de Riga (01/09/2016)',
-    category: 'TINTA CHINA & LIBRETA',
-    creator: 'Agne Taur',
-    year: '2016',
-    medium: 'Tinta china y carboncillo sobre papel de libreta',
-    dims: '21 × 15 cm · Dibujo original fechado',
-    origin: 'Riga, Letonia',
-    synergy: 'Conecta con: The Magic Threads · Noche Oscura en Letonia',
-    quote: 'El trazo a tinta sobre el papel de libreta detiene el viento del Báltico. En el silencio de Riga, el alma aprende a no huir de su propia quietud.',
-    concept: 'Retrato íntimo a tinta de trazo ondulado y denso, capturando la introspección y la serenidad de los días nómadas por el Báltico. Firmado y fechado a mano por Agne Taur en el otoño letón.',
-    postUrl: '/trazos/',
+    categoria: 'Tinta China & Libreta · 2016',
+    fragmento: 'Agne Taur. El trazo a tinta sobre el papel de libreta detiene el viento del Báltico.',
+    url: '/trazos/',
   },
   {
-    id: 'spec-trazos-004',
-    invCode: 'MS-TRA-2016-009 · ACUARELA & MICELIO',
     title: 'The Magic Threads (Pipene & Gailene)',
-    category: 'FÁBULA BOTÁNICA',
-    creator: 'Munay Amaru',
-    year: '2016',
-    medium: 'Acuarelas botánicas y caligrafía en libreta de anillas',
-    dims: 'Cuaderno de campo ilustrado · 4 pliegos',
-    origin: 'Bosques de Riga & Gauja, Letonia',
-    synergy: 'Conecta con: Los Guardianes · Seeds · Tejedora Cósmica',
-    quote: 'Bajo la nieve del Báltico, las raíces de la margarita y las hifas del hongo se dan la mano en silencio: lo que uno carece, el otro lo entrega.',
-    concept: 'Fábula botánica ilustrada que relata cómo las hifas invisibles del hongo Gailene (rebozuelo) abrazan bajo la tierra helada las raíces de la flor Pipene (margarita), transfiriéndole calor y sales minerales en la noche oscura.',
-    postUrl: '/trazos/',
+    categoria: 'Fábula Botánica · 2016',
+    fragmento: 'Bajo la nieve del Báltico, las raíces de Pipene y las hifas de Gailene se dan la mano en silencio.',
+    url: '/trazos/',
   },
   {
-    id: 'spec-trazos-005',
-    invCode: 'MS-TRA-2024-002 · TINTAS ORGÁNICAS',
     title: 'Hula Hop',
-    category: 'ACRÍLICO & TINTAS ZEN',
-    creator: 'Eliana Colzani & Munay Amaru',
-    year: '2024',
-    medium: 'Acrílico y tintas orgánicas sobre papel de algodón 300g & pieza acústica',
-    dims: '45 × 45 cm (Papel montado) · 03:12 min',
-    origin: 'Diálogo transcontinental Lima – Europa',
-    synergy: 'Conecta con: Oda a la Digestión · Humor Zen',
-    quote: 'El juego, la circularidad y la liviandad son las formas más altas de conciencia zen: girar sin aferrarse al eje.',
-    concept: 'Frente a la gravedad del viaje existencial, «Hula Hop» reivindica el juego, la circularidad y la liviandad como prácticas de conciencia zen. La pieza de Colzani captura la energía cinética y el pulso orbital del aro.',
-    imageSrc: 'https://f4.bcbits.com/img/a2669624191_2.jpg',
-    duration: '03:12',
-    postUrl: '/posts/sonidos-hula-hop/',
+    categoria: 'Acrílico & Tintas Zen · 2024',
+    fragmento: 'Eliana Colzani & Munay Amaru. El juego y la circularidad como prácticas de conciencia zen.',
+    url: '/posts/sonidos-hula-hop/',
+    imagen: 'https://f4.bcbits.com/img/a2669624191_2.jpg',
   },
   {
-    id: 'spec-trazos-006',
-    invCode: 'MS-GRA-2016-003 · CALCOGRAFÍA & CINTA',
     title: 'Proyecto Tu Silencio!',
-    category: 'CALCOGRAFÍA & MONOTIPIA',
-    creator: 'Jimena Vílchez, Omar Franco & Munay Amaru',
-    year: '2016 / 2021',
-    medium: 'Calcografía, monotipia y transferencia textil & tríptico sonoro',
-    dims: '70 × 50 cm (Obra gráfica) · 12:48 min',
-    origin: 'Taller Sonoro & Gráfico, Lima, Perú',
-    synergy: 'Conecta con: Manifiesto de los 4 Principios · Pausa Samay',
-    quote: 'El blanco del papel no es vacío, es el territorio donde el silencio cobra cuerpo y la mirada descansa.',
-    concept: 'Investigación estética fundamental sobre el valor de la pausa y el vacío fértil. La obra de Jimena Vílchez trabaja el soporte como un territorio de texturas ausentes donde los blancos encarnan el silencio visual.',
-    imageSrc: 'https://f4.bcbits.com/img/0036122981_23.jpg',
-    duration: '12:48',
-    postUrl: '/posts/sonidos-proyecto-tu-silencio/',
+    categoria: 'Calcografía & Monotipia · 2016/2021',
+    fragmento: 'Jimena Vílchez, Omar Franco & Munay Amaru. El blanco del papel no es vacío.',
+    url: '/posts/sonidos-proyecto-tu-silencio/',
+    imagen: 'https://f4.bcbits.com/img/0036122981_23.jpg',
   },
   {
-    id: 'spec-trazos-007',
-    invCode: 'MS-SUM-2016-004 · SUMI-E & SERIGRAFÍA',
     title: 'Dioses EP',
-    category: 'SUMI-E RITUAL',
-    creator: 'Gastón Puray, Omar Franco & Munay Amaru',
-    year: '2016',
-    medium: 'Tinta china ritual sumi-e en alto contraste & síntesis analógica andina',
-    dims: '50 × 50 cm (Lámina montada) · 09:40 min',
-    origin: 'Valle Sagrado de los Incas, Cusco & Lima, Perú',
-    synergy: 'Conecta con: Pachamamita · Allinllachu',
-    quote: 'Ofrenda mineral y sumi-e a las fuerzas invisibles de la cordillera: cuando el trazo calla, la montaña habla.',
-    concept: 'Ofrenda sonora y plástica a los Apus tutelares y a las fuerzas invisibles del paisaje andino. La iconografía de Gastón Puray conjura el misticismo precolombino a través de gestos gráficos rotundos.',
-    imageSrc: 'https://f4.bcbits.com/img/a1715722282_2.jpg',
-    duration: '09:40',
-    postUrl: '/posts/sonidos-dioses/',
+    categoria: 'Sumi-e Ritual · 2016',
+    fragmento: 'Gastón Puray, Omar Franco & Munay Amaru. Ofrenda mineral a las fuerzas invisibles de la cordillera.',
+    url: '/posts/sonidos-dioses/',
+    imagen: 'https://f4.bcbits.com/img/a1715722282_2.jpg',
   },
   {
-    id: 'spec-trazos-008',
-    invCode: 'MS-TRA-2016-010 · COLLAGE DE LIBRETA',
     title: 'Collage de Raíces & Valores',
-    category: 'COLLAGE DE RUTA',
-    creator: 'Munay Amaru',
-    year: '2016',
-    medium: 'Papel rasgado, caligrafía a tinta y recortes de cuaderno',
-    dims: 'Doble página de libreta de ruta',
-    origin: 'Cuaderno Nómada',
-    synergy: 'Conecta con: Manifiesto de los 4 Principios · Seeds',
-    quote: 'Roots, Love for the World, Spirituality, Journey, Creativity, Humble, Bravery, Simplicity. Los pilares no se declaman: se viven en cada trazo.',
-    concept: 'Manifiesto gráfico íntimo compuesto con recortes y caligrafía de campo: Roots, Love for the World, Spirituality, Journey, Creativity, Humble, Bravery, Simplicity. Los cimientos vitales de toda la obra.',
-    postUrl: '/trazos/',
-  }
+    categoria: 'Collage de Ruta · 2016',
+    fragmento: 'Roots, Love for the World, Spirituality, Journey, Creativity, Humble, Bravery, Simplicity.',
+    url: '/trazos/',
+  },
 ];
 ---
 
-<Layout activePage="trazos" title="Muestras de Arte & Láminas" locale="es">
-  <div class="specimen-archive-field breathe-substrate">
-    
-    <header class="specimen-masthead">
-      <div class="masthead-vital-bar">
-        <span>🌱 ESTRATOS DE LA TIERRA &middot; PIGMENTOS MINERALES</span>
-        <span>ÓLEOS BOTÁNICOS &middot; TINTAS DE RUTA</span>
-        <span>ACÚSTICA EN 432 Hz</span>
-      </div>
-
-      <h1 class="specimen-main-title">
-        Trazos &amp; Materia
-      </h1>
-
-      <p class="specimen-tagline">
-        Paredes de tierra, pigmentos minerales, óleos botánicos sobre lino y cuadernos de viaje en diálogo íntimo con Eliana Colzani, Jimena Vílchez, Agne Taur y Gastón Puray.
-      </p>
-
-      <div class="specimen-mycelium-legend">
-        <span>🌿 8 Creaciones de la Tierra</span>
-        <span>&middot;</span>
-        <span>Greda, Arcilla y Tinta</span>
-        <span>&middot;</span>
-        <span>Toca cualquier muro para abrir en 1 clic</span>
-      </div>
-    </header>
-
-    <!-- Galería de Obras / Especímenes Plásticos -->
-    <section class="specimen-constellation">
-      {exhibits.map((item) => (
-        <SpecimenCard {...item} />
+<Layout activePage="trazos" title="Trazos & Materia" locale="es">
+  <!-- PÁGINA TEMPORAL: placeholder mientras se construye el diseño nuevo del bosque -->
+  <div style="
+    min-height: 100vh;
+    background: #0c1210;
+    color: #dce5df;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    padding: 4rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  ">
+    <a href="/" style="color: #c4a35a; font-size: 0.85rem; letter-spacing: 0.1em;">← Volver</a>
+    <h1 style="font-size: clamp(2rem, 6vw, 3.5rem); margin: 2rem 0 0.5rem; letter-spacing: 0.1em;">
+      Trazos & Materia
+    </h1>
+    <p style="opacity: 0.5; font-style: italic; margin-bottom: 3rem;">
+      Óleos, tintas, pasteles & cuadernos de campo
+    </p>
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 2rem;">
+      {obras.map((obra) => (
+        <li style="border-bottom: 1px solid #243028; padding-bottom: 1.5rem;">
+          <a href={obra.url} style="color: #dce5df; text-decoration: none;">
+            <div style="font-size: 0.75rem; letter-spacing: 0.15em; color: #c4a35a; margin-bottom: 0.3rem;">
+              {obra.categoria}
+            </div>
+            <div style="font-size: 1.4rem; margin-bottom: 0.4rem;">{obra.title}</div>
+            <div style="font-size: 0.9rem; opacity: 0.6; font-style: italic;">{obra.fragmento}</div>
+          </a>
+        </li>
       ))}
-    </section>
+    </ul>
 
-    <!-- Nota de circulación libre / Ayni -->
-    <section class="marginal-note" style="margin: 48px auto 20px; max-width: 60ch; text-align: center; border-left: none; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 24px 16px;">
-      <p style="margin-bottom: 12px; font-style: italic;">
-        «Las cosas hechas con las manos y el tiempo buscan circular libremente. Quien las mira completa la intención.»
-      </p>
-      <div style="display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; font-size: 0.82rem; font-style: normal;">
-        <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline;">Bandcamp &rarr;</a>
-        <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline;">SoundCloud &rarr;</a>
-        <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline;">Audius &rarr;</a>
-      </div>
-    </section>
-
+    <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #243028; display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.8rem;">
+      <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="color: #c4a35a;">Bandcamp →</a>
+      <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="color: #c4a35a;">SoundCloud →</a>
+      <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" style="color: #c4a35a;">Audius →</a>
+    </div>
   </div>
 </Layout>
