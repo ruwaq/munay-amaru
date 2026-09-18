@@ -13,112 +13,127 @@ allPensamientos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout activePage="words" title="Palabras & Papeles Sueltos" locale="es">
+  <div class="page-container">
+    <a href="/" class="back-link">&larr; Volver al inicio</a>
 
-  <!-- Cabecera de Papeles Sueltos -->
-  <div style="margin-bottom: 36px; border-bottom: 1px solid var(--rule); padding-bottom: 18px;">
-    <span class="inv-code" style="margin-bottom: 6px;">PAPELES SUELTOS &middot; VERSOS, RELATOS &amp; APUNTES</span>
-    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-top: 4px; max-width: 22ch;">
-      Palabras &amp; Papeles
-    </h1>
-    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px; line-height: 1.65;">
-      Versos, relatos breves y fragmentos de libreta escritos sobre la marcha.
-    </p>
-    <div style="margin-top: 18px; display: flex; gap: 16px; flex-wrap: wrap; font-family: var(--font-label); font-size: 0.65rem; letter-spacing: 0.16em; color: var(--ink-muted); text-transform: uppercase;">
-      <a href="#poemas" style="color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px;">I — Poemas</a>
-      <a href="#cuentos" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px;">II — Relatos</a>
-      <a href="#aforismos" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px;">III — Notas</a>
-    </div>
-  </div>
+    <header class="page-header">
+      <span class="section-eyebrow">Versos, Relatos & Cuadernos</span>
+      <h1 class="page-title">Palabras & Papeles</h1>
+      <p class="page-description">
+        Fábulas ecológicas de micelio, sátira existencial y notas de libreta escritas sobre la marcha.
+      </p>
 
-  <!-- I. POEMAS -->
-  <section id="poemas" style="margin-bottom: 50px;">
-    <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
-      <span class="inv-code">I &mdash; POEMAS &middot; VERSOS</span>
-      <span style="font-size: 0.78rem; color: var(--ink-faint);">{allPoemas.length} poemas</span>
-    </div>
-    <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-      {allPoemas.map((poema) => (
-        <article class="zen-card" style="border-left: 2px solid var(--accent-gold);">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-            <span class="inv-code" style="margin-bottom: 0;">POEMA</span>
-            <span style="font-size: 0.78rem; color: var(--ink-faint);">
-              {poema.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' })}
-            </span>
-          </div>
-          <h2 class="zen-title">
-            <a href={`/posts/poemas-${poema.id.replace(/\.md$/, '')}/`}>{poema.data.title}</a>
-          </h2>
-          {poema.data.dedication && (
-            <p style="font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: var(--ink-muted); margin-bottom: 10px; line-height: 1.6;">
-              &laquo;{poema.data.dedication}&raquo;
-            </p>
-          )}
-          {poema.data.location && (
-            <div style="font-size: 0.8rem; color: var(--ink-faint); margin-bottom: 14px;">
-              &#128205; {poema.data.location}
-            </div>
-          )}
-          <a href={`/posts/poemas-${poema.id.replace(/\.md$/, '')}/`} style="font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center;">
-            Leer poema &rarr;
-          </a>
-        </article>
-      ))}
-    </div>
-  </section>
+      <nav style="display: flex; gap: 1.5rem; margin-top: 1.8rem; font-size: 0.9rem;" aria-label="Secciones de textos">
+        <a href="#poemas" class="hero-shortcut-link">Poemas ({allPoemas.length})</a>
+        <a href="#cuentos" class="hero-shortcut-link">Relatos ({allCuentos.length})</a>
+        <a href="#pensamientos" class="hero-shortcut-link">Pensamientos ({allPensamientos.length})</a>
+      </nav>
+    </header>
 
-  <!-- II. CUENTOS -->
-  {allCuentos.length > 0 && (
-    <section id="cuentos" style="margin-bottom: 60px;">
-      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">II &mdash; RELATOS</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allCuentos.length} relatos</span>
+    <!-- I. POEMAS -->
+    <section id="poemas" class="home-section">
+      <div class="home-section-header">
+        <h2 class="home-section-title">Poemas & Versos</h2>
+        <span class="home-section-more">{allPoemas.length} poemas</span>
       </div>
-      <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-        {allCuentos.map((cuento) => (
-          <article class="zen-card">
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-              <span class="inv-code" style="margin-bottom: 0;">RELATO</span>
-              <span style="font-size: 0.78rem; color: var(--ink-faint);">
-                {cuento.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' })}
-              </span>
-            </div>
-            <h2 class="zen-title">
-              <a href={`/posts/cuentos-${cuento.id.replace(/\.md$/, '')}/`}>{cuento.data.title}</a>
-            </h2>
-            <a href={`/posts/cuentos-${cuento.id.replace(/\.md$/, '')}/`} style="font-size: 0.85rem; font-weight: 500; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center;">
-              Leer relato &rarr;
+
+      <div class="item-list">
+        {allPoemas.map((poema) => (
+          <article>
+            <a href={`/posts/poemas-${poema.id.replace(/\.md$/, '')}/`} class="item-entry">
+              <div class="item-meta">
+                <span class="item-meta-category">Poema</span>
+                <span>&middot;</span>
+                <time datetime={poema.data.date.toISOString()}>
+                  {poema.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' })}
+                </time>
+                {poema.data.location && <span>&middot; {poema.data.location}</span>}
+              </div>
+              <h3 class="item-title">{poema.data.title}</h3>
+              {poema.data.dedication && (
+                <p class="item-summary" style="font-style: italic; margin-bottom: 0.4rem;">
+                  &laquo;{poema.data.dedication}&raquo;
+                </p>
+              )}
+              <div class="item-arrow">
+                <span>Leer poema</span>
+                <span aria-hidden="true">&rarr;</span>
+              </div>
             </a>
           </article>
         ))}
       </div>
     </section>
-  )}
 
-  <!-- III. AFORISMOS -->
-  {allPensamientos.length > 0 && (
-    <section id="aforismos" style="margin-bottom: 50px;">
-      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">III &mdash; NOTAS DE CAMPO &middot; FRAGMENTOS</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allPensamientos.length} notas</span>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;">
-        {allPensamientos.map((pensamiento) => (
-          <article class="zen-card" style="background: var(--bg-card-warm);">
-            <span class="inv-code" style="margin-bottom: 8px;">
-              {pensamiento.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })}
-            </span>
-            <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin-bottom: 8px; line-height: 1.3;">
-              <a href={`/posts/pensamientos-${pensamiento.id.replace(/\.md$/, '')}/`} style="color: inherit; text-decoration: none;">
-                {pensamiento.data.title || 'Fragmento contemplativo'}
+    <!-- II. CUENTOS -->
+    {allCuentos.length > 0 && (
+      <section id="cuentos" class="home-section">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Relatos & Fábulas</h2>
+          <span class="home-section-more">{allCuentos.length} relatos</span>
+        </div>
+
+        <div class="item-list">
+          {allCuentos.map((cuento) => (
+            <article>
+              <a href={`/posts/cuentos-${cuento.id.replace(/\.md$/, '')}/`} class="item-entry">
+                <div class="item-meta">
+                  <span class="item-meta-category">Relato</span>
+                  <span>&middot;</span>
+                  <time datetime={cuento.data.date.toISOString()}>
+                    {cuento.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' })}
+                  </time>
+                  {cuento.data.series && <span>&middot; {cuento.data.series.name}</span>}
+                </div>
+                <h3 class="item-title">{cuento.data.title}</h3>
+                {cuento.data.summary && (
+                  <p class="item-summary">{cuento.data.summary}</p>
+                )}
+                <div class="item-arrow">
+                  <span>Leer relato</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </div>
               </a>
-            </h3>
-            {pensamiento.data.mood && (
-              <div style="font-size: 0.78rem; color: var(--ink-muted); margin-top: 8px;">Estado: {pensamiento.data.mood}</div>
-            )}
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
 
+    <!-- III. PENSAMIENTOS -->
+    {allPensamientos.length > 0 && (
+      <section id="pensamientos" class="home-section">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Filosofía & Notas de Libreta</h2>
+          <span class="home-section-more">{allPensamientos.length} notas</span>
+        </div>
+
+        <div class="item-list">
+          {allPensamientos.map((pensamiento) => (
+            <article>
+              <a href={`/posts/pensamientos-${pensamiento.id.replace(/\.md$/, '')}/`} class="item-entry">
+                <div class="item-meta">
+                  <span class="item-meta-category">Cuaderno</span>
+                  <span>&middot;</span>
+                  <time datetime={pensamiento.data.date.toISOString()}>
+                    {pensamiento.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </time>
+                  {pensamiento.data.mood && <span>&middot; {pensamiento.data.mood}</span>}
+                </div>
+                <h3 class="item-title">{pensamiento.data.title || 'Fragmento contemplativo'}</h3>
+                <p class="item-summary">
+                  {(pensamiento.body || '').slice(0, 180).trim()}...
+                </p>
+                <div class="item-arrow">
+                  <span>Leer nota</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+  </div>
 </Layout>

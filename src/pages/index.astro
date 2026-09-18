@@ -1,152 +1,206 @@
 ---
 import Layout from '../components/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Las 12 creaciones de Munay Amaru — datos preservados, diseño nuevo a construir
-const creaciones = [
-  {
-    id: 'spec-001',
-    title: 'Munay (Corazón Radiante)',
-    categoria: 'Tótem Fundacional · Ayni',
-    año: '2026',
-    fragmento: 'El amor no es pasividad ni resignación: es fuego creador, presencia incondicional y la voluntad sagrada de estar despiertos.',
-    url: '/trazos/',
-    tipo: 'visual',
-  },
-  {
-    id: 'spec-004',
-    title: 'Illari y el Observatorio del Alma',
-    categoria: 'Ficción Filosófica · Novela',
-    año: '2026',
-    fragmento: 'En la geometría estéril de la prisa urbana olvidamos mirar el cielo. Illari colapsa frente a los ventanales pulcros y desciende al desierto de su psique.',
-    url: '/posts/cuentos-illari-observatorio-del-alma/',
-    tipo: 'cuento',
-  },
-  {
-    id: 'spec-003',
-    title: 'Los Guardianes',
-    categoria: 'Fábula Ecológica de Micelio',
-    año: '2026',
-    fragmento: 'Aunque corten el tronco más viejo, la tierra no olvida. Bajo cuatrocientos inviernos de nieve y silencio, las hifas invisibles del micelio transfieren calor al brote nuevo.',
-    url: '/posts/cuentos-los-guardianes/',
-    tipo: 'cuento',
-  },
-  {
-    id: 'spec-007',
-    title: 'Seeds',
-    categoria: 'Poema Existencial · Riga',
-    año: '2026',
-    fragmento: 'We worship what the eye can calculate. Yet the whole miracle begins in blindness. A seed is not asleep; it is submitting to the crushing dark.',
-    url: '/posts/poemas-seeds/',
-    tipo: 'poema',
-  },
-  {
-    id: 'spec-010',
-    title: 'Oda a la Digestión & El Descuido',
-    categoria: 'Sátira & Crónica Urbana',
-    año: '2026',
-    fragmento: 'Podrás levitar en tus tratados de metafísica, pero si tu estómago no procesa el pan de ayer, tu iluminación es solo aire atrapado.',
-    url: '/posts/poemas-oda-a-la-digestion/',
-    tipo: 'poema',
-  },
-  {
-    id: 'spec-012',
-    title: 'Manifiesto de los 4 Principios',
-    categoria: 'Fundamentos Éticos & Filosofía',
-    año: '2026',
-    fragmento: 'I. Rechazo al escapismo espiritual. II. Integración de la sombra. III. La biología como poética sagrada. IV. El humor como brújula de la verdad.',
-    url: '/posts/pensamientos-manifiesto-filosofico/',
-    tipo: 'pensamiento',
-  },
-  {
-    id: 'spec-002',
-    title: 'I Am a Tree',
-    categoria: 'Óleo Botánico & 432 Hz',
-    año: '2024',
-    fragmento: 'I am a tree, drinking deep from the silent streams... my roots are old, older than my grief, holding the memory of a thousand rains.',
-    url: '/posts/sonidos-i-am-a-tree/',
-    tipo: 'sonido',
-    audio: '/audio/ejemplo-voz.mp3',
-  },
-  {
-    id: 'spec-005',
-    title: 'Il Canto Senza Paura',
-    categoria: 'Canto de Medicina · Afinación Drop D',
-    año: '2026',
-    fragmento: 'Non c\'è buio che possa spegnere il passo. La mente si accende quando il cuore smette di tremare.',
-    url: '/posts/sonidos-il-canto-senza-paura/',
-    tipo: 'sonido',
-    audio: '/audio/ejemplo-voz.mp3',
-  },
-  {
-    id: 'spec-006',
-    title: 'The Heart\'s Medicine',
-    categoria: 'Canto Introspectivo · Gratitud Celular',
-    año: '2026',
-    fragmento: 'The heart does not ask for permission to beat; it forgives every wound simply by pumping the next drop of life into your veins.',
-    url: '/posts/sonidos-the-hearts-medicine/',
-    tipo: 'sonido',
-    audio: '/audio/ejemplo-voz.mp3',
-  },
-  {
-    id: 'spec-008',
-    title: 'Pachamamita',
-    categoria: 'Devocional Andino · Charango & Ronroco',
-    año: '2026',
-    fragmento: 'Agüita clara que bajas cantando del barranco, llévate las penas del caminante, déjanos la costumbre sagrada de dar las gracias.',
-    url: '/posts/sonidos-pachamamita/',
-    tipo: 'sonido',
-    audio: '/audio/ejemplo-voz.mp3',
-  },
-  {
-    id: 'spec-009',
-    title: 'The Magic Threads (Pipene & Gailene)',
-    categoria: 'Fábula Botánica de Micorrizas',
-    año: '2016 / 2026',
-    fragmento: 'Bajo la nieve del Báltico, las raíces de Pipene y las hifas de Gailene se dan la mano en secreto para florecer juntos en primavera.',
-    url: '/trazos/',
-    tipo: 'cuento',
-  },
-  {
-    id: 'spec-011',
-    title: 'El Amigo de Cuatro Patas',
-    categoria: 'Folk Acústico & Presencia Animal',
-    año: '2026',
-    fragmento: 'No sabe de cuentas, de deudas ni horario, su único empleo en este mundo es mirarme llegar, y recordarme en silencio que ya estoy a salvo.',
-    url: '/posts/sonidos-el-amigo-de-cuatro-patas/',
-    tipo: 'sonido',
-    audio: '/audio/ejemplo-voz.mp3',
-  },
-];
+// 1. Último pensamiento / nota de libreta
+const allPensamientos = await getCollection('pensamientos', ({ data }) => !data.draft);
+allPensamientos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const ultimoPensamiento = allPensamientos[0];
+
+// 2. Pieza sonora destacada
+const allSonidos = await getCollection('sonidos', ({ data }) => !data.draft);
+allSonidos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const sonidoDestacado = allSonidos.find(s => s.id.includes('i-am-a-tree')) || allSonidos[0];
+
+// 3. Cuaderno de ruta o expedición reciente
+const allViajes = await getCollection('viajes', ({ data }) => !data.draft);
+allViajes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const ultimoViaje = allViajes[0];
+
+// 4. Obra destacada de Trazos
+const obraDestacada = {
+  title: 'Munay (Corazón Radiante)',
+  categoria: 'Pastel al óleo & Voluntad · 2026',
+  fragmento: 'Silueta iluminada con corazón ardiente. La voluntad afectiva que no evade el dolor del mundo.',
+  imagen: '/images/cuaderno/munay-corazon-pastel-restaurado.jpg',
+  url: '/trazos/#munay',
+};
 ---
 
 <Layout activePage="home" locale="es">
-  <!-- PÁGINA TEMPORAL: placeholder limpio mientras se construye el diseño nuevo -->
-  <div style="
-    min-height: 100vh;
-    background: #0c1210;
-    color: #dce5df;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    text-align: center;
-  ">
-    <h1 style="font-size: clamp(2rem, 8vw, 5rem); letter-spacing: 0.2em; margin-bottom: 1rem;">
-      Munay Amaru
-    </h1>
-    <p style="opacity: 0.5; font-style: italic; margin-bottom: 3rem;">
-      El bosque está creciendo · Diseño en construcción
-    </p>
-    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem; max-width: 600px; width: 100%;">
-      {creaciones.map((c) => (
-        <li>
-          <a href={c.url} style="color: #c4a35a; text-decoration: none;">
-            {c.title} — <span style="opacity: 0.6; font-size: 0.85em;">{c.categoria}</span>
+  <div class="page-container">
+    
+    <!-- Hero Minimalista -->
+    <header class="hero-minimal">
+      <span class="hero-tag">Diario de Vida &middot; Archivo Abierto</span>
+      <h1 class="hero-heading">Munay Amaru</h1>
+      <p class="hero-lead">
+        Registros de existencia: notas de libreta, grabaciones templadas a 432 Hz, pigmentos sobre papel y caminos entre los Andes, el Báltico y el Mediterráneo.
+      </p>
+
+      <nav class="hero-shortcuts" aria-label="Secciones principales">
+        <a href="/trazos/" class="hero-shortcut-link">
+          <span>Trazos</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/sonidos/" class="hero-shortcut-link">
+          <span>Sonidos</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/palabras/" class="hero-shortcut-link">
+          <span>Palabras</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/miradas/" class="hero-shortcut-link">
+          <span>Miradas</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/sobre/" class="hero-shortcut-link">
+          <span>Sobre</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- Sección: Último Pensamiento / Nota de Campo -->
+    {ultimoPensamiento && (
+      <section class="home-section">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Nota de Campo</h2>
+          <a href="/palabras/#pensamientos" class="home-section-more">Ver todas &rarr;</a>
+        </div>
+
+        <article>
+          <a href={`/posts/pensamientos-${ultimoPensamiento.id.replace(/\.md$/, '')}/`} class="item-entry">
+            <div class="item-meta">
+              <span class="item-meta-category">Cuaderno de Terminal</span>
+              <span>&middot;</span>
+              <time datetime={ultimoPensamiento.data.date.toISOString()}>
+                {ultimoPensamiento.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              {ultimoPensamiento.data.mood && (
+                <>
+                  <span>&middot;</span>
+                  <span>{ultimoPensamiento.data.mood}</span>
+                </>
+              )}
+            </div>
+            <h3 class="item-title">
+              {ultimoPensamiento.data.title || 'Fragmento contemplativo'}
+            </h3>
+            <p class="item-summary">
+              {(ultimoPensamiento.body || '').slice(0, 220).trim()}...
+            </p>
+            <div class="item-arrow">
+              <span>Leer nota completa</span>
+              <span aria-hidden="true">&rarr;</span>
+            </div>
           </a>
-        </li>
-      ))}
-    </ul>
+        </article>
+      </section>
+    )}
+
+    <!-- Sección: Lámina & Trazo Destacado -->
+    <section class="home-section">
+      <div class="home-section-header">
+        <h2 class="home-section-title">Lámina & Materia</h2>
+        <a href="/trazos/" class="home-section-more">Ver galería &rarr;</a>
+      </div>
+
+      <article>
+        <a href={obraDestacada.url} class="item-entry" style="border-bottom: none; padding-bottom: 0;">
+          <div class="plate-figure" style="max-height: 400px; aspect-ratio: 16/10; margin-bottom: 1.2rem;">
+            <img
+              src={obraDestacada.imagen}
+              alt={obraDestacada.title}
+              class="plate-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="item-meta">
+            <span class="item-meta-category">{obraDestacada.categoria}</span>
+          </div>
+          <h3 class="item-title">{obraDestacada.title}</h3>
+          <p class="item-summary">{obraDestacada.fragmento}</p>
+          <div class="item-arrow">
+            <span>Ver lámina</span>
+            <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      </article>
+    </section>
+
+    <!-- Sección: Resonancia Sonora 432 Hz -->
+    {sonidoDestacado && (
+      <section class="home-section">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Resonancia Sonora (432 Hz)</h2>
+          <a href="/sonidos/" class="home-section-more">Ver registros &rarr;</a>
+        </div>
+
+        <div class="sound-card">
+          <div class="sound-card-header">
+            <h3 class="sound-card-title">{sonidoDestacado.data.title}</h3>
+            <span class="sound-card-badge">
+              432 Hz &middot; {sonidoDestacado.data.audio?.duration || 'Grabación viva'}
+            </span>
+          </div>
+          <p class="sound-card-desc">
+            {sonidoDestacado.data.category.toUpperCase().replace('_', ' ')}
+            {sonidoDestacado.data.location && (
+              <span> &middot; {typeof sonidoDestacado.data.location === 'object' ? sonidoDestacado.data.location.name : sonidoDestacado.data.location}</span>
+            )}
+          </p>
+
+          {sonidoDestacado.data.audio?.src ? (
+            <audio controls src={sonidoDestacado.data.audio.src} class="sound-audio-native" preload="none"></audio>
+          ) : (
+            <audio controls src="/audio/432hz-bosque.wav" class="sound-audio-native" preload="none"></audio>
+          )}
+
+          <div style="margin-top: 1rem;">
+            <a href={`/posts/sonidos-${sonidoDestacado.id.replace(/\.md$/, '')}/`} class="hero-shortcut-link" style="font-size: 0.85rem;">
+              <span>Ficha y notas de la pieza</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Sección: Cuaderno de Ruta -->
+    {ultimoViaje && (
+      <section class="home-section" style="margin-bottom: 2rem;">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Cuaderno de Ruta</h2>
+          <a href="/miradas/" class="home-section-more">Ver crónicas &rarr;</a>
+        </div>
+
+        <article>
+          <a href={`/posts/viajes-${ultimoViaje.id.replace(/\.md$/, '')}/`} class="item-entry" style="border-bottom: none;">
+            <div class="item-meta">
+              <span class="item-meta-category">
+                {ultimoViaje.data.location.country ? ultimoViaje.data.location.country.toUpperCase() : 'EXPEDICIÓN'}
+              </span>
+              <span>&middot;</span>
+              <time datetime={ultimoViaje.data.date.toISOString()}>
+                {ultimoViaje.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long' })}
+              </time>
+              <span>&middot;</span>
+              <span>{ultimoViaje.data.location.name}</span>
+            </div>
+            <h3 class="item-title">{ultimoViaje.data.title}</h3>
+            <p class="item-summary">
+              {(ultimoViaje.body || '').slice(0, 190).trim()}...
+            </p>
+            <div class="item-arrow">
+              <span>Leer crónica de viaje</span>
+              <span aria-hidden="true">&rarr;</span>
+            </div>
+          </a>
+        </article>
+      </section>
+    )}
+
   </div>
 </Layout>

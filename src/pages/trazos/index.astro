@@ -2,41 +2,50 @@
 import Layout from '../../components/Layout.astro';
 import { SOCIAL_LINKS } from '../../utils/i18n';
 
-// 8 obras de trazos — datos preservados, diseño nuevo a construir
+// 8 obras de trazos — datos y láminas
 const obras = [
   {
+    id: 'munay',
     title: 'Munay (Corazón Radiante)',
-    categoria: 'Pastel & Voluntad · 2026',
+    categoria: 'Pastel al Óleo · 2026',
     fragmento: 'Silueta iluminada con corazón ardiente. La voluntad afectiva que no evade el dolor del mundo.',
-    url: '/trazos/',
+    url: '/trazos/#munay',
+    imagen: '/images/cuaderno/munay-corazon-pastel-restaurado.jpg',
   },
   {
+    id: 'i-am-a-tree',
     title: 'I Am a Tree',
-    categoria: 'Óleo Botánico & 432 Hz · 2024',
+    categoria: 'Óleo Botánico sobre Lino · 2024',
     fragmento: 'Eliana Colzani & Munay Amaru. Małopolska y Kazimierz, Cracovia.',
     url: '/posts/sonidos-i-am-a-tree/',
     imagen: 'https://f4.bcbits.com/img/a3993646546_2.jpg',
   },
   {
+    id: 'retrato-riga',
     title: 'Retrato de Riga (01/09/2016)',
     categoria: 'Tinta China & Libreta · 2016',
     fragmento: 'Agne Taur. El trazo a tinta sobre el papel de libreta detiene el viento del Báltico.',
-    url: '/trazos/',
+    url: '/trazos/#retrato-riga',
+    imagen: '/images/cuaderno/retrato-riga-restaurado.jpg',
   },
   {
+    id: 'hilos-magicos',
     title: 'The Magic Threads (Pipene & Gailene)',
     categoria: 'Fábula Botánica · 2016',
     fragmento: 'Bajo la nieve del Báltico, las raíces de Pipene y las hifas de Gailene se dan la mano en silencio.',
-    url: '/trazos/',
+    url: '/trazos/#hilos-magicos',
+    imagen: '/images/cuaderno/the-magic-threads-pag1-restaurada.jpg',
   },
   {
+    id: 'hula-hop',
     title: 'Hula Hop',
     categoria: 'Acrílico & Tintas Zen · 2024',
-    fragmento: 'Eliana Colzani & Munay Amaru. El juego y la circularidad como prácticas de conciencia zen.',
+    fragmento: 'Eliana Colzani & Munay Amaru. El juego y la circularidad como prácticas de conciencia.',
     url: '/posts/sonidos-hula-hop/',
     imagen: 'https://f4.bcbits.com/img/a2669624191_2.jpg',
   },
   {
+    id: 'proyecto-tu-silencio',
     title: 'Proyecto Tu Silencio!',
     categoria: 'Calcografía & Monotipia · 2016/2021',
     fragmento: 'Jimena Vílchez, Omar Franco & Munay Amaru. El blanco del papel no es vacío.',
@@ -44,6 +53,7 @@ const obras = [
     imagen: 'https://f4.bcbits.com/img/0036122981_23.jpg',
   },
   {
+    id: 'dioses',
     title: 'Dioses EP',
     categoria: 'Sumi-e Ritual · 2016',
     fragmento: 'Gastón Puray, Omar Franco & Munay Amaru. Ofrenda mineral a las fuerzas invisibles de la cordillera.',
@@ -51,50 +61,57 @@ const obras = [
     imagen: 'https://f4.bcbits.com/img/a1715722282_2.jpg',
   },
   {
+    id: 'collage-raices',
     title: 'Collage de Raíces & Valores',
     categoria: 'Collage de Ruta · 2016',
     fragmento: 'Roots, Love for the World, Spirituality, Journey, Creativity, Humble, Bravery, Simplicity.',
-    url: '/trazos/',
+    url: '/trazos/#collage-raices',
+    imagen: '/images/cuaderno/collage-raices-valores-restaurado.jpg',
   },
 ];
 ---
 
 <Layout activePage="trazos" title="Trazos & Materia" locale="es">
-  <!-- PÁGINA TEMPORAL: placeholder mientras se construye el diseño nuevo del bosque -->
-  <div style="
-    min-height: 100vh;
-    background: #0c1210;
-    color: #dce5df;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    padding: 4rem 2rem;
-    max-width: 700px;
-    margin: 0 auto;
-  ">
-    <a href="/" style="color: #c4a35a; font-size: 0.85rem; letter-spacing: 0.1em;">← Volver</a>
-    <h1 style="font-size: clamp(2rem, 6vw, 3.5rem); margin: 2rem 0 0.5rem; letter-spacing: 0.1em;">
-      Trazos & Materia
-    </h1>
-    <p style="opacity: 0.5; font-style: italic; margin-bottom: 3rem;">
-      Óleos, tintas, pasteles & cuadernos de campo
-    </p>
-    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 2rem;">
-      {obras.map((obra) => (
-        <li style="border-bottom: 1px solid #243028; padding-bottom: 1.5rem;">
-          <a href={obra.url} style="color: #dce5df; text-decoration: none;">
-            <div style="font-size: 0.75rem; letter-spacing: 0.15em; color: #c4a35a; margin-bottom: 0.3rem;">
-              {obra.categoria}
-            </div>
-            <div style="font-size: 1.4rem; margin-bottom: 0.4rem;">{obra.title}</div>
-            <div style="font-size: 0.9rem; opacity: 0.6; font-style: italic;">{obra.fragmento}</div>
-          </a>
-        </li>
-      ))}
-    </ul>
+  <div class="page-container-wide">
+    <a href="/" class="back-link">&larr; Volver al inicio</a>
 
-    <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #243028; display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.8rem;">
-      <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="color: #c4a35a;">Bandcamp →</a>
-      <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="color: #c4a35a;">SoundCloud →</a>
-      <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" style="color: #c4a35a;">Audius →</a>
+    <header class="page-header">
+      <span class="section-eyebrow">Láminas, Óleos & Tintas</span>
+      <h1 class="page-title">Trazos & Materia</h1>
+      <p class="page-description">
+        Tintas botánicas, pasteles al óleo, calcografías y cuadernos de campo nacidos en ruta y en talleres nómadas.
+      </p>
+    </header>
+
+    <div class="plate-grid">
+      {obras.map((obra) => (
+        <article id={obra.id} class="plate-card" style="scroll-margin-top: 5rem;">
+          <a href={obra.url} class="plate-card">
+            {obra.imagen && (
+              <figure class="plate-figure">
+                <img src={obra.imagen} alt={obra.title} class="plate-img" loading="lazy" decoding="async" />
+              </figure>
+            )}
+            <div class="item-meta">
+              <span class="item-meta-category">{obra.categoria}</span>
+            </div>
+            <h2 class="plate-title">{obra.title}</h2>
+            <p class="plate-caption">{obra.fragmento}</p>
+            <div class="item-arrow">
+              <span>Ver detalle</span>
+              <span aria-hidden="true">&rarr;</span>
+            </div>
+          </a>
+        </article>
+      ))}
     </div>
+
+    <footer style="margin-top: 6rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle); text-align: center;">
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; font-size: 0.85rem;">
+        <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); text-decoration: none;">Bandcamp &rarr;</a>
+        <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); text-decoration: none;">SoundCloud &rarr;</a>
+        <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); text-decoration: none;">Audius &rarr;</a>
+      </div>
+    </footer>
   </div>
 </Layout>

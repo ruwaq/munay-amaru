@@ -10,119 +10,96 @@ allMiradas.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout activePage="gazes" title="Rutas & Cuadernos de Campo" locale="es">
+  <div class="page-container-wide">
+    <a href="/" class="back-link">&larr; Volver al inicio</a>
 
-  <!-- Cabecera de Cuadernos de Campo -->
-  <div style="margin-bottom: 36px; border-bottom: 1px solid var(--rule); padding-bottom: 18px;">
-    <span class="inv-code" style="margin-bottom: 6px;">BITÁCORAS DE RUTA &middot; DESPACHOS Y POLAROIDS</span>
-    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-top: 4px; max-width: 22ch;">
-      Rutas &amp; Cuadernos
-    </h1>
-    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px; line-height: 1.65;">
-      Bitácoras de camino, coordenadas y registros analógicos: la niebla de Rumania, los bosques de Polonia, la costa de Grecia y los Andes.
-    </p>
-  </div>
+    <header class="page-header">
+      <span class="section-eyebrow">Bitácoras de Ruta & Polaroids</span>
+      <h1 class="page-title">Rutas & Miradas</h1>
+      <p class="page-description">
+        Coordenadas, cuadernos de viaje y registros analógicos: la niebla de Rumania, los bosques de Polonia, la costa de Grecia y los Andes.
+      </p>
 
-  <!-- Diarios de viaje y rutas -->
-  {allViajes.length > 0 && (
-    <section style="margin-bottom: 50px;">
-      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">CUADERNOS DE RUTA</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allViajes.length} rutas</span>
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr; gap: 28px;">
-        {allViajes.map((viaje) => (
-          <article class="zen-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-              <div>
-                <span class="inv-code" style="margin-bottom: 2px;">
-                  {viaje.data.location.country ? viaje.data.location.country.toUpperCase() : 'EXPEDICIÓN'}
-                  {viaje.data.location.elevation && ` · ${viaje.data.location.elevation}`}
-                </span>
-                {viaje.data.location.weather && (
-                  <div style="font-size: 0.75rem; color: var(--ink-faint); margin-top: 2px;">&#9729;&#xFE0F; {viaje.data.location.weather}</div>
-                )}
-              </div>
-              <span style="font-size: 0.78rem; color: var(--ink-faint); flex-shrink: 0;">
-                {viaje.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' })}
-              </span>
-            </div>
+      <nav style="display: flex; gap: 1.5rem; margin-top: 1.8rem; font-size: 0.9rem;" aria-label="Secciones de rutas y miradas">
+        <a href="#viajes" class="hero-shortcut-link">Cuadernos de Ruta ({allViajes.length})</a>
+        <a href="#miradas" class="hero-shortcut-link">Registros Analógicos ({allMiradas.length})</a>
+      </nav>
+    </header>
 
-            <h2 class="zen-title">
-              <a href={`/posts/viajes-${viaje.id.replace(/\.md$/, '')}/`}>{viaje.data.title}</a>
-            </h2>
+    <!-- Diarios de viaje y expediciones -->
+    {allViajes.length > 0 && (
+      <section id="viajes" class="home-section">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Cuadernos de Ruta</h2>
+          <span class="home-section-more">{allViajes.length} expediciones</span>
+        </div>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; color: var(--ink-muted); margin-bottom: 14px; line-height: 1.5;">
-              <span>&#128205; <strong>{viaje.data.location.name}</strong></span>
-              {viaje.data.location.coordinates && (
-                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint);">
-                  {viaje.data.location.coordinates.lat}° / {viaje.data.location.coordinates.lng}°
-                </span>
-              )}
-              {(viaje.data.journey?.stage || viaje.data.journey?.name) && (
-                <span>— {viaje.data.journey?.stage || viaje.data.journey?.name}</span>
-              )}
-            </div>
-
-            {viaje.data.ambientAudio && (
-              <div style="margin-bottom: 14px;">
-                <div style="font-size: 0.72rem; color: var(--accent-gold); font-family: var(--font-inscription); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;">
-                  &#127908; PAISAJE SONORO DEL LUGAR
+        <div class="item-list">
+          {allViajes.map((viaje) => (
+            <article>
+              <a href={`/posts/viajes-${viaje.id.replace(/\.md$/, '')}/`} class="item-entry">
+                <div class="item-meta">
+                  <span class="item-meta-category">
+                    {viaje.data.location.country ? viaje.data.location.country.toUpperCase() : 'EXPEDICIÓN'}
+                  </span>
+                  <span>&middot;</span>
+                  <time datetime={viaje.data.date.toISOString()}>
+                    {viaje.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long' })}
+                  </time>
+                  <span>&middot;</span>
+                  <span>{viaje.data.location.name}</span>
+                  {viaje.data.location.elevation && <span>&middot; &#9968;&#65039; {viaje.data.location.elevation}</span>}
                 </div>
-                <audio controls src={viaje.data.ambientAudio.src} style="width: 100%; height: 36px; filter: sepia(10%);"></audio>
-              </div>
-            )}
-
-            <a href={`/posts/viajes-${viaje.id.replace(/\.md$/, '')}/`} style="font-size: 0.85rem; font-weight: 600; color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; min-height: 44px; display: inline-flex; align-items: center;">
-              Leer crónica de expedición &rarr;
-            </a>
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
-
-  <!-- Pliegos fotográficos analógicos -->
-  {allMiradas.length > 0 && (
-    <section>
-      <div style="margin-bottom: 20px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
-        <span class="inv-code">REGISTROS ANALÓGICOS &middot; POLAROIDS</span>
-        <span style="font-size: 0.78rem; color: var(--ink-faint); font-family: var(--font-mono);">{allMiradas.length} fotos</span>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px;">
-        {allMiradas.map((mirada) => (
-          <article class="zen-card" style="padding: 0; overflow: hidden;">
-            <!-- Marco de grabado analógico -->
-            <div class="float-mount-frame" style="margin-bottom: 0; border-radius: 0; border: none; border-bottom: 1px solid var(--border-hairline); aspect-ratio: 4/3; padding: 14px;">
-              <img
-                src={mirada.data.photo.src}
-                alt={mirada.data.photo.alt}
-                class="float-artwork"
-                loading="lazy"
-                decoding="async"
-                style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto;"
-              />
-            </div>
-            <!-- Cartela de plinto fotográfico -->
-            <div style="padding: 16px 18px;">
-              <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; margin-bottom: 6px; line-height: 1.3; color: var(--ink-primary);">
-                {mirada.data.title || 'Instante mineral'}
-              </h3>
-              {mirada.data.footnote && (
-                <p style="font-family: var(--font-display); font-size: 0.9rem; font-style: italic; color: var(--ink-muted); line-height: 1.5; margin-bottom: 10px;">
-                  {mirada.data.footnote}
+                <h3 class="item-title">{viaje.data.title}</h3>
+                <p class="item-summary">
+                  {(viaje.body || '').slice(0, 200).trim()}...
                 </p>
-              )}
-              <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.75rem; color: var(--ink-faint);">
-                {mirada.data.camera?.model && <span>&#128247; {mirada.data.camera.model}</span>}
-                {mirada.data.camera?.film && <span>&#127897; {mirada.data.camera.film}</span>}
-                {mirada.data.analogDate && <span>{mirada.data.analogDate}</span>}
-                {mirada.data.location && <span>&#128205; {mirada.data.location}</span>}
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
+                <div class="item-arrow">
+                  <span>Leer crónica de expedición</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
 
+    <!-- Pliegos fotográficos analógicos / Polaroids -->
+    {allMiradas.length > 0 && (
+      <section id="miradas" class="home-section">
+        <div class="home-section-header">
+          <h2 class="home-section-title">Registros Analógicos &middot; Instantes Minerales</h2>
+          <span class="home-section-more">{allMiradas.length} instantes</span>
+        </div>
+
+        <div class="plate-grid">
+          {allMiradas.map((mirada) => (
+            <article class="plate-card">
+              <a href={`/posts/miradas-${mirada.id.replace(/\.md$/, '')}/`} class="plate-card">
+                <figure class="plate-figure">
+                  <img
+                    src={mirada.data.photo.src}
+                    alt={mirada.data.photo.alt}
+                    class="plate-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+                <div class="item-meta">
+                  <span class="item-meta-category">{mirada.data.location || 'Registro'}</span>
+                  {mirada.data.camera?.model && <span>&middot; {mirada.data.camera.model}</span>}
+                </div>
+                <h3 class="plate-title">{mirada.data.title || 'Instante mineral'}</h3>
+                {mirada.data.footnote && (
+                  <p class="plate-caption">{mirada.data.footnote}</p>
+                )}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+  </div>
 </Layout>

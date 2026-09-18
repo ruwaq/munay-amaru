@@ -1,108 +1,88 @@
 ---
 import Layout from '../../components/Layout.astro';
+import { ARTIST_INFO, SOCIAL_LINKS } from '../../utils/i18n';
 ---
 
-<Layout activePage="about" title="Colofón · Munay Amaru" locale="es">
-  <div style="margin-bottom: 36px; border-bottom: 1px solid var(--rule); padding-bottom: 18px;">
-    <span class="inv-code" style="margin-bottom: 6px;">COLOFÓN &middot; REGISTRO VITAL</span>
-    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: var(--ink); line-height: 1.15; margin-top: 4px;">
-      Munay Amaru
-    </h1>
-    <p style="font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--ink-muted); max-width: 58ch; margin-top: 8px; line-height: 1.65;">
-      Un diario de vida. Lo que se pudo dejar en este tiempo: pensamientos, notas de terminal, música en cinta magnética, trazos y caminos.
-    </p>
-  </div>
+<Layout activePage="about" title="Sobre Munay Amaru" locale="es">
+  <div class="page-container">
+    <a href="/" class="back-link">&larr; Volver al inicio</a>
 
-  <div style="display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 50px;">
-    <!-- Nota sobre el diario -->
-    <article class="zen-card" style="border-left: 2px solid var(--gold);">
-      <h2 style="font-family: var(--font-display); font-size: 1.55rem; margin-bottom: 14px; color: var(--ink); font-weight: 400;">
-        I. Lo que se deja en el camino
-      </h2>
-      <p style="line-height: 1.75; color: var(--ink-body); margin-bottom: 14px;">
-        Esto no es una galería ni un escaparate para definirse. Es más bien un diario de vida: las huellas de lo que pude hacer mientras estuve aquí. Pensamientos escritos de noche en la terminal de un teléfono bajo la lluvia, cuerdas de guitarra afinadas en 432 Hz, pigmento botánico sobre lino, grabados en papel de algodón, fragmentos de código y cuadernos de viaje por los Cárpatos, Polonia, Grecia y los Andes.
+    <header class="page-header">
+      <span class="section-eyebrow">Colofón & Registro Vital</span>
+      <h1 class="page-title">Munay Amaru</h1>
+      <p class="page-description">
+        Omar Trillo &middot; Músico, escritor, artista visual y nómada entre los Andes y Europa.
       </p>
-      <p style="line-height: 1.75; color: var(--ink-body); margin-bottom: 0;">
-        No hay etiquetas que defender ni categorías que imponer. Quienes miren o escuchen definirán lo que esto es para ellos.
-      </p>
-    </article>
+    </header>
 
-    <!-- La raíz del nombre -->
-    <section class="zen-card">
-      <span class="inv-code" style="margin-bottom: 8px;">ORIGEN DEL NOMBRE</span>
-      <h2 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--ink); margin-bottom: 10px; font-weight: 400;">
-        Omar Trillo &middot; Munay Amaru
-      </h2>
-      <blockquote class="marginal-note" style="margin: 10px 0 14px;">
-        «<strong>Munay</strong>»: la voluntad pura de amar desde el centro del corazón.<br />
-        «<strong>Amaru</strong>»: la serpiente andina de la sabiduría, el agua que corre y la transmutación continua entre los mundos.
-      </blockquote>
-      <p style="font-size: 0.92rem; color: var(--ink-muted); line-height: 1.65; margin: 0;">
-        Un puente entre la memoria andina del Perú y los caminos nómadas por Europa.
-      </p>
-    </section>
+    <div class="prose-body">
+      <section style="margin-bottom: 4rem;">
+        <h2>La Raíz del Nombre</h2>
+        <blockquote>
+          {ARTIST_INFO.spiritualMeaning.es}
+        </blockquote>
+        <p>
+          Viajero continuo entre Lima (Perú), Małopolska y Cracovia (Polonia), Riga (Letonia), Kalamata (Grecia), los montes de Abruzzo (Italia) y los Cárpatos rumanos. Una vida concebida no como una acumulación de méritos o exposiciones, sino como un sendero abierto: registrar las resonancias que brotan en el camino a través de la música en 432 Hz, óleos botánicos, tintas, versos y cuadernos de viaje.
+        </p>
+      </section>
 
-    <!-- Colaboraciones y manos amigas -->
-    <section class="zen-card">
-      <span class="inv-code" style="margin-bottom: 10px;">COMPAÑEROS DE CAMINO</span>
-      <h2 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 14px; color: var(--ink); font-weight: 400;">
-        Manos &amp; Diálogos
-      </h2>
-      <p style="font-size: 0.92rem; color: var(--ink-muted); line-height: 1.6; margin-bottom: 18px;">
-        Las piezas visuales y grabaciones han dialogado con creadores e ingenieros entrañables:
-      </p>
+      <section style="margin-bottom: 4rem;">
+        <h2>Conexión con el Bosque & el Micelio</h2>
+        <p>
+          Bajo la tierra no existen seres aislados. Las redes micorrízicas del bosque transfieren agua, minerales y memoria entre los árboles viejos y los brotes tiernos. Del mismo modo, el arte y la poesía operan como filamentos invisibles: unen mundos distantes, sanan heridas celulares y recuerdan que somos parte de un único tejido vivo.
+        </p>
+      </section>
 
-      <div style="display: grid; gap: 14px;">
-        <div style="padding: 14px; border: 1px dashed var(--rule); background: var(--bg);">
-          <strong style="font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); display: block; margin-bottom: 4px;">
-            ELIANA COLZANI (Italia)
-          </strong>
-          <span style="font-size: 0.88rem; color: var(--ink-body); line-height: 1.5; display: block;">
-            Pintura al óleo botánico sobre lino para <em>I Am a Tree</em> y tintas orgánicas en <em>Hula Hop</em>.
-          </span>
+      <section style="margin-bottom: 4rem;">
+        <h2>Compañeros de Camino</h2>
+        <div style="display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem;">
+          <div style="border-left: 2px solid var(--accent-green); padding-left: 1.2rem;">
+            <strong style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main);">Eliana Colzani (Italia)</strong>
+            <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">
+              Pintura al óleo botánico sobre lino para <em>I Am a Tree</em> y tintas orgánicas en <em>Hula Hop</em>.
+            </p>
+          </div>
+
+          <div style="border-left: 2px solid var(--accent-green); padding-left: 1.2rem;">
+            <strong style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main);">Jimena Vílchez (Perú)</strong>
+            <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">
+              Grabado calcográfico y texturas textiles en <em>Proyecto Tu Silencio!</em>.
+            </p>
+          </div>
+
+          <div style="border-left: 2px solid var(--accent-green); padding-left: 1.2rem;">
+            <strong style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main);">Gastón Puray (Perú)</strong>
+            <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">
+              Tinta china ritual sumi-e y gráfica andina en <em>Dioses EP</em>.
+            </p>
+          </div>
+
+          <div style="border-left: 2px solid var(--accent-green); padding-left: 1.2rem;">
+            <strong style="font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main);">Omar Franco (Perú / Europa)</strong>
+            <p style="margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--text-muted);">
+              Ingeniería acústica, grabación en cinta analógica, mezcla y masterización.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div style="padding: 14px; border: 1px dashed var(--rule); background: var(--bg);">
-          <strong style="font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); display: block; margin-bottom: 4px;">
-            JIMENA VÍLCHEZ (Perú)
-          </strong>
-          <span style="font-size: 0.88rem; color: var(--ink-body); line-height: 1.5; display: block;">
-            Grabado calcográfico y texturas textiles en <em>Proyecto Tu Silencio!</em>.
-          </span>
+      <section style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle); text-align: center;">
+        <span class="section-eyebrow">Correspondencia Abierta</span>
+        <h3 style="font-size: 1.8rem; margin: 0.5rem 0 1rem;">Escribir una carta</h3>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
+          Para resonancias, notas de silencio o intercambios sin prisa:
+        </p>
+        <a href="mailto:munaysounds@gmail.com" class="hero-shortcut-link" style="font-size: 1.15rem;">
+          munaysounds@gmail.com
+        </a>
+
+        <div style="display: flex; justify-content: center; gap: 1.8rem; flex-wrap: wrap; margin-top: 3rem; font-size: 0.85rem;">
+          <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" class="footer-link">Bandcamp</a>
+          <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" class="footer-link">SoundCloud</a>
+          <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" class="footer-link">YouTube</a>
+          <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
         </div>
-
-        <div style="padding: 14px; border: 1px dashed var(--rule); background: var(--bg);">
-          <strong style="font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); display: block; margin-bottom: 4px;">
-            GASTÓN PURAY [@gastipuray] (Perú)
-          </strong>
-          <span style="font-size: 0.88rem; color: var(--ink-body); line-height: 1.5; display: block;">
-            Tinta china ritual sumi-e y gráfica andina en <em>Dioses EP</em>.
-          </span>
-        </div>
-
-        <div style="padding: 14px; border: 1px dashed var(--rule); background: var(--bg);">
-          <strong style="font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); display: block; margin-bottom: 4px;">
-            OMAR FRANCO (Perú / Europa)
-          </strong>
-          <span style="font-size: 0.88rem; color: var(--ink-body); line-height: 1.5; display: block;">
-            Ingeniería acústica, grabación en cinta, mezcla y masterización analógica.
-          </span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Correspondencia -->
-    <section class="zen-card" style="text-align: center; padding: 32px 20px;">
-      <span class="inv-code" style="margin-bottom: 8px;">CORRESPONDENCIA</span>
-      <h2 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); margin-bottom: 8px; font-weight: 400;">
-        Escribir una carta
-      </h2>
-      <p style="font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: var(--ink-muted); max-width: 44ch; margin: 0 auto 16px;">
-        Para cualquier resonancia, nota o intercambio sin prisa:
-      </p>
-      <a href="mailto:munaysounds@gmail.com" style="font-family: var(--font-mono); font-size: 0.92rem; color: var(--ink); text-decoration: underline;">
-        munaysounds@gmail.com
-      </a>
-    </section>
+      </section>
+    </div>
   </div>
 </Layout>

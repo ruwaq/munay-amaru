@@ -1,38 +1,67 @@
 ---
 import Layout from '../../components/Layout.astro';
 import { getCollection } from 'astro:content';
+import { SOCIAL_LINKS } from '../../utils/i18n';
 
 const allSonidos = await getCollection('sonidos', ({ data }) => !data.draft);
 allSonidos.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout activePage="sounds" title="Sonidos en 432 Hz" locale="es">
-  <!-- PÁGINA TEMPORAL: placeholder mientras se construye el diseño nuevo del bosque -->
-  <div style="
-    min-height: 100vh;
-    background: #0c1210;
-    color: #dce5df;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    padding: 4rem 2rem;
-    max-width: 700px;
-    margin: 0 auto;
-  ">
-    <a href="/" style="color: #c4a35a; font-size: 0.85rem; letter-spacing: 0.1em;">← Volver</a>
-    <h1 style="font-size: clamp(2rem, 6vw, 3.5rem); margin: 2rem 0 0.5rem; letter-spacing: 0.1em;">
-      Sonidos
-    </h1>
-    <p style="opacity: 0.5; font-style: italic; margin-bottom: 3rem;">432 Hz · Cantos de medicina · Grabaciones de campo</p>
-    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 2rem;">
+  <div class="page-container">
+    <a href="/" class="back-link">&larr; Volver al inicio</a>
+
+    <header class="page-header">
+      <span class="section-eyebrow">Resonancia Acústica &middot; 432 Hz</span>
+      <h1 class="page-title">Sonidos del Bosque</h1>
+      <p class="page-description">
+        Cantos de medicina, charango, grabaciones de campo y cuerdas templadas a 432 Hz.
+      </p>
+    </header>
+
+    <div class="sound-list">
       {allSonidos.map((track) => (
-        <li style="border-bottom: 1px solid #243028; padding-bottom: 1.5rem;">
-          <a href={`/posts/sonidos-${track.id.replace(/\.md$/, '')}/`} style="color: #dce5df; text-decoration: none;">
-            <div style="font-size: 0.75rem; letter-spacing: 0.15em; color: #c4a35a; margin-bottom: 0.3rem;">
-              {track.data.category.toUpperCase().replace('_', ' ')} · {track.data.audio?.duration || ''}
+        <article class="sound-card">
+          <div class="sound-card-header">
+            <h2 class="sound-card-title">
+              <a href={`/posts/sonidos-${track.id.replace(/\.md$/, '')}/`}>
+                {track.data.title}
+              </a>
+            </h2>
+            <span class="sound-card-badge">
+              {track.data.category.toUpperCase().replace('_', ' ')}
+              {track.data.audio?.duration && ` · ${track.data.audio.duration}`}
+            </span>
+          </div>
+
+          {track.data.location && (
+            <p class="sound-card-desc">
+              &#128205; {typeof track.data.location === 'object' ? `${track.data.location.name}` : track.data.location}
+            </p>
+          )}
+
+          {track.data.audio?.src && (
+            <div style="margin: 1rem 0;">
+              <audio controls src={track.data.audio.src} class="sound-audio-native" preload="none"></audio>
             </div>
-            <div style="font-size: 1.4rem;">{track.data.title}</div>
-          </a>
-        </li>
+          )}
+
+          <div>
+            <a href={`/posts/sonidos-${track.id.replace(/\.md$/, '')}/`} class="hero-shortcut-link" style="font-size: 0.85rem;">
+              <span>Ficha de grabación & notas</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </article>
       ))}
-    </ul>
+    </div>
+
+    <footer style="margin-top: 6rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle); text-align: center;">
+      <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; font-size: 0.85rem;">
+        <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); text-decoration: none;">Bandcamp &rarr;</a>
+        <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); text-decoration: none;">SoundCloud &rarr;</a>
+        <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" style="color: var(--accent-gold); text-decoration: none;">YouTube &rarr;</a>
+      </div>
+    </footer>
   </div>
 </Layout>

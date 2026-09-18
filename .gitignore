@@ -8,3 +8,5 @@ dist/
 npm-debug.log*
 .vercel
 .wrangler
+scratch/
+.chrome-temp/
