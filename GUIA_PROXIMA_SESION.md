@@ -1,46 +1,30 @@
-# 📌 Guía y Memoria de Contexto para la Próxima Sesión
-### *Proyecto: Munay Amaru — Diario de Vida · Pliego de Gaceta Antigua*
+# 📌 Guía de Memoria y Hoja de Ruta
+
+### *Proyecto: Munay Amaru — Mundo 2D Interactivo (Gather-Style) & Archivo Vivo*
 
 ---
 
 ## 🧭 Estado Actual del Proyecto
 
-1. **Concepto Rector:** **Diario de Vida** (sin etiquetas de museo, sin definirse como artista; solo registros reales de lo que se pudo hacer: pensamientos, arte, música, código y caminos).
-2. **Estética & Layout:**
-   - **Pliego de periódico antiguo / gaceta asimétrica de 3 columnas** con CSS Grid.
-   - Tipografías: *Cormorant Garamond* (cuerpo y plomo), *Cinzel* (titulares y labels), *Courier Prime* (terminal y notas de campo), *Plus Jakarta Sans* (lectura limpia).
-   - Sin tarjetas flotantes, sin sombras ni bordes redondeados modernos.
-   - Filetes de imprenta, fotograbados con filtro de litografía y texto justificado con separación silábica.
-3. **Páginas y Rutas Actualizadas (29 páginas estáticas):**
-   - `/`: Portada en 3 columnas (Nota de Terminal real de Termux, Obra *I Am a Tree* con capitular, reproductor 432 Hz y despachos de viaje).
-   - `/trazos/`: Cuaderno de Trazos & Láminas (Eliana Colzani, Jimena Vílchez, @gastipuray, Omar Franco) con componente `GazettePlate.astro`.
-   - `/tienda/`: Redirección automática a `/trazos/` para compatibilidad de enlaces.
-   - `/sonidos/`: Cintas Sonoras en 432 Hz y registros de campo con Samay interactivo.
-   - `/palabras/`: Papeles sueltos, poemas, relatos y notas de libreta.
-   - `/miradas/`: Cuadernos de ruta y polaroids analógicas.
-   - `/sobre/`: Colofón vital de Munay Amaru (Omar Trillo).
-   - `/posts/[...slug]`: Detalle individual limpio de cada pieza.
-4. **Purificación Terminológica Completa:**
-   - 0 términos institucionales (`museo`, `pabellón`, `curatorial`, `sala`, `exposición permanente`, etc.).
-   - Terminología editorial pura: *pliegos, cédulas de registro, notas de campo, cuadernos de ruta, grabados analógicos, colofón y cintas sonoras*.
-5. **Infraestructura:**
-   - **Astro 5.4.2** (Static output, 29 páginas compiladas en ~2.7s).
-   - Repositorio GitHub: `https://github.com/ruwaq/munay-amaru` (`main`).
-   - Despliegue listo para Cloudflare Pages vía `wrangler.json`.
+1. **Nuevo Concepto:**
+   - Mundo espacial 2D interactivo inspirado en Gather.town / RPG top-down.
+   - Exploración contemplativa: claro en el bosque con 5 puntos interactivos (Trazos, Sonidos 432 Hz, Palabras, Rutas, Buzón).
+   - Modo dual: Mundo 2D + Vista rápida en lista accesible para móviles.
+2. **Stack Definido:**
+   - **Vite** como entorno de desarrollo y empaquetado.
+   - **KAPLAY.js** como motor WebGL 2D (~45 kB).
+   - **HTML5/CSS3** para modales y lectura editorial de alta fidelidad.
+3. **Contenido Preservado y Organizado:**
+   - `contenido/`: 37 textos en Markdown (poemas, cuentos, pensamientos, sonidos, viajes, miradas).
+   - `assets/`: 14 pistas de audio en 432 Hz y galería fotográfica de láminas restauradas.
+   - `docs/`: Documentos de arquitectura y biografía oficial.
+   - `archivo-antiguo/`: Respaldo completo del código previo.
 
 ---
 
-## 🛠️ Comandos de Reactivación Rápida
-```bash
-# Iniciar servidor de desarrollo en Termux
-cd ~/projects/munay-amaru
-npm run dev
+## 🛠️ Próximo Paso Inmediato
 
-# Compilar para producción
-npm run build
-
-# Subir a GitHub
-git add .
-git commit -m "feat: transformar a diario de vida estilo periodico antiguo"
-git push origin main
-```
+- **Paso 1: Inicialización del Entorno con Vite + KAPLAY**
+  - Instalar Vite y KAPLAY.
+  - Crear el `index.html` con el canvas y el loop básico a 60 FPS.
+  - Probar en local y verificar rendimiento.

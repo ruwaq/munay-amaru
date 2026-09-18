@@ -1,77 +1,56 @@
-# 📰 Munay Amaru — Diario de Vida · Pliego de Gaceta Antigua
+# 🌲 Munay Amaru — Mundo 2D Interactivo & Archivo Vivo
 
-Diario de vida, notas de campo, sonidos en 432 Hz, trazos sobre papel y lino, rutas nómadas y líneas de código de **Munay Amaru** (**Omar Trillo**). Sin poses ni etiquetas institucionales: registros de lo que se pudo hacer y dejar en este tiempo.
+Mundo espacial 2D interactivo (estilo *Gather.town / RPG top-down*) y diario de vida de **Munay Amaru** (**Omar Trillo**). 
 
-- 📦 **Repositorio GitHub:** [https://github.com/ruwaq/munay-sounds](https://github.com/ruwaq/munay-sounds)
+Exploración en mapa de bosque con personaje caminante, puntos de interacción para arte, música en 432 Hz, poemas y bitácoras nómadas, optimizado para móviles (*tap-to-move*) y con modo lista accesible.
+
+- 📦 **Repositorio GitHub:** [https://github.com/ruwaq/munay-amaru](https://github.com/ruwaq/munay-amaru)
 - 🌐 **Plataformas:** [Bandcamp](https://munaysounds.bandcamp.com/) · [SoundCloud](https://soundcloud.com/munay_sounds) · [YouTube](https://youtube.com/@munay_sounds) · [Audius](https://audius.co/munaysounds)
 - 🚀 **Despliegue:** [https://munay-amaru.pages.dev](https://munay-amaru.pages.dev) (Cloudflare Pages)
 
 ---
 
-## 🌿 Raíz & Colaboraciones
+## 🛠️ Stack Tecnológico
 
-- **Registro Vital:** **Munay Amaru** (**Omar Trillo**).
-  - *Munay*: Amor incondicional y voluntad desde el corazón.
-  - *Amaru*: Serpiente andina de la sabiduría, transmutación y flujo del agua.
-- **Manos & Diálogos:**
-  - **Eliana Colzani (Italia):** Óleo botánico sobre lino (*I Am a Tree*) y tintas orgánicas (*Hula Hop*).
-  - **Jimena Vílchez (Perú):** Grabado calcográfico y texturas textiles (*Proyecto Tu Silencio!*).
-  - **@gastipuray / Gastón Puray (Perú):** Tinta china sumi-e y gráfica andina (*Dioses EP*).
-  - **Omar Franco (Perú / Europa):** Grabación analógica, ingeniería acústica, mezcla y masterización.
+- **Entorno & Build:** Vite (ESM rápido y ultra-ligero)
+- **Motor 2D:** KAPLAY.js (aceleración WebGL 2D por GPU, ~45 kB)
+- **Capa UI & Modales:** HTML5 semántico + CSS3 moderno (con tipografías *Cormorant Garamond* y *Plus Jakarta Sans*)
+- **Controles:** Teclado (WASD / Flechas) + Táctil móvil (*Tap-to-move* inteligente)
+- **Accesibilidad:** Modo dual (Mundo 2D interactivo / Vista directa en lista)
 
 ---
 
-## 📰 Estructura del Diario (Pliegos & Secciones)
+## 🗺️ Espacios del Mapa
 
-| # | Sección | Ruta | Estética & Contenido |
-| :---: | :--- | :--- | :--- |
-| **1** | **📰 Diario** | `/` | **Portada de Gaceta en 3 columnas asimétricas**: nota real de Termux bajo la lluvia (`23:18`), fotograbado de *I Am a Tree* con capitular clásica, reproductor sonoro directo a 432 Hz, pausa Samay y banda inferior de despachos y versos. |
-| **2** | **🎨 Trazos** | `/tienda/` | **Cuaderno de Láminas**: obras sobre lino, papel de algodón, sumi-e y calcografía presentadas como láminas de taller de imprenta. |
-| **3** | **📻 Sonidos** | `/sonidos/` | **Cintas Sonoras en 432 Hz**: grabaciones de campo, guitarras orgánicas, ficha técnica de microfonía analógica y respiración Samay. |
-| **4** | **📜 Palabras** | `/palabras/` | **Papeles Sueltos**: poemas mayores, relatos de la lentitud y notas breves escritas en la terminal. |
-| **5** | **🗺️ Rutas** | `/miradas/` | **Cuadernos de Camino**: despachos de viaje por Cárpatos (Rumania), Małopolska (Polonia), Kalamata (Grecia) y los Andes, con polaroids analógicas. |
-| **6** | **✒️ Colofón** | `/sobre/` | **Colofón Vital**: testimonio honesto del diario, raíz del nombre andino y notas de correspondencia epistolar. |
+1. 🏛️ **Taller de Trazos:** Galería de láminas, óleos botánicos (*Munay*, *I Am a Tree*, *Retrato de Riga*).
+2. 🎶 **Santuario Sonoro (432 Hz):** Cintas y pistas de campo con reproductor nativo.
+3. 🔥 **Fogata de Palabras:** Poemas, fábulas de micelio y notas de libreta.
+4. 🧭 **Carreta de Rutas:** Crónicas de residencia nómada (Rumania, Polonia, Andes, Grecia, Báltico).
+5. 📬 **Buzón de Correspondencia:** Contacto directo por correo y enlaces oficiales.
 
 ---
 
-## 🚀 Comandos de Terminal en Termux
+## 📚 Documentación
 
-```bash
-# 1. Entrar al proyecto
-cd ~/projects/munay-amaru
+- [Arquitectura del Mundo 2D](docs/ARQUITECTURA_MUNDO_2D.md)
+- [Dossier de Información & Obra de Munay Amaru](docs/INFORMACION_MUNAY_AMARU.md)
+- [Dossier Histórico de Obras y Espacios](docs/DOSSIER_OBRAS_Y_ESPACIOS.md)
 
-# 2. Modo desarrollo en vivo (Hot reload en tu teléfono)
-npm run dev
+---
 
-# 3. Compilar el sitio estático para producción (28 páginas en ~2.4 segundos)
-npm run build
+## 📁 Estructura del Proyecto
 
-# 4. Probar la versión compilada en local
-npm run preview
-
-# 5. Guardar cambios y subir a GitHub
-git add .
-git commit -m "feat: transformar a diario de vida estilo periodico antiguo"
-git push origin main
+```text
+├── assets/                  # Medios: audios reales y fotografías de láminas
+│   ├── audio/              # Grabaciones en 432 Hz
+│   └── images/             # Óleos, pasteles y polaroids
+├── contenido/               # Textos y escritos puros en Markdown
+│   ├── cuentos/
+│   ├── miradas/
+│   ├── pensamientos/
+│   ├── poemas/
+│   ├── sonidos/
+│   └── viajes/
+├── docs/                    # Documentación de arquitectura e identidad
+└── archivo-antiguo/         # Copia de seguridad completa de versiones anteriores
 ```
-
----
-
-## ✍️ Publicar Nuevas Entradas desde Termux con `nano`
-
-Todas las entradas son archivos Markdown limpios en `src/content/`:
-
-- **Notas de terminal / Pensamientos:** `src/content/pensamientos/` (soporta campos: `weather`, `device`, `mood`)
-- **Poemas:** `src/content/poemas/`
-- **Cintas Sonoras:** `src/content/sonidos/`
-- **Cuadernos de Viaje:** `src/content/viajes/`
-- **Polaroids Analógicas:** `src/content/miradas/`
-- **Relatos:** `src/content/cuentos/`
-
----
-
-## 🔒 Despliegue & Seguridad
-
-- Build estático con **Astro 5** compilado a `./dist/`.
-- Conectado a **Cloudflare Pages** vía `wrangler.json`.
-- Secretos aislados en `~/.secrets.env` (`chmod 600`).
