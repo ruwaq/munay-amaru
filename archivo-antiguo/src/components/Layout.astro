@@ -1,0 +1,123 @@
+---
+import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION, SOCIAL_LINKS } from '../utils/i18n';
+import type { Locale } from '../utils/i18n';
+import '../styles/bosque.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  locale?: Locale;
+  activePage?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  locale = 'es',
+  activePage = 'home',
+} = Astro.props;
+
+const siteTitle = SITE_TITLE[locale];
+const siteSubtitle = SITE_SUBTITLE[locale];
+const pageTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} · ${siteSubtitle}`;
+const pageDesc = description || SITE_DESCRIPTION[locale];
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://munay-amaru.pages.dev');
+
+const navItems = [
+  { href: '/trazos/', label: 'Trazos', id: 'trazos' },
+  { href: '/sonidos/', label: 'Sonidos', id: 'sounds' },
+  { href: '/palabras/', label: 'Palabras', id: 'words' },
+  { href: '/miradas/', label: 'Miradas', id: 'gazes' },
+  { href: '/sobre/', label: 'Sobre', id: 'about' },
+];
+---
+
+<!doctype html>
+<html lang={locale === 'es' ? 'es' : 'en'}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="author" content="Munay Amaru (Omar Trillo)" />
+  <meta name="theme-color" content="#0b0f0d" />
+
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
+  <meta property="og:image" content={new URL(image || '/images/cuaderno/munay-corazon-pastel-restaurado.jpg', canonicalUrl).href} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDesc} />
+  <meta name="twitter:image" content={new URL(image || '/images/cuaderno/munay-corazon-pastel-restaurado.jpg', canonicalUrl).href} />
+
+  <link rel="alternate" type="application/rss+xml" title={`Feed RSS — ${siteTitle}`} href="/rss.xml" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Tipografías serenas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">
+    Saltar al contenido
+  </a>
+
+  <!-- Cabecera y Navegación Universal Minimalista -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="brand-link" aria-label="Munay Amaru — Inicio">
+        <span class="brand-name">Munay Amaru</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navegación principal">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`nav-item-link ${activePage === item.id ? 'is-active' : ''}`}
+            aria-current={activePage === item.id ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main id="main-content" class="main-content" tabindex="-1">
+    <slot />
+  </main>
+
+  <!-- Pie de página minimalista -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <nav class="footer-links" aria-label="Enlaces exteriores y contacto">
+        <a href={SOCIAL_LINKS.bandcamp} target="_blank" rel="noopener noreferrer" class="footer-link">Bandcamp</a>
+        <span style="opacity: 0.3;">&middot;</span>
+        <a href={SOCIAL_LINKS.soundcloud} target="_blank" rel="noopener noreferrer" class="footer-link">SoundCloud</a>
+        <span style="opacity: 0.3;">&middot;</span>
+        <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" class="footer-link">YouTube</a>
+        <span style="opacity: 0.3;">&middot;</span>
+        <a href="https://audius.co/munaysounds" target="_blank" rel="noopener noreferrer" class="footer-link">Audius</a>
+        <span style="opacity: 0.3;">&middot;</span>
+        <a href="mailto:munaysounds@gmail.com" class="footer-link">Contacto</a>
+      </nav>
+
+      <p class="footer-colophon">
+        Munay Amaru (Omar Trillo) &middot; 432 Hz &middot; Diario de vida, notas de campo, trazos y caminos.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
